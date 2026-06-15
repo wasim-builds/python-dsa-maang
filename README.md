@@ -7,7 +7,8 @@ This repository contains **306 fully implemented, parameterized, and tested algo
 ## Features
 - **Comprehensive Coverage:** 14 topics covering everything from Arrays and Strings to advanced Graphs, Tries, Backtracking, and Bit Manipulation.
 - **Production Grade Code:** Every problem contains a baseline brute force approach (`solve_brute`) for verification and an optimal approach (`solve_optimal`) strictly adhering to the best time/space complexities (e.g. $O(N)$, $O(N \log N)$).
-- **Extensive Testing:** Uses `pytest` with parameterized test cases matching standard edge cases and tricky bounds. Over 850 tests are actively maintained.
+- **System Design:** Includes a dedicated `system_design/` folder with detailed markdown guides on Core Concepts (Scaling, Redis, Load Balancers) and Common Problems (Twitter, Rate Limiters, Chat Apps).
+- **Extensive Testing:** Over 850 tests are actively maintained for all algorithms.
 - **Clean Code Standard:** All Python files are formatted with `black` for consistent, PEP8-compliant structure.
 
 ## Repository Status
@@ -49,7 +50,7 @@ topics/
 ├── 12_greedy/
 ├── 13_tries/
 └── 14_bit_manipulation/
+system_design/         # Architectural guides and interview problems
 utils/                 # Helper functions and data structures (Tree/List nodes)
-pytest.ini             # Pytest configuration file
 TRACKER.md             # Master checklist of all algorithms
 ```
