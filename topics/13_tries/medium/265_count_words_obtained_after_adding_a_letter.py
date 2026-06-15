@@ -5,8 +5,6 @@ Problem Statement: Implement Trie-based map with prefix sum functionality.
 Complexity: Time O(K) insert/sum, Space O(N * K)
 """
 
-import pytest
-
 
 class MapSum:
     def __init__(self):
@@ -32,9 +30,10 @@ class MapSum:
         return curr.get("_sum", 0)
 
 
-def test_mapsum():
+if __name__ == "__main__":
     m = MapSum()
     m.insert("apple", 3)
     assert m.sum("ap") == 3
     m.insert("app", 2)
     assert m.sum("ap") == 5
+    print("All tests passed successfully!")

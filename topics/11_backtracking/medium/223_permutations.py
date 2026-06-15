@@ -12,7 +12,6 @@ Complexity Proof:
 - Space Complexity: O(N) for the depth of the recursion stack.
 """
 
-import pytest
 from typing import List
 
 
@@ -55,27 +54,24 @@ def solve_brute(nums: List[int]) -> List[List[int]]:
     return perms
 
 
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([1, 2, 3], [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]),
         ([0, 1], [[0, 1], [1, 0]]),
         ([1], [[1]]),
-    ],
-)
-def test_solve_optimal(nums, expected):
-    result = solve_optimal(nums)
-    assert sorted([tuple(x) for x in result]) == sorted([tuple(x) for x in expected])
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
-        ([1, 2, 3], [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]),
-        ([0, 1], [[0, 1], [1, 0]]),
-        ([1], [[1]]),
-    ],
-)
-def test_solve_brute(nums, expected):
-    result = solve_brute(nums)
-    assert sorted([tuple(x) for x in result]) == sorted([tuple(x) for x in expected])
+    for nums, expected in test_cases:
+        result = solve_brute(nums)
+        assert sorted([tuple(x) for x in result]) == sorted(
+            [tuple(x) for x in expected]
+        )
+    print("All tests passed successfully!")

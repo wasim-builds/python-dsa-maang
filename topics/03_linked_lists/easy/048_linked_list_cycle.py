@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only use two pointers (`slow` and `fast`).
 """
 
-import pytest
 import sys
 import os
 
@@ -73,29 +72,23 @@ def create_cycle(arr, pos):
     return head
 
 
-@pytest.mark.parametrize(
-    "arr, pos, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([3, 2, 0, -4], 1, True),
         ([1, 2], 0, True),
         ([1], -1, False),
         ([], -1, False),
-    ],
-)
-def test_solve_optimal(arr, pos, expected):
-    head = create_cycle(arr, pos)
-    assert solve_optimal(head) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "arr, pos, expected",
-    [
-        ([3, 2, 0, -4], 1, True),
-        ([1, 2], 0, True),
-        ([1], -1, False),
-        ([], -1, False),
-    ],
-)
-def test_solve_brute(arr, pos, expected):
-    head = create_cycle(arr, pos)
-    assert solve_brute(head) == expected
+    for arr, pos, expected in test_cases:
+        head = create_cycle(arr, pos)
+        assert solve_brute(head) == expected
+    print("All tests passed successfully!")

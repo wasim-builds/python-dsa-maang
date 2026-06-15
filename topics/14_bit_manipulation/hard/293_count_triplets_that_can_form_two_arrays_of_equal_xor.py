@@ -5,7 +5,6 @@ Problem Statement: Count triplets (i,j,k) where XOR(i..j-1)==XOR(j..k).
 Complexity: Time O(N^2), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -37,6 +36,17 @@ def solve_optimal(arr):
     return count
 
 
-@pytest.mark.parametrize("arr,ex", [([2, 3, 1, 6, 7], 4), ([1, 1, 1, 1, 1], 10)])
-def test_opt(arr, ex):
-    assert solve_optimal(arr) == ex
+if __name__ == "__main__":
+    test_cases = [([2, 3, 1, 6, 7], 4), ([1, 1, 1, 1, 1], 10)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        assert solve_optimal(arr) == ex
+    print("All tests passed successfully!")

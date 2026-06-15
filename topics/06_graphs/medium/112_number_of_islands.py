@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(M * N) in the worst case (if the entire grid is land) for the recursive call stack in DFS, or for the queue in BFS.
 """
 
-import pytest
 from typing import List
 from collections import deque
 
@@ -85,9 +84,8 @@ def solve_optimal(grid: List[List[str]]) -> int:
     return islands
 
 
-@pytest.mark.parametrize(
-    "grid, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [
                 ["1", "1", "1", "1", "0"],
@@ -106,34 +104,16 @@ def solve_optimal(grid: List[List[str]]) -> int:
             ],
             3,
         ),
-    ],
-)
-def test_solve_optimal(grid, expected):
-    assert solve_optimal(grid) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "grid, expected",
-    [
-        (
-            [
-                ["1", "1", "1", "1", "0"],
-                ["1", "1", "0", "1", "0"],
-                ["1", "1", "0", "0", "0"],
-                ["0", "0", "0", "0", "0"],
-            ],
-            1,
-        ),
-        (
-            [
-                ["1", "1", "0", "0", "0"],
-                ["1", "1", "0", "0", "0"],
-                ["0", "0", "1", "0", "0"],
-                ["0", "0", "0", "1", "1"],
-            ],
-            3,
-        ),
-    ],
-)
-def test_solve_brute(grid, expected):
-    assert solve_brute(grid) == expected
+    for grid, expected in test_cases:
+        assert solve_brute(grid) == expected
+    print("All tests passed successfully!")

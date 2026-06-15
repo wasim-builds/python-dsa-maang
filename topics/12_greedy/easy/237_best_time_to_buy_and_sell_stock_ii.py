@@ -5,7 +5,6 @@ Problem Statement: Maximize profit buying/selling on any day (unlimited transact
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -17,8 +16,17 @@ def solve_optimal(prices):
     return solve_brute(prices)
 
 
-@pytest.mark.parametrize(
-    "p,ex", [([7, 1, 5, 3, 6, 4], 7), ([1, 2, 3, 4, 5], 4), ([7, 6, 4, 3, 1], 0)]
-)
-def test_opt(p, ex):
-    assert solve_optimal(p) == ex
+if __name__ == "__main__":
+    test_cases = [([7, 1, 5, 3, 6, 4], 7), ([1, 2, 3, 4, 5], 4), ([7, 6, 4, 3, 1], 0)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for p, ex in test_cases:
+        assert solve_optimal(p) == ex
+    print("All tests passed successfully!")

@@ -6,8 +6,6 @@ Problem Statement: Deep copy a linked list where each node has next and random p
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
-
 
 class Node:
     def __init__(self, x, next=None, random=None):
@@ -32,7 +30,7 @@ def solve_optimal(head):
     return m[head]
 
 
-def test_copy():
+if __name__ == "__main__":
     n1 = Node(7)
     n2 = Node(13)
     n3 = Node(11)
@@ -47,4 +45,5 @@ def test_copy():
     n4.random = n3
     n5.random = n1
     copy = solve_optimal(n1)
-    assert copy is not n1 and copy.val == 7 and copy.next.val == 13
+    assert copy is not n1 and copy.val == 7 and (copy.next.val == 13)
+    print("All tests passed successfully!")

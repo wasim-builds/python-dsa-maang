@@ -5,7 +5,6 @@ Problem Statement: Find minimum time T such that you can swim from [0][0] to [N-
 Complexity: Time O(N^2 log N), Space O(N^2)
 """
 
-import pytest
 from typing import List
 import heapq
 
@@ -31,9 +30,8 @@ def solve_optimal(grid):
                 heapq.heappush(heap, (max(t, grid[nr][nc]), nr, nc))
 
 
-@pytest.mark.parametrize(
-    "g,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[0, 2], [1, 3]], 3),
         (
             [
@@ -45,7 +43,16 @@ def solve_optimal(grid):
             ],
             16,
         ),
-    ],
-)
-def test_opt(g, ex):
-    assert solve_optimal(g) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for g, ex in test_cases:
+        assert solve_optimal(g) == ex
+    print("All tests passed successfully!")

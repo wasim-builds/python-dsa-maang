@@ -5,7 +5,6 @@ Problem Statement: Given array of integers (bytes), validate if it is valid UTF-
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -35,6 +34,17 @@ def solve_optimal(data):
     return True
 
 
-@pytest.mark.parametrize("d,ex", [([197, 130, 1], True), ([235, 140, 4], False)])
-def test_opt(d, ex):
-    assert solve_optimal(d) == ex
+if __name__ == "__main__":
+    test_cases = [([197, 130, 1], True), ([235, 140, 4], False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for d, ex in test_cases:
+        assert solve_optimal(d) == ex
+    print("All tests passed successfully!")

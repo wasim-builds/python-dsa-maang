@@ -12,7 +12,6 @@ Complexity Proof:
 - Space Complexity: O(N) or O(log N) depending on the sorting algorithm. The output array can take O(N) space if no intervals overlap.
 """
 
-import pytest
 from typing import List
 
 
@@ -53,25 +52,21 @@ def solve_optimal(intervals: List[List[int]]) -> List[List[int]]:
     return output
 
 
-@pytest.mark.parametrize(
-    "input_data, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[1, 3], [2, 6], [8, 10], [15, 18]], [[1, 6], [8, 10], [15, 18]]),
         ([[1, 4], [4, 5]], [[1, 5]]),
         ([[1, 4], [0, 4]], [[0, 4]]),
-    ],
-)
-def test_solve_optimal(input_data, expected):
-    assert solve_optimal(input_data) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "input_data, expected",
-    [
-        ([[1, 3], [2, 6], [8, 10], [15, 18]], [[1, 6], [8, 10], [15, 18]]),
-        ([[1, 4], [4, 5]], [[1, 5]]),
-        ([[1, 4], [0, 4]], [[0, 4]]),
-    ],
-)
-def test_solve_brute(input_data, expected):
-    assert solve_brute(input_data) == expected
+    for input_data, expected in test_cases:
+        assert solve_brute(input_data) == expected
+    print("All tests passed successfully!")

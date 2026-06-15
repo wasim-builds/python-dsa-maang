@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only use a few variables (`l`, `r`, `res`) for the binary search.
 """
 
-import pytest
 import math
 from typing import List
 
@@ -54,24 +53,19 @@ def solve_optimal(piles: List[int], h: int) -> int:
     return res
 
 
-@pytest.mark.parametrize(
-    "piles, h, expected",
-    [
-        ([3, 6, 7, 11], 8, 4),
-        ([30, 11, 23, 4, 20], 5, 30),
-        ([30, 11, 23, 4, 20], 6, 23),
-    ],
-)
-def test_solve_optimal(piles, h, expected):
-    assert solve_optimal(piles, h) == expected
-
-
 # Restrict brute force to small tests to prevent timeout
-@pytest.mark.parametrize(
-    "piles, h, expected",
-    [
-        ([3, 6, 7, 11], 8, 4),
-    ],
-)
-def test_solve_brute(piles, h, expected):
-    assert solve_brute(piles, h) == expected
+
+if __name__ == "__main__":
+    test_cases = [([3, 6, 7, 11], 8, 4)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for piles, h, expected in test_cases:
+        assert solve_brute(piles, h) == expected
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Return all possible letter combinations from phone digit mapp
 Complexity: Time O(4^N * N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -39,13 +38,21 @@ def solve_optimal(digits):
     return res
 
 
-@pytest.mark.parametrize(
-    "d,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("23", ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]),
         ("2", ["a", "b", "c"]),
         ("", []),
-    ],
-)
-def test_opt(d, ex):
-    assert sorted(solve_optimal(d)) == sorted(ex)
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for d, ex in test_cases:
+        assert sorted(solve_optimal(d)) == sorted(ex)
+    print("All tests passed successfully!")

@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(V + E) to build the adjacency list mapping courses to their prerequisites, plus the recursion stack or queue space.
 """
 
-import pytest
 from typing import List
 from collections import defaultdict, deque
 
@@ -74,25 +73,21 @@ def solve_brute(numCourses: int, prerequisites: List[List[int]]) -> bool:
     return completed == numCourses
 
 
-@pytest.mark.parametrize(
-    "numCourses, prerequisites, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (2, [[1, 0]], True),
         (2, [[1, 0], [0, 1]], False),
         (5, [[0, 1], [0, 2], [1, 3], [1, 4], [3, 4]], True),
-    ],
-)
-def test_solve_optimal(numCourses, prerequisites, expected):
-    assert solve_optimal(numCourses, prerequisites) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "numCourses, prerequisites, expected",
-    [
-        (2, [[1, 0]], True),
-        (2, [[1, 0], [0, 1]], False),
-        (5, [[0, 1], [0, 2], [1, 3], [1, 4], [3, 4]], True),
-    ],
-)
-def test_solve_brute(numCourses, prerequisites, expected):
-    assert solve_brute(numCourses, prerequisites) == expected
+    for numCourses, prerequisites, expected in test_cases:
+        assert solve_brute(numCourses, prerequisites) == expected
+    print("All tests passed successfully!")

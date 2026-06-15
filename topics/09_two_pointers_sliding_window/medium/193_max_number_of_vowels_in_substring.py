@@ -5,8 +5,6 @@ Problem Statement: Return max vowels in any substring of length k.
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(s, k):
     vowels = set("aeiou")
@@ -25,8 +23,17 @@ def solve_optimal(s, k):
     return res
 
 
-@pytest.mark.parametrize(
-    "s,k,ex", [("abciiidef", 3, 3), ("aeiou", 2, 2), ("leetcode", 3, 2)]
-)
-def test_opt(s, k, ex):
-    assert solve_optimal(s, k) == ex
+if __name__ == "__main__":
+    test_cases = [("abciiidef", 3, 3), ("aeiou", 2, 2), ("leetcode", 3, 2)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, k, ex in test_cases:
+        assert solve_optimal(s, k) == ex
+    print("All tests passed successfully!")

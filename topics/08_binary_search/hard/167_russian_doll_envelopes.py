@@ -5,7 +5,6 @@ Problem Statement: Find max number of envelopes you can Russian-doll (sort+LIS).
 Complexity: Time O(N log N), Space O(N)
 """
 
-import pytest
 from typing import List
 import bisect
 
@@ -33,8 +32,17 @@ def solve_optimal(envs):
     return len(tails)
 
 
-@pytest.mark.parametrize(
-    "e,ex", [([[5, 4], [6, 4], [6, 7], [2, 3]], 3), ([[1, 1], [1, 1], [1, 1]], 1)]
-)
-def test_opt(e, ex):
-    assert solve_optimal(e) == ex
+if __name__ == "__main__":
+    test_cases = [([[5, 4], [6, 4], [6, 7], [2, 3]], 3), ([[1, 1], [1, 1], [1, 1]], 1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for e, ex in test_cases:
+        assert solve_optimal(e) == ex
+    print("All tests passed successfully!")

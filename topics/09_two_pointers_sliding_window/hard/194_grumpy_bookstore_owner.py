@@ -5,7 +5,6 @@ Problem Statement: Find max customers satisfied using 'grumpy' suppression windo
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -34,8 +33,17 @@ def solve_optimal(customers, grumpy, minutes):
     return always + best
 
 
-@pytest.mark.parametrize(
-    "c,g,m,ex", [([1, 0, 1, 2, 1, 1, 7, 5], [0, 1, 0, 1, 0, 1, 0, 1], 3, 16)]
-)
-def test_opt(c, g, m, ex):
-    assert solve_optimal(c, g, m) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 0, 1, 2, 1, 1, 7, 5], [0, 1, 0, 1, 0, 1, 0, 1], 3, 16)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for c, g, m, ex in test_cases:
+        assert solve_optimal(c, g, m) == ex
+    print("All tests passed successfully!")

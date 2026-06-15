@@ -6,7 +6,6 @@ Problem Statement: Write a function to find the longest common prefix string amo
 Complexity: Time O(S) where S is sum of all chars, Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -30,8 +29,17 @@ def solve_optimal(strs):
     return strs[0]
 
 
-@pytest.mark.parametrize(
-    "strs,ex", [(["flower", "flow", "flight"], "fl"), (["dog", "racecar", "car"], "")]
-)
-def test_opt(strs, ex):
-    assert solve_optimal(strs) == ex
+if __name__ == "__main__":
+    test_cases = [(["flower", "flow", "flight"], "fl"), (["dog", "racecar", "car"], "")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for strs, ex in test_cases:
+        assert solve_optimal(strs) == ex
+    print("All tests passed successfully!")

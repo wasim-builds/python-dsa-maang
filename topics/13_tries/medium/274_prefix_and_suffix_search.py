@@ -5,7 +5,6 @@ Problem Statement: Given list of words, find index of word with given prefix and
 Complexity: Time O(N * L^2) build, O(P + S) search; Space O(N * L^2)
 """
 
-import pytest
 from typing import List
 
 
@@ -22,7 +21,8 @@ class WordFilter:
         return self.lookup.get((pref, suff), -1)
 
 
-def test_word_filter():
+if __name__ == "__main__":
     wf = WordFilter(["apple"])
     assert wf.f("a", "e") == 0
     assert wf.f("b", "") == -1
+    print("All tests passed successfully!")

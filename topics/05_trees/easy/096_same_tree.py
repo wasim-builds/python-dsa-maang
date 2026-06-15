@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(H) where H is the height of the trees, due to the recursion stack. In the worst case, O(N).
 """
 
-import pytest
 import sys
 import os
 
@@ -49,29 +48,23 @@ def solve_optimal(p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
     return solve_optimal(p.left, q.left) and solve_optimal(p.right, q.right)
 
 
-@pytest.mark.parametrize(
-    "arr_p, arr_q, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([1, 2, 3], [1, 2, 3], True),
         ([1, 2], [1, None, 2], False),
         ([1, 2, 1], [1, 1, 2], False),
-    ],
-)
-def test_solve_optimal(arr_p, arr_q, expected):
-    p = list_to_tree(arr_p)
-    q = list_to_tree(arr_q)
-    assert solve_optimal(p, q) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "arr_p, arr_q, expected",
-    [
-        ([1, 2, 3], [1, 2, 3], True),
-        ([1, 2], [1, None, 2], False),
-        ([1, 2, 1], [1, 1, 2], False),
-    ],
-)
-def test_solve_brute(arr_p, arr_q, expected):
-    p = list_to_tree(arr_p)
-    q = list_to_tree(arr_q)
-    assert solve_brute(p, q) == expected
+    for arr_p, arr_q, expected in test_cases:
+        p = list_to_tree(arr_p)
+        q = list_to_tree(arr_q)
+        assert solve_brute(p, q) == expected
+    print("All tests passed successfully!")

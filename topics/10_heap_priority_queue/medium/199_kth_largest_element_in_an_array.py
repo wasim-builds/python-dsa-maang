@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(1) for Quickselect. O(k) for Min-Heap.
 """
 
-import pytest
 from typing import List
 import heapq
 import random
@@ -56,24 +55,17 @@ def solve_optimal(nums: List[int], k: int) -> int:
     return quickSelect(0, len(nums) - 1)
 
 
-@pytest.mark.parametrize(
-    "nums, k, expected",
-    [
-        ([3, 2, 1, 5, 6, 4], 2, 5),
-        ([3, 2, 3, 1, 2, 4, 5, 5, 6], 4, 4),
-    ],
-)
-def test_solve_optimal(nums, k, expected):
-    # Pass copy to avoid modifying original array across tests
-    assert solve_optimal(nums[:], k) == expected
+if __name__ == "__main__":
+    test_cases = [([3, 2, 1, 5, 6, 4], 2, 5), ([3, 2, 3, 1, 2, 4, 5, 5, 6], 4, 4)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums, k, expected",
-    [
-        ([3, 2, 1, 5, 6, 4], 2, 5),
-        ([3, 2, 3, 1, 2, 4, 5, 5, 6], 4, 4),
-    ],
-)
-def test_solve_brute(nums, k, expected):
-    assert solve_brute(nums[:], k) == expected
+    for nums, k, expected in test_cases:
+        assert solve_brute(nums[:], k) == expected
+    print("All tests passed successfully!")

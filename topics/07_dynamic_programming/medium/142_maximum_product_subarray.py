@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only need to store `res`, `curMax`, and `curMin`.
 """
 
-import pytest
 from typing import List
 
 
@@ -51,25 +50,17 @@ def solve_optimal(nums: List[int]) -> int:
     return res
 
 
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
-        ([2, 3, -2, 4], 6),
-        ([-2, 0, -1], 0),
-        ([-2, 3, -4], 24),
-    ],
-)
-def test_solve_optimal(nums, expected):
-    assert solve_optimal(nums) == expected
+if __name__ == "__main__":
+    test_cases = [([2, 3, -2, 4], 6), ([-2, 0, -1], 0), ([-2, 3, -4], 24)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
-        ([2, 3, -2, 4], 6),
-        ([-2, 0, -1], 0),
-        ([-2, 3, -4], 24),
-    ],
-)
-def test_solve_brute(nums, expected):
-    assert solve_brute(nums) == expected
+    for nums, expected in test_cases:
+        assert solve_brute(nums) == expected
+    print("All tests passed successfully!")

@@ -19,8 +19,6 @@ Complexity Proof:
 - Space Complexity: O(N) where N is the number of elements in the stack. We maintain two parallel stacks (or tuples in one stack) to keep track of the minimum.
 """
 
-import pytest
-
 
 # OPTIMAL
 # Time: O(1), Space: O(N)
@@ -46,12 +44,13 @@ class MinStack:
         return self.stack[-1][1]
 
 
-def test_min_stack():
+if __name__ == "__main__":
     minStack = MinStack()
     minStack.push(-2)
     minStack.push(0)
     minStack.push(-3)
-    assert minStack.getMin() == -3  # return -3
+    assert minStack.getMin() == -3
     minStack.pop()
-    assert minStack.top() == 0  # return 0
-    assert minStack.getMin() == -2  # return -2
+    assert minStack.top() == 0
+    assert minStack.getMin() == -2
+    print("All tests passed successfully!")

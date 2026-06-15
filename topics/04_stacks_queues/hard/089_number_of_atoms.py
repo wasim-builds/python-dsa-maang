@@ -5,7 +5,6 @@ Problem Statement: Given formula of a chemical compound, return count of each at
 Complexity: Time O(N^2), Space O(N)
 """
 
-import pytest
 from collections import defaultdict
 
 
@@ -45,8 +44,17 @@ def solve_optimal(formula):
     return "".join(f"{k}{v if v>1 else ''}" for k, v in sorted(res.items()))
 
 
-@pytest.mark.parametrize(
-    "f,ex", [("H2O", "H2O"), ("Mg(OH)2", "H2MgO2"), ("K4(ON(SO3)2)2", "K4N2O14S4")]
-)
-def test_opt(f, ex):
-    assert solve_optimal(f) == ex
+if __name__ == "__main__":
+    test_cases = [("H2O", "H2O"), ("Mg(OH)2", "H2MgO2"), ("K4(ON(SO3)2)2", "K4N2O14S4")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for f, ex in test_cases:
+        assert solve_optimal(f) == ex
+    print("All tests passed successfully!")

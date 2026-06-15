@@ -5,8 +5,6 @@ Problem Statement: Build sequence where Sn = Sn-1 + "1" + reverse(invert(Sn-1)).
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(n, k):
     s = "1"
@@ -27,6 +25,17 @@ def solve_optimal(n, k):
     return "0" if solve_optimal(n - 1, ln + 1 - k) == "1" else "1"
 
 
-@pytest.mark.parametrize("n,k,ex", [(3, 1, "0"), (4, 11, "1")])
-def test_opt(n, k, ex):
-    assert solve_optimal(n, k) == ex
+if __name__ == "__main__":
+    test_cases = [(3, 1, "0"), (4, 11, "1")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, k, ex in test_cases:
+        assert solve_optimal(n, k) == ex
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Sum of Hamming distances between all pairs of integers.
 Complexity: Time O(N * 32), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -32,6 +31,17 @@ def solve_optimal(nums):
     return total
 
 
-@pytest.mark.parametrize("nums,ex", [([4, 14, 2], 6), ([4, 14, 4], 4)])
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([4, 14, 2], 6), ([4, 14, 4], 4)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, ex in test_cases:
+        assert solve_optimal(nums) == ex
+    print("All tests passed successfully!")

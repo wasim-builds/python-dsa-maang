@@ -11,8 +11,6 @@ Complexity Proof:
 - Space Complexity: O(min(N, M)) where M is the size of the charset (e.g. 26 or 128 or 256), since the hash map stores at most the unique characters.
 """
 
-import pytest
-
 
 # BRUTE FORCE
 # Time: O(n^3), Space: O(n)
@@ -49,25 +47,17 @@ def lengthOfLongestSubstring_optimal(s: str) -> int:
     return max_len
 
 
-@pytest.mark.parametrize(
-    "s, expected",
-    [
-        ("abcabcbb", 3),
-        ("bbbbb", 1),
-        ("pwwkew", 3),
-    ],
-)
-def test_lengthOfLongestSubstring_optimal(s, expected):
-    assert lengthOfLongestSubstring_optimal(s) == expected
+if __name__ == "__main__":
+    test_cases = [("abcabcbb", 3), ("bbbbb", 1), ("pwwkew", 3)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "s, expected",
-    [
-        ("abcabcbb", 3),
-        ("bbbbb", 1),
-        ("pwwkew", 3),
-    ],
-)
-def test_lengthOfLongestSubstring_brute(s, expected):
-    assert lengthOfLongestSubstring_brute(s) == expected
+    for s, expected in test_cases:
+        assert lengthOfLongestSubstring_brute(s) == expected
+    print("All tests passed successfully!")

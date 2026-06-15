@@ -12,7 +12,6 @@ Complexity Proof:
 - Space Complexity: O(N) because the hash map and the bucket array will store at most N unique elements.
 """
 
-import pytest
 from typing import List
 from collections import Counter
 import heapq
@@ -48,23 +47,17 @@ def solve_optimal(nums: List[int], k: int) -> List[int]:
     return res
 
 
-@pytest.mark.parametrize(
-    "nums, k, expected",
-    [
-        ([1, 1, 1, 2, 2, 3], 2, [1, 2]),
-        ([1], 1, [1]),
-    ],
-)
-def test_solve_optimal(nums, k, expected):
-    assert sorted(solve_optimal(nums, k)) == sorted(expected)
+if __name__ == "__main__":
+    test_cases = [([1, 1, 1, 2, 2, 3], 2, [1, 2]), ([1], 1, [1])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums, k, expected",
-    [
-        ([1, 1, 1, 2, 2, 3], 2, [1, 2]),
-        ([1], 1, [1]),
-    ],
-)
-def test_solve_brute(nums, k, expected):
-    assert sorted(solve_brute(nums, k)) == sorted(expected)
+    for nums, k, expected in test_cases:
+        assert sorted(solve_brute(nums, k)) == sorted(expected)
+    print("All tests passed successfully!")

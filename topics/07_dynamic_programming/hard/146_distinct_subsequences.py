@@ -5,8 +5,6 @@ Problem Statement: Count number of distinct subsequences of s which equals t.
 Complexity: Time O(M*N), Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(s, t):
     return solve_optimal(s, t)
@@ -23,6 +21,17 @@ def solve_optimal(s, t):
     return dp[n]
 
 
-@pytest.mark.parametrize("s,t,ex", [("rabbbit", "rabbit", 3), ("babgbag", "bag", 5)])
-def test_opt(s, t, ex):
-    assert solve_optimal(s, t) == ex
+if __name__ == "__main__":
+    test_cases = [("rabbbit", "rabbit", 3), ("babgbag", "bag", 5)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, t, ex in test_cases:
+        assert solve_optimal(s, t) == ex
+    print("All tests passed successfully!")

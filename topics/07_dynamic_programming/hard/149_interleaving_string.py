@@ -5,8 +5,6 @@ Problem Statement: Given s1,s2,s3, check if s3 is formed by interleaving s1 and 
 Complexity: Time O(M*N), Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(s1, s2, s3):
     from functools import lru_cache
@@ -41,9 +39,20 @@ def solve_optimal(s1, s2, s3):
     return dp[n]
 
 
-@pytest.mark.parametrize(
-    "s1,s2,s3,ex",
-    [("aabcc", "dbbca", "aadbbcbcac", True), ("aabcc", "dbbca", "aadbbbaccc", False)],
-)
-def test_opt(s1, s2, s3, ex):
-    assert solve_optimal(s1, s2, s3) == ex
+if __name__ == "__main__":
+    test_cases = [
+        ("aabcc", "dbbca", "aadbbcbcac", True),
+        ("aabcc", "dbbca", "aadbbbaccc", False),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s1, s2, s3, ex in test_cases:
+        assert solve_optimal(s1, s2, s3) == ex
+    print("All tests passed successfully!")

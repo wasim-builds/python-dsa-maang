@@ -6,7 +6,7 @@ Problem Statement: Two non-empty linked lists represent two non-negative integer
 Complexity: Time O(max(M,N)), Space O(max(M,N))
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -45,13 +45,21 @@ def solve_optimal(l1, l2):
     return dummy.next
 
 
-@pytest.mark.parametrize(
-    "a,b,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([2, 4, 3], [5, 6, 4], [7, 0, 8]),
         ([0], [0], [0]),
         ([9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9], [8, 9, 9, 9, 0, 0, 0, 1]),
-    ],
-)
-def test_opt(a, b, ex):
-    assert linked_to_list(solve_optimal(list_to_linked(a), list_to_linked(b))) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for a, b, ex in test_cases:
+        assert linked_to_list(solve_optimal(list_to_linked(a), list_to_linked(b))) == ex
+    print("All tests passed successfully!")

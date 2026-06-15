@@ -6,8 +6,6 @@ Problem Statement: Given string s, reverse only vowels and return it.
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(s):
     vowels = "aeiouAEIOU"
@@ -36,6 +34,17 @@ def solve_optimal(s):
     return "".join(s)
 
 
-@pytest.mark.parametrize("s,ex", [("hello", "holle"), ("leetcode", "leotcede")])
-def test_opt(s, ex):
-    assert solve_optimal(s) == ex
+if __name__ == "__main__":
+    test_cases = [("hello", "holle"), ("leetcode", "leotcede")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, ex in test_cases:
+        assert solve_optimal(s) == ex
+    print("All tests passed successfully!")

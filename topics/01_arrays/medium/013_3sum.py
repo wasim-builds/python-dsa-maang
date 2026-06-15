@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(1) or O(N) depending on the sorting algorithm implementation. The output array does not count as extra space.
 """
 
-import pytest
 from typing import List
 
 
@@ -55,30 +54,23 @@ def solve_optimal(nums: List[int]) -> List[List[int]]:
     return res
 
 
-@pytest.mark.parametrize(
-    "input_data, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([-1, 0, 1, 2, -1, -4], [[-1, -1, 2], [-1, 0, 1]]),
         ([0, 1, 1], []),
         ([0, 0, 0], [[0, 0, 0]]),
-    ],
-)
-def test_solve_optimal(input_data, expected):
-    # Sorting lists inside lists for safe comparison
-    assert sorted([sorted(x) for x in solve_optimal(input_data)]) == sorted(
-        [sorted(x) for x in expected]
-    )
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "input_data, expected",
-    [
-        ([-1, 0, 1, 2, -1, -4], [[-1, -1, 2], [-1, 0, 1]]),
-        ([0, 1, 1], []),
-        ([0, 0, 0], [[0, 0, 0]]),
-    ],
-)
-def test_solve_brute(input_data, expected):
-    assert sorted([sorted(x) for x in solve_brute(input_data)]) == sorted(
-        [sorted(x) for x in expected]
-    )
+    for input_data, expected in test_cases:
+        assert sorted([sorted(x) for x in solve_brute(input_data)]) == sorted(
+            [sorted(x) for x in expected]
+        )
+    print("All tests passed successfully!")

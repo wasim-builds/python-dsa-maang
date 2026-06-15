@@ -5,7 +5,6 @@ Problem Statement: Alex and Lee take turns. Find max stones Alex can get.
 Complexity: Time O(N^2), Space O(N^2)
 """
 
-import pytest
 from typing import List
 
 
@@ -32,6 +31,17 @@ def solve_optimal(piles):
     return dp(0, 1)
 
 
-@pytest.mark.parametrize("p,ex", [([2, 7, 9, 4, 4], 10), ([1, 2, 3, 4, 5, 100], 104)])
-def test_opt(p, ex):
-    assert solve_optimal(p) == ex
+if __name__ == "__main__":
+    test_cases = [([2, 7, 9, 4, 4], 10), ([1, 2, 3, 4, 5, 100], 104)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for p, ex in test_cases:
+        assert solve_optimal(p) == ex
+    print("All tests passed successfully!")

@@ -5,7 +5,7 @@ Problem Statement: Return min stops needed to reach target. Greedy with max heap
 Complexity: Time O(N log N), Space O(N)
 """
 
-import pytest, heapq
+import heapq
 from typing import List
 
 
@@ -28,13 +28,21 @@ def solve_optimal(target, startFuel, stations):
     return stops
 
 
-@pytest.mark.parametrize(
-    "t,f,s,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (1, 1, [], 0),
         (100, 1, [[10, 100]], -1),
         (100, 10, [[10, 60], [20, 30], [30, 30], [60, 40]], 2),
-    ],
-)
-def test_opt(t, f, s, ex):
-    assert solve_optimal(t, f, s[:]) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for t, f, s, ex in test_cases:
+        assert solve_optimal(t, f, s[:]) == ex
+    print("All tests passed successfully!")

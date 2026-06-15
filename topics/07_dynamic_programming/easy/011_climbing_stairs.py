@@ -13,8 +13,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only need to store the previous two values (`one` and `two`) rather than a full DP array of size N.
 """
 
-import pytest
-
 
 # OPTIMAL (DP / Fibonacci)
 # Time: O(n), Space: O(1)
@@ -27,13 +25,17 @@ def climbStairs(n: int) -> int:
     return one
 
 
-@pytest.mark.parametrize(
-    "n, expected",
-    [
-        (2, 2),
-        (3, 3),
-        (5, 8),
-    ],
-)
-def test_climbStairs(n, expected):
-    assert climbStairs(n) == expected
+if __name__ == "__main__":
+    test_cases = [(2, 2), (3, 3), (5, 8)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, expected in test_cases:
+        assert climbStairs(n) == expected
+    print("All tests passed successfully!")

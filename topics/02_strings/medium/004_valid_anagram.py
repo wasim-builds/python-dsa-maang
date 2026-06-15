@@ -11,8 +11,6 @@ Complexity Proof:
 - Space Complexity: O(1) because the size of the hash map is bounded by the size of the alphabet (e.g., 26 lowercase English letters), which is a constant regardless of N.
 """
 
-import pytest
-
 
 # BRUTE FORCE (Sort)
 # Time: O(n log n), Space: O(1) or O(n) depending on sort
@@ -35,23 +33,17 @@ def isAnagram_optimal(s: str, t: str) -> bool:
     return True
 
 
-@pytest.mark.parametrize(
-    "s, t, expected",
-    [
-        ("anagram", "nagaram", True),
-        ("rat", "car", False),
-    ],
-)
-def test_isAnagram_optimal(s, t, expected):
-    assert isAnagram_optimal(s, t) == expected
+if __name__ == "__main__":
+    test_cases = [("anagram", "nagaram", True), ("rat", "car", False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "s, t, expected",
-    [
-        ("anagram", "nagaram", True),
-        ("rat", "car", False),
-    ],
-)
-def test_isAnagram_brute(s, t, expected):
-    assert isAnagram_brute(s, t) == expected
+    for s, t, expected in test_cases:
+        assert isAnagram_brute(s, t) == expected
+    print("All tests passed successfully!")

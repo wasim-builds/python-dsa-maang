@@ -5,7 +5,6 @@ Problem Statement: Find minimum total cost to cut array into non-decreasing piec
 Complexity: Time O(N log N), Space O(1) greedy
 """
 
-import pytest
 from typing import List
 
 
@@ -33,6 +32,17 @@ def solve_optimal(m, horizontalCut, verticalCut):
     return res
 
 
-@pytest.mark.parametrize("m,h,v,ex", [(3, [1, 3], [2], 9)])
-def test_opt(m, h, v, ex):
-    assert solve_optimal(m, h, v) == ex
+if __name__ == "__main__":
+    test_cases = [(3, [1, 3], [2], 9)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for m, h, v, ex in test_cases:
+        assert solve_optimal(m, h, v) == ex
+    print("All tests passed successfully!")

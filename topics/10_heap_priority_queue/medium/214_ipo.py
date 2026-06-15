@@ -5,7 +5,7 @@ Problem Statement: Maximize capital by choosing up to k projects with initial ca
 Complexity: Time O(N log N), Space O(N)
 """
 
-import pytest, heapq
+import heapq
 from typing import List
 
 
@@ -42,8 +42,17 @@ def solve_optimal(k, w, profits, capital):
     return w
 
 
-@pytest.mark.parametrize(
-    "k,w,p,c,ex", [(2, 0, [1, 2, 3], [0, 1, 1], 4), (3, 0, [1, 2, 3], [0, 1, 2], 6)]
-)
-def test_opt(k, w, p, c, ex):
-    assert solve_optimal(k, w, p, c) == ex
+if __name__ == "__main__":
+    test_cases = [(2, 0, [1, 2, 3], [0, 1, 1], 4), (3, 0, [1, 2, 3], [0, 1, 2], 6)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for k, w, p, c, ex in test_cases:
+        assert solve_optimal(k, w, p, c) == ex
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Count distinct bitwise ORs of all subarrays.
 Complexity: Time O(N * 32), Space O(N * 32)
 """
 
-import pytest
 from typing import List
 
 
@@ -28,6 +27,17 @@ def solve_optimal(arr):
     return len(res)
 
 
-@pytest.mark.parametrize("arr,ex", [([0], 1), ([1, 1, 2], 3), ([1, 2, 4], 6)])
-def test_opt(arr, ex):
-    assert solve_optimal(arr) == ex
+if __name__ == "__main__":
+    test_cases = [([0], 1), ([1, 1, 2], 3), ([1, 2, 4], 6)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        assert solve_optimal(arr) == ex
+    print("All tests passed successfully!")

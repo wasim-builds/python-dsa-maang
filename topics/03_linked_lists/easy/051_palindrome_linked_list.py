@@ -6,7 +6,7 @@ Problem Statement: Given head of linked list, return true if it is a palindrome.
 Complexity: Time O(N), Space O(1) using fast/slow pointer + reverse
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -40,6 +40,17 @@ def solve_optimal(head):
     return True
 
 
-@pytest.mark.parametrize("arr,ex", [([1, 2, 2, 1], True), ([1, 2], False)])
-def test_opt(arr, ex):
-    assert solve_optimal(list_to_linked(arr)) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 2, 1], True), ([1, 2], False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        assert solve_optimal(list_to_linked(arr)) == ex
+    print("All tests passed successfully!")

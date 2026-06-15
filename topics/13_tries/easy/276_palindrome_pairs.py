@@ -5,7 +5,6 @@ Problem Statement: Given list of unique words, find all pairs (i,j) where words[
 Complexity: Time O(N * K^2), Space O(N * K)
 """
 
-import pytest
 from typing import List
 
 
@@ -40,8 +39,19 @@ def solve_optimal(words):
     return [list(x) for x in set(tuple(x) for x in res)]
 
 
-@pytest.mark.parametrize(
-    "w,ex", [(["abcd", "dcba", "lls", "s", "sssll"], [[0, 1], [1, 0], [3, 2], [2, 4]])]
-)
-def test_opt(w, ex):
-    assert sorted(solve_optimal(w)) == sorted(ex)
+if __name__ == "__main__":
+    test_cases = [
+        (["abcd", "dcba", "lls", "s", "sssll"], [[0, 1], [1, 0], [3, 2], [2, 4]])
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for w, ex in test_cases:
+        assert sorted(solve_optimal(w)) == sorted(ex)
+    print("All tests passed successfully!")

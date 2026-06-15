@@ -5,7 +5,7 @@ Problem Statement: Smash two heaviest stones. Return weight of last stone or 0.
 Complexity: Time O(N log N), Space O(N)
 """
 
-import pytest, heapq
+import heapq
 from typing import List
 
 
@@ -28,6 +28,17 @@ def solve_optimal(stones):
     return -stones[0] if stones else 0
 
 
-@pytest.mark.parametrize("s,ex", [([2, 7, 4, 1, 8, 1], 1), ([1], 1)])
-def test_opt(s, ex):
-    assert solve_optimal(s[:]) == ex
+if __name__ == "__main__":
+    test_cases = [([2, 7, 4, 1, 8, 1], 1), ([1], 1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, ex in test_cases:
+        assert solve_optimal(s[:]) == ex
+    print("All tests passed successfully!")

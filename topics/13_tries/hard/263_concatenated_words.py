@@ -5,7 +5,6 @@ Problem Statement: Return all words that can be formed by concatenating other wo
 Complexity: Time O(N * L^2), Space O(N * L)
 """
 
-import pytest
 from typing import List
 
 
@@ -32,9 +31,8 @@ def solve_optimal(words):
     return [w for w in words if can_form(w)]
 
 
-@pytest.mark.parametrize(
-    "w,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [
                 "cat",
@@ -48,7 +46,16 @@ def solve_optimal(words):
             ],
             ["catsdogcats", "dogcatsdog", "ratcatdogcat"],
         )
-    ],
-)
-def test_opt(w, ex):
-    assert sorted(solve_optimal(w)) == sorted(ex)
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for w, ex in test_cases:
+        assert sorted(solve_optimal(w)) == sorted(ex)
+    print("All tests passed successfully!")

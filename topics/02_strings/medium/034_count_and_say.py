@@ -6,8 +6,6 @@ Problem Statement: Return nth term of count-and-say sequence.
 Complexity: Time O(2^N), Space O(2^N)
 """
 
-import pytest
-
 
 def solve_brute(n):
     return solve_optimal(n)
@@ -29,8 +27,17 @@ def solve_optimal(n):
     return s
 
 
-@pytest.mark.parametrize(
-    "n,ex", [(1, "1"), (2, "11"), (3, "21"), (4, "1211"), (5, "111221")]
-)
-def test_opt(n, ex):
-    assert solve_optimal(n) == ex
+if __name__ == "__main__":
+    test_cases = [(1, "1"), (2, "11"), (3, "21"), (4, "1211"), (5, "111221")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert solve_optimal(n) == ex
+    print("All tests passed successfully!")

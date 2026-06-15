@@ -5,7 +5,6 @@ Problem Statement: Count target words obtainable by adding one letter to source 
 Complexity: Time O(N log L), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -34,8 +33,17 @@ def solve_optimal(startWords, targetWords):
     return cnt
 
 
-@pytest.mark.parametrize(
-    "s,t,ex", [(["ant", "act", "tack"], ["tack", "act", "acti"], 2)]
-)
-def test_opt(s, t, ex):
-    assert solve_optimal(s, t) == ex
+if __name__ == "__main__":
+    test_cases = [(["ant", "act", "tack"], ["tack", "act", "acti"], 2)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, t, ex in test_cases:
+        assert solve_optimal(s, t) == ex
+    print("All tests passed successfully!")

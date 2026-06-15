@@ -5,8 +5,6 @@ Problem Statement: Compute integer square root (truncated) without using sqrt fu
 Complexity: Time O(log N), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(x):
     return int(x**0.5)
@@ -27,6 +25,17 @@ def solve_optimal(x):
     return r
 
 
-@pytest.mark.parametrize("x,ex", [(4, 2), (8, 2), (0, 0), (1, 1)])
-def test_opt(x, ex):
-    assert solve_optimal(x) == ex
+if __name__ == "__main__":
+    test_cases = [(4, 2), (8, 2), (0, 0), (1, 1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for x, ex in test_cases:
+        assert solve_optimal(x) == ex
+    print("All tests passed successfully!")

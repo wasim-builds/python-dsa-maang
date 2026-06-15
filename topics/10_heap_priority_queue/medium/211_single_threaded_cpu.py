@@ -5,7 +5,7 @@ Problem Statement: Return order in which CPU processes tasks (single-threaded, s
 Complexity: Time O(N log N), Space O(N)
 """
 
-import pytest, heapq
+import heapq
 from typing import List
 
 
@@ -34,12 +34,20 @@ def solve_optimal(tasks):
     return res
 
 
-@pytest.mark.parametrize(
-    "tasks,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[1, 2], [2, 4], [3, 2], [4, 1]], [0, 2, 3, 1]),
         ([[7, 10], [7, 12], [7, 5], [7, 4], [7, 2]], [4, 3, 2, 0, 1]),
-    ],
-)
-def test_opt(tasks, ex):
-    assert solve_optimal(tasks) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for tasks, ex in test_cases:
+        assert solve_optimal(tasks) == ex
+    print("All tests passed successfully!")

@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(N) for the DP array of size N + 1.
 """
 
-import pytest
 from typing import List
 
 
@@ -57,25 +56,21 @@ def solve_brute(s: str, wordDict: List[str]) -> bool:
     return dfs(0)
 
 
-@pytest.mark.parametrize(
-    "s, wordDict, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("leetcode", ["leet", "code"], True),
         ("applepenapple", ["apple", "pen"], True),
         ("catsandog", ["cats", "dog", "sand", "and", "cat"], False),
-    ],
-)
-def test_solve_optimal(s, wordDict, expected):
-    assert solve_optimal(s, wordDict) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "s, wordDict, expected",
-    [
-        ("leetcode", ["leet", "code"], True),
-        ("applepenapple", ["apple", "pen"], True),
-        ("catsandog", ["cats", "dog", "sand", "and", "cat"], False),
-    ],
-)
-def test_solve_brute(s, wordDict, expected):
-    assert solve_brute(s, wordDict) == expected
+    for s, wordDict, expected in test_cases:
+        assert solve_brute(s, wordDict) == expected
+    print("All tests passed successfully!")

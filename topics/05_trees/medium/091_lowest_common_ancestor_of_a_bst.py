@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(1) for the iterative approach. O(H) for the recursive approach.
 """
 
-import pytest
 import sys
 import os
 
@@ -61,33 +60,25 @@ def find_node(root, val):
     return find_node(root.right, val)
 
 
-@pytest.mark.parametrize(
-    "arr, p_val, q_val, expected_val",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5], 2, 8, 6),
         ([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5], 2, 4, 2),
         ([2, 1], 2, 1, 2),
-    ],
-)
-def test_solve_optimal(arr, p_val, q_val, expected_val):
-    root = list_to_tree(arr)
-    p = find_node(root, p_val)
-    q = find_node(root, q_val)
-    res = solve_optimal(root, p, q)
-    assert res.val == expected_val
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "arr, p_val, q_val, expected_val",
-    [
-        ([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5], 2, 8, 6),
-        ([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5], 2, 4, 2),
-        ([2, 1], 2, 1, 2),
-    ],
-)
-def test_solve_brute(arr, p_val, q_val, expected_val):
-    root = list_to_tree(arr)
-    p = find_node(root, p_val)
-    q = find_node(root, q_val)
-    res = solve_brute(root, p, q)
-    assert res.val == expected_val
+    for arr, p_val, q_val, expected_val in test_cases:
+        root = list_to_tree(arr)
+        p = find_node(root, p_val)
+        q = find_node(root, q_val)
+        res = solve_brute(root, p, q)
+        assert res.val == expected_val
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Return all distinct solutions to N-queens puzzle as board con
 Complexity: Time O(N!), Space O(N^2)
 """
 
-import pytest
 from typing import List
 
 
@@ -41,6 +40,17 @@ def solve_optimal(n):
     return res
 
 
-@pytest.mark.parametrize("n,ex_len", [(4, 2), (1, 1), (8, 92)])
-def test_opt(n, ex_len):
-    assert len(solve_optimal(n)) == ex_len
+if __name__ == "__main__":
+    test_cases = [(4, 2), (1, 1), (8, 92)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex_len in test_cases:
+        assert len(solve_optimal(n)) == ex_len
+    print("All tests passed successfully!")

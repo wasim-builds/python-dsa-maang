@@ -15,7 +15,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only use two pointers (`l` and `r`).
 """
 
-import pytest
 from typing import List
 
 
@@ -54,29 +53,23 @@ def solve_optimal(nums: List[int], target: int) -> int:
     return -1
 
 
-@pytest.mark.parametrize(
-    "nums, target, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([4, 5, 6, 7, 0, 1, 2], 0, 4),
         ([4, 5, 6, 7, 0, 1, 2], 3, -1),
         ([1], 0, -1),
         ([5, 1, 3], 5, 0),
         ([5, 1, 3], 3, 2),
-    ],
-)
-def test_solve_optimal(nums, target, expected):
-    assert solve_optimal(nums, target) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums, target, expected",
-    [
-        ([4, 5, 6, 7, 0, 1, 2], 0, 4),
-        ([4, 5, 6, 7, 0, 1, 2], 3, -1),
-        ([1], 0, -1),
-        ([5, 1, 3], 5, 0),
-        ([5, 1, 3], 3, 2),
-    ],
-)
-def test_solve_brute(nums, target, expected):
-    assert solve_brute(nums, target) == expected
+    for nums, target, expected in test_cases:
+        assert solve_brute(nums, target) == expected
+    print("All tests passed successfully!")

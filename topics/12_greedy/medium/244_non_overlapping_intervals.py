@@ -5,7 +5,6 @@ Problem Statement: Return minimum number of intervals to remove to make rest non
 Complexity: Time O(N log N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -25,13 +24,21 @@ def solve_optimal(intervals):
     return count
 
 
-@pytest.mark.parametrize(
-    "inv,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[1, 2], [2, 3], [3, 4], [1, 3]], 1),
         ([[1, 2], [1, 2], [1, 2]], 2),
         ([[1, 2], [2, 3]], 0),
-    ],
-)
-def test_opt(inv, ex):
-    assert solve_optimal(inv) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for inv, ex in test_cases:
+        assert solve_optimal(inv) == ex
+    print("All tests passed successfully!")

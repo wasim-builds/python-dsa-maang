@@ -5,8 +5,6 @@ Problem Statement: Determine if num is a perfect square without using sqrt.
 Complexity: Time O(log N), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(n):
     return int(n**0.5) ** 2 == n
@@ -25,6 +23,17 @@ def solve_optimal(n):
     return False
 
 
-@pytest.mark.parametrize("n,ex", [(16, True), (14, False), (1, True)])
-def test_opt(n, ex):
-    assert solve_optimal(n) == ex
+if __name__ == "__main__":
+    test_cases = [(16, True), (14, False), (1, True)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert solve_optimal(n) == ex
+    print("All tests passed successfully!")

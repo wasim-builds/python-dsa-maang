@@ -5,7 +5,6 @@ Problem Statement: For each index i, find smallest j>=i where OR of nums[i..j] e
 Complexity: Time O(N * 32), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -25,8 +24,17 @@ def solve_optimal(nums):
     return res
 
 
-@pytest.mark.parametrize(
-    "nums,ex", [([1, 0, 2, 1, 3], [3, 3, 2, 2, 1]), ([1, 2], [2, 1])]
-)
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 0, 2, 1, 3], [3, 3, 2, 2, 1]), ([1, 2], [2, 1])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, ex in test_cases:
+        assert solve_optimal(nums) == ex
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Replace words in sentence with shortest root from dictionary.
 Complexity: Time O(N * M), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -26,15 +25,23 @@ def solve_optimal(dictionary, sentence):
     return " ".join(replace(w) for w in words)
 
 
-@pytest.mark.parametrize(
-    "d,s,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             ["cat", "bat", "rat"],
             "the cattle was rattled by the battery",
             "the cat was rat by the bat",
         )
-    ],
-)
-def test_opt(d, s, ex):
-    assert solve_optimal(d, s) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for d, s, ex in test_cases:
+        assert solve_optimal(d, s) == ex
+    print("All tests passed successfully!")

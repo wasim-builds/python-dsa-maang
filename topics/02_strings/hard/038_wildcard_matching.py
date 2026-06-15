@@ -6,8 +6,6 @@ Problem Statement: Match string s to pattern p with '?' and '*'.
 Complexity: Time O(M*N), Space O(M*N)
 """
 
-import pytest
-
 
 def solve_brute(s, p):
     import re
@@ -32,14 +30,22 @@ def solve_optimal(s, p):
     return dp[m][n]
 
 
-@pytest.mark.parametrize(
-    "s,p,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("aa", "a", False),
         ("aa", "*", True),
         ("cb", "?a", False),
         ("adceb", "*a*b", True),
-    ],
-)
-def test_opt(s, p, ex):
-    assert solve_optimal(s, p) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, p, ex in test_cases:
+        assert solve_optimal(s, p) == ex
+    print("All tests passed successfully!")

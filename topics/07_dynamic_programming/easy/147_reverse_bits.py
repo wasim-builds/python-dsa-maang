@@ -5,8 +5,6 @@ Problem Statement: Reverse bits of a 32-bit unsigned integer.
 Complexity: Time O(1), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(n):
     return int(bin(n)[2:].zfill(32)[::-1], 2)
@@ -20,6 +18,17 @@ def solve_optimal(n):
     return res
 
 
-@pytest.mark.parametrize("n,ex", [(43261596, 964176192), (4294967293, 3221225471)])
-def test_opt(n, ex):
-    assert solve_optimal(n) == ex
+if __name__ == "__main__":
+    test_cases = [(43261596, 964176192), (4294967293, 3221225471)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert solve_optimal(n) == ex
+    print("All tests passed successfully!")

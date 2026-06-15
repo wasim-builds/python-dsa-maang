@@ -6,7 +6,6 @@ Problem Statement: Write a function that reverses a string in-place. Input is ch
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -22,13 +21,21 @@ def solve_optimal(s):
         r -= 1
 
 
-@pytest.mark.parametrize(
-    "s,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (["h", "e", "l", "l", "o"], ["o", "l", "l", "e", "h"]),
         (["H", "a", "n", "n", "a", "h"], ["h", "a", "n", "n", "a", "H"]),
-    ],
-)
-def test_opt(s, ex):
-    solve_optimal(s)
-    assert s == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, ex in test_cases:
+        solve_optimal(s)
+        assert s == ex
+    print("All tests passed successfully!")

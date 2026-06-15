@@ -6,7 +6,7 @@ Problem Statement: Swap every two adjacent nodes and return its head. Must not m
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -28,6 +28,17 @@ def solve_optimal(head):
     return solve_brute(head)
 
 
-@pytest.mark.parametrize("arr,ex", [([1, 2, 3, 4], [2, 1, 4, 3]), ([], []), ([1], [1])])
-def test_opt(arr, ex):
-    assert linked_to_list(solve_optimal(list_to_linked(arr))) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 3, 4], [2, 1, 4, 3]), ([], []), ([1], [1])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        assert linked_to_list(solve_optimal(list_to_linked(arr))) == ex
+    print("All tests passed successfully!")

@@ -5,8 +5,6 @@ Problem Statement: Find minimum integer x with same number of set bits as target
 Complexity: Time O(log N), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(num, target):
     return solve_optimal(num, target)
@@ -32,6 +30,17 @@ def solve_optimal(num, target):
     return x
 
 
-@pytest.mark.parametrize("num,t,ex", [(3, 5, 3), (1, 12, 3)])
-def test_opt(num, t, ex):
-    assert solve_optimal(num, t) == ex
+if __name__ == "__main__":
+    test_cases = [(3, 5, 3), (1, 12, 3)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for num, t, ex in test_cases:
+        assert solve_optimal(num, t) == ex
+    print("All tests passed successfully!")

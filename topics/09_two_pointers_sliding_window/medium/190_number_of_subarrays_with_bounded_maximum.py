@@ -5,7 +5,6 @@ Problem Statement: Return number of subarrays where max element is in range [lef
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -31,8 +30,17 @@ def solve_optimal(nums, left, right):
     return count(right) - count(left - 1)
 
 
-@pytest.mark.parametrize(
-    "nums,l,r,ex", [([2, 1, 4, 3], 2, 3, 3), ([2, 9, 2, 5, 6], 2, 8, 7)]
-)
-def test_opt(nums, l, r, ex):
-    assert solve_optimal(nums, l, r) == ex
+if __name__ == "__main__":
+    test_cases = [([2, 1, 4, 3], 2, 3, 3), ([2, 9, 2, 5, 6], 2, 8, 7)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, l, r, ex in test_cases:
+        assert solve_optimal(nums, l, r) == ex
+    print("All tests passed successfully!")

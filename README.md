@@ -24,17 +24,13 @@ pip install pytest black
 ```
 
 ## Running the Tests
-To run the entire suite of 850+ tests and verify the integrity of the solutions:
+To verify any algorithm, simply run the Python file directly. It contains an `if __name__ == '__main__':` block with built-in test cases and assertions.
+
 ```bash
-# Run all tests in the repository
-pytest topics/
-
-# Run tests with verbose output
-pytest -v topics/
-
-# Run tests for a specific topic
-pytest topics/01_arrays/
+# Example: Run tests for Two Sum
+python topics/01_arrays/easy/001_two_sum.py
 ```
+If the terminal outputs `All tests passed successfully!`, the code is working. If there is an error, an `AssertionError` will be raised.
 
 ## Structure
 ```text

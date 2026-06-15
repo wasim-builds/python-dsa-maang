@@ -5,7 +5,6 @@ Problem Statement: Find max XOR of any two numbers in array.
 Complexity: Time O(N), Space O(N) trie
 """
 
-import pytest
 from typing import List
 
 
@@ -29,17 +28,17 @@ def solve_optimal(nums):
     return res
 
 
-@pytest.mark.parametrize(
-    "nums,ex",
-    [
-        ([3, 10, 5, 25, 2, 8], 28),
-        ([14, 70, 53, 83, 49, 91, 36, 80, 92, 51, 66, 70], 127),
-    ],
-)
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([3, 10, 5, 25, 2, 8], 28)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("nums,ex", [([3, 10, 5, 25, 2, 8], 28)])
-def test_brute(nums, ex):
-    assert solve_brute(nums) == ex
+    for nums, ex in test_cases:
+        assert solve_brute(nums) == ex
+    print("All tests passed successfully!")

@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only use two pointers (`l` and `r`) to find the minimum.
 """
 
-import pytest
 from typing import List
 
 
@@ -46,25 +45,21 @@ def solve_optimal(nums: List[int]) -> int:
     return res
 
 
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([3, 4, 5, 1, 2], 1),
         ([4, 5, 6, 7, 0, 1, 2], 0),
         ([11, 13, 15, 17], 11),
-    ],
-)
-def test_solve_optimal(nums, expected):
-    assert solve_optimal(nums) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
-        ([3, 4, 5, 1, 2], 1),
-        ([4, 5, 6, 7, 0, 1, 2], 0),
-        ([11, 13, 15, 17], 11),
-    ],
-)
-def test_solve_brute(nums, expected):
-    assert solve_brute(nums) == expected
+    for nums, expected in test_cases:
+        assert solve_brute(nums) == expected
+    print("All tests passed successfully!")

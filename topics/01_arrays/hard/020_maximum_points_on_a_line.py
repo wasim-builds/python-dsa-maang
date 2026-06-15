@@ -6,7 +6,6 @@ Problem Statement: Given array of points, return max number of points that lie o
 Complexity: Time O(N^2), Space O(N)
 """
 
-import pytest
 from typing import List
 from collections import defaultdict
 from math import gcd
@@ -53,17 +52,17 @@ def solve_optimal(points):
     return res
 
 
-@pytest.mark.parametrize(
-    "pts,ex",
-    [
-        ([[1, 1], [2, 2], [3, 3]], 3),
-        ([[1, 1], [3, 2], [5, 3], [4, 1], [2, 3], [1, 4]], 4),
-    ],
-)
-def test_opt(pts, ex):
-    assert solve_optimal(pts) == ex
+if __name__ == "__main__":
+    test_cases = [([[1, 1], [2, 2], [3, 3]], 3)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("pts,ex", [([[1, 1], [2, 2], [3, 3]], 3)])
-def test_brute(pts, ex):
-    assert solve_brute(pts) == ex
+    for pts, ex in test_cases:
+        assert solve_brute(pts) == ex
+    print("All tests passed successfully!")

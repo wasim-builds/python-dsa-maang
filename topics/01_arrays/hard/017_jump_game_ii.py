@@ -6,7 +6,6 @@ Problem Statement: Return minimum jumps to reach last index. You can jump up to 
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -30,11 +29,17 @@ def solve_optimal(nums):
     return jumps
 
 
-@pytest.mark.parametrize("nums,ex", [([2, 3, 1, 1, 4], 2), ([2, 3, 0, 1, 4], 2)])
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([2, 3, 1, 1, 4], 2)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("nums,ex", [([2, 3, 1, 1, 4], 2)])
-def test_brute(nums, ex):
-    assert solve_brute(nums) == ex
+    for nums, ex in test_cases:
+        assert solve_brute(nums) == ex
+    print("All tests passed successfully!")

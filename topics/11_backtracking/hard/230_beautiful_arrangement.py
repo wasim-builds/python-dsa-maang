@@ -5,8 +5,6 @@ Problem Statement: Count beautiful arrangements where nums[i]%i==0 or i%nums[i]=
 Complexity: Time O(k) where k is valid placements, Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(n):
     return solve_optimal(n)
@@ -30,6 +28,17 @@ def solve_optimal(n):
     return count[0]
 
 
-@pytest.mark.parametrize("n,ex", [(2, 2), (1, 1), (3, 3)])
-def test_opt(n, ex):
-    assert solve_optimal(n) == ex
+if __name__ == "__main__":
+    test_cases = [(2, 2), (1, 1), (3, 3)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert solve_optimal(n) == ex
+    print("All tests passed successfully!")

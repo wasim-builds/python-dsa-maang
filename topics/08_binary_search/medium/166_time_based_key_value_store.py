@@ -5,7 +5,6 @@ Problem Statement: Design time-based key-value data structure that can store mul
 Complexity: Time O(log N) get, Space O(N)
 """
 
-import pytest
 from collections import defaultdict
 import bisect
 
@@ -25,7 +24,7 @@ class TimeMap:
         return arr[idx][1] if idx >= 0 else ""
 
 
-def test_timemap():
+if __name__ == "__main__":
     tm = TimeMap()
     tm.set("foo", "bar", 1)
     assert tm.get("foo", 1) == "bar"
@@ -33,3 +32,4 @@ def test_timemap():
     tm.set("foo", "bar2", 4)
     assert tm.get("foo", 4) == "bar2"
     assert tm.get("foo", 5) == "bar2"
+    print("All tests passed successfully!")

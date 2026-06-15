@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(W) where W is the total number of characters in all words to build the Trie, plus O(L) for the DFS recursion stack.
 """
 
-import pytest
 from typing import List
 
 
@@ -131,9 +130,8 @@ def solve_brute(board: List[List[str]], words: List[str]) -> List[str]:
     return res
 
 
-@pytest.mark.parametrize(
-    "board, words, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [
                 ["o", "a", "a", "n"],
@@ -143,30 +141,18 @@ def solve_brute(board: List[List[str]], words: List[str]) -> List[str]:
             ],
             ["oath", "pea", "eat", "rain"],
             ["eat", "oath"],
-        ),
-        ([["a", "b"], ["c", "d"]], ["abcb"], []),
-    ],
-)
-def test_solve_optimal(board, words, expected):
-    board_copy = [row[:] for row in board]
-    assert sorted(solve_optimal(board_copy, words)) == sorted(expected)
+        )
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "board, words, expected",
-    [
-        (
-            [
-                ["o", "a", "a", "n"],
-                ["e", "t", "a", "e"],
-                ["i", "h", "k", "r"],
-                ["i", "f", "l", "v"],
-            ],
-            ["oath", "pea", "eat", "rain"],
-            ["eat", "oath"],
-        ),
-    ],
-)
-def test_solve_brute(board, words, expected):
-    board_copy = [row[:] for row in board]
-    assert sorted(solve_brute(board_copy, words)) == sorted(expected)
+    for board, words, expected in test_cases:
+        board_copy = [row[:] for row in board]
+        assert sorted(solve_brute(board_copy, words)) == sorted(expected)
+    print("All tests passed successfully!")

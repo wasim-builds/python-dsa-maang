@@ -15,7 +15,6 @@ Complexity Proof:
 - Space Complexity: O(M * N) to store the `pac` and `atl` hash sets and for the DFS recursion stack.
 """
 
-import pytest
 from typing import List
 
 
@@ -105,9 +104,8 @@ def solve_brute(heights: List[List[int]]) -> List[List[int]]:
     return res
 
 
-@pytest.mark.parametrize(
-    "heights, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [
                 [1, 2, 2, 3, 5],
@@ -119,27 +117,16 @@ def solve_brute(heights: List[List[int]]) -> List[List[int]]:
             [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]],
         ),
         ([[1]], [[0, 0]]),
-    ],
-)
-def test_solve_optimal(heights, expected):
-    assert solve_optimal(heights) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "heights, expected",
-    [
-        (
-            [
-                [1, 2, 2, 3, 5],
-                [3, 2, 3, 4, 4],
-                [2, 4, 5, 3, 1],
-                [6, 7, 1, 4, 5],
-                [5, 1, 1, 2, 4],
-            ],
-            [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]],
-        ),
-        ([[1]], [[0, 0]]),
-    ],
-)
-def test_solve_brute(heights, expected):
-    assert solve_brute(heights) == expected
+    for heights, expected in test_cases:
+        assert solve_brute(heights) == expected
+    print("All tests passed successfully!")

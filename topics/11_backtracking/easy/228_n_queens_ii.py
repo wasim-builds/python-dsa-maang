@@ -5,8 +5,6 @@ Problem Statement: Return number of distinct solutions to N-queens puzzle.
 Complexity: Time O(N!), Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(n):
     return solve_optimal(n)
@@ -37,6 +35,17 @@ def solve_optimal(n):
     return count[0]
 
 
-@pytest.mark.parametrize("n,ex", [(4, 2), (1, 1), (8, 92)])
-def test_opt(n, ex):
-    assert solve_optimal(n) == ex
+if __name__ == "__main__":
+    test_cases = [(4, 2), (1, 1), (8, 92)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert solve_optimal(n) == ex
+    print("All tests passed successfully!")

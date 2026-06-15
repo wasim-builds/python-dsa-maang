@@ -6,7 +6,7 @@ Problem Statement: Rotate list to the right by k places.
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -40,8 +40,17 @@ def solve_optimal(head, k):
     return new_head
 
 
-@pytest.mark.parametrize(
-    "arr,k,ex", [([1, 2, 3, 4, 5], 2, [4, 5, 1, 2, 3]), ([0, 1, 2], 4, [2, 0, 1])]
-)
-def test_opt(arr, k, ex):
-    assert linked_to_list(solve_optimal(list_to_linked(arr), k)) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 3, 4, 5], 2, [4, 5, 1, 2, 3]), ([0, 1, 2], 4, [2, 0, 1])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, k, ex in test_cases:
+        assert linked_to_list(solve_optimal(list_to_linked(arr), k)) == ex
+    print("All tests passed successfully!")

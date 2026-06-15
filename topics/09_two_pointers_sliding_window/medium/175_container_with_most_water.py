@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only store a few variables (`l`, `r`, `max_area`).
 """
 
-import pytest
 from typing import List
 
 
@@ -49,27 +48,22 @@ def solve_optimal(height: List[int]) -> int:
     return max_area
 
 
-@pytest.mark.parametrize(
-    "height, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([1, 8, 6, 2, 5, 4, 8, 3, 7], 49),
         ([1, 1], 1),
         ([4, 3, 2, 1, 4], 16),
         ([1, 2, 1], 2),
-    ],
-)
-def test_solve_optimal(height, expected):
-    assert solve_optimal(height) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "height, expected",
-    [
-        ([1, 8, 6, 2, 5, 4, 8, 3, 7], 49),
-        ([1, 1], 1),
-        ([4, 3, 2, 1, 4], 16),
-        ([1, 2, 1], 2),
-    ],
-)
-def test_solve_brute(height, expected):
-    assert solve_brute(height) == expected
+    for height, expected in test_cases:
+        assert solve_brute(height) == expected
+    print("All tests passed successfully!")

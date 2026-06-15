@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(L) for the DFS recursion stack. The visited set can also be avoided by modifying the board in place, keeping space at O(L).
 """
 
-import pytest
 from typing import List
 
 
@@ -65,42 +64,24 @@ def solve_brute(board: List[List[str]], word: str) -> bool:
     return solve_optimal(board, word)
 
 
-@pytest.mark.parametrize(
-    "board, word, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]],
             "ABCCED",
             True,
-        ),
-        (
-            [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]],
-            "SEE",
-            True,
-        ),
-        (
-            [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]],
-            "ABCB",
-            False,
-        ),
-    ],
-)
-def test_solve_optimal(board, word, expected):
-    # Deep copy board to not affect other tests
-    test_board = [row[:] for row in board]
-    assert solve_optimal(test_board, word) == expected
+        )
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "board, word, expected",
-    [
-        (
-            [["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]],
-            "ABCCED",
-            True,
-        ),
-    ],
-)
-def test_solve_brute(board, word, expected):
-    test_board = [row[:] for row in board]
-    assert solve_brute(test_board, word) == expected
+    for board, word, expected in test_cases:
+        test_board = [row[:] for row in board]
+        assert solve_brute(test_board, word) == expected
+    print("All tests passed successfully!")

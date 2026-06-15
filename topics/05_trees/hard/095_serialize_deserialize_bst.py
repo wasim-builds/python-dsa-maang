@@ -5,7 +5,7 @@ Problem Statement: Design algorithm to serialize/deserialize BST more compactly 
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import TreeNode
@@ -44,7 +44,8 @@ class Codec:
         return build(float("-inf"), float("inf"))
 
 
-def test_codec():
+if __name__ == "__main__":
     c = Codec()
     root = TreeNode(4, TreeNode(2, TreeNode(1), TreeNode(3)), TreeNode(5))
     assert c.deserialize(c.serialize(root)).val == 4
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Given n nodes and edges, determine if they form a valid tree 
 Complexity: Time O(V+E), Space O(V)
 """
 
-import pytest
 from typing import List
 
 
@@ -36,12 +35,20 @@ def solve_optimal(n, edges):
     return solve_brute(n, edges)
 
 
-@pytest.mark.parametrize(
-    "n,e,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (5, [[0, 1], [0, 2], [0, 3], [1, 4]], True),
         (5, [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], False),
-    ],
-)
-def test_opt(n, e, ex):
-    assert solve_optimal(n, e) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, e, ex in test_cases:
+        assert solve_optimal(n, e) == ex
+    print("All tests passed successfully!")

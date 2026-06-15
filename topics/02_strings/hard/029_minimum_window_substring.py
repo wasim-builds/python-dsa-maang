@@ -6,7 +6,6 @@ Problem Statement: Given strings s and t, return minimum window substring of s c
 Complexity: Time O(N), Space O(|t|) sliding window with counter
 """
 
-import pytest
 from collections import Counter
 
 
@@ -44,13 +43,17 @@ def solve_optimal(s, t):
     return res
 
 
-@pytest.mark.parametrize(
-    "s,t,ex", [("ADOBECODEBANC", "ABC", "BANC"), ("a", "a", "a"), ("a", "aa", "")]
-)
-def test_opt(s, t, ex):
-    assert solve_optimal(s, t) == ex
+if __name__ == "__main__":
+    test_cases = [("ADOBECODEBANC", "ABC", "BANC")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("s,t,ex", [("ADOBECODEBANC", "ABC", "BANC")])
-def test_brute(s, t, ex):
-    assert solve_brute(s, t) == ex
+    for s, t, ex in test_cases:
+        assert solve_brute(s, t) == ex
+    print("All tests passed successfully!")

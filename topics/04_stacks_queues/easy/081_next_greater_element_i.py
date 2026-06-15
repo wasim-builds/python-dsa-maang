@@ -5,7 +5,6 @@ Problem Statement: For each element in nums1 (subset of nums2), find next greate
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -34,9 +33,20 @@ def solve_optimal(nums1, nums2):
     return [nge.get(n, -1) for n in nums1]
 
 
-@pytest.mark.parametrize(
-    "n1,n2,ex",
-    [([4, 1, 2], [1, 3, 4, 2], [-1, 3, -1]), ([2, 4], [1, 2, 3, 4], [3, -1])],
-)
-def test_opt(n1, n2, ex):
-    assert solve_optimal(n1, n2) == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([4, 1, 2], [1, 3, 4, 2], [-1, 3, -1]),
+        ([2, 4], [1, 2, 3, 4], [3, -1]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n1, n2, ex in test_cases:
+        assert solve_optimal(n1, n2) == ex
+    print("All tests passed successfully!")

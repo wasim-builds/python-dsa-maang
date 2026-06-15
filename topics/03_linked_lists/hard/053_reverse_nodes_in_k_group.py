@@ -6,7 +6,7 @@ Problem Statement: Reverse nodes in k-groups. If remaining nodes < k, leave them
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -54,9 +54,20 @@ def get_kth(curr, k):
     return curr
 
 
-@pytest.mark.parametrize(
-    "arr,k,ex",
-    [([1, 2, 3, 4, 5], 2, [2, 1, 4, 3, 5]), ([1, 2, 3, 4, 5], 3, [3, 2, 1, 4, 5])],
-)
-def test_opt(arr, k, ex):
-    assert linked_to_list(solve_optimal(list_to_linked(arr), k)) == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([1, 2, 3, 4, 5], 2, [2, 1, 4, 3, 5]),
+        ([1, 2, 3, 4, 5], 3, [3, 2, 1, 4, 5]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, k, ex in test_cases:
+        assert linked_to_list(solve_optimal(list_to_linked(arr), k)) == ex
+    print("All tests passed successfully!")

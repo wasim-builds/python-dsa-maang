@@ -5,7 +5,7 @@ Problem Statement: Given root, return values of nodes visible from right side, t
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import TreeNode, list_to_tree
@@ -35,9 +35,21 @@ def solve_optimal(root):
     return solve_brute(root)
 
 
-@pytest.mark.parametrize(
-    "arr,ex",
-    [([1, 2, 3, None, 5, None, 4], [1, 3, 4]), ([1, None, 3], [1, 3]), ([], [])],
-)
-def test_opt(arr, ex):
-    assert solve_optimal(list_to_tree(arr)) == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([1, 2, 3, None, 5, None, 4], [1, 3, 4]),
+        ([1, None, 3], [1, 3]),
+        ([], []),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        assert solve_optimal(list_to_tree(arr)) == ex
+    print("All tests passed successfully!")

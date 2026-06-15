@@ -5,7 +5,6 @@ Problem Statement: Find all combinations of candidates summing to target, each n
 Complexity: Time O(2^N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -34,12 +33,20 @@ def solve_optimal(candidates, target):
     return res
 
 
-@pytest.mark.parametrize(
-    "c,t,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([10, 1, 2, 7, 6, 1, 5], 8, [[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]),
         ([2, 5, 2, 1, 2], 5, [[1, 2, 2], [5]]),
-    ],
-)
-def test_opt(c, t, ex):
-    assert sorted(solve_optimal(c, t)) == sorted(ex)
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for c, t, ex in test_cases:
+        assert sorted(solve_optimal(c, t)) == sorted(ex)
+    print("All tests passed successfully!")

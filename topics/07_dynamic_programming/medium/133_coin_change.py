@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(A) to store the DP array of size `amount + 1`.
 """
 
-import pytest
 from typing import List
 
 
@@ -52,26 +51,19 @@ def solve_optimal(coins: List[int], amount: int) -> int:
     return dp[amount] if dp[amount] != float("inf") else -1
 
 
-@pytest.mark.parametrize(
-    "coins, amount, expected",
-    [
-        ([1, 2, 5], 11, 3),
-        ([2], 3, -1),
-        ([1], 0, 0),
-    ],
-)
-def test_solve_optimal(coins, amount, expected):
-    assert solve_optimal(coins, amount) == expected
-
-
 # Note: Only testing brute force on small amounts to prevent timeout
-@pytest.mark.parametrize(
-    "coins, amount, expected",
-    [
-        ([1, 2, 5], 11, 3),
-        ([2], 3, -1),
-        ([1], 0, 0),
-    ],
-)
-def test_solve_brute(coins, amount, expected):
-    assert solve_brute(coins, amount) == expected
+
+if __name__ == "__main__":
+    test_cases = [([1, 2, 5], 11, 3), ([2], 3, -1), ([1], 0, 0)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for coins, amount, expected in test_cases:
+        assert solve_brute(coins, amount) == expected
+    print("All tests passed successfully!")

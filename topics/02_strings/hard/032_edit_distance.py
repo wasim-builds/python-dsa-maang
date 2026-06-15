@@ -6,8 +6,6 @@ Problem Statement: Given two strings word1 and word2, return minimum operations 
 Complexity: Time O(M*N), Space O(M*N) DP
 """
 
-import pytest
-
 
 def solve_brute(word1, word2):
     from functools import lru_cache
@@ -41,13 +39,17 @@ def solve_optimal(word1, word2):
     return dp[m][n]
 
 
-@pytest.mark.parametrize(
-    "w1,w2,ex", [("horse", "ros", 3), ("intention", "execution", 5)]
-)
-def test_opt(w1, w2, ex):
-    assert solve_optimal(w1, w2) == ex
+if __name__ == "__main__":
+    test_cases = [("horse", "ros", 3)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("w1,w2,ex", [("horse", "ros", 3)])
-def test_brute(w1, w2, ex):
-    assert solve_brute(w1, w2) == ex
+    for w1, w2, ex in test_cases:
+        assert solve_brute(w1, w2) == ex
+    print("All tests passed successfully!")

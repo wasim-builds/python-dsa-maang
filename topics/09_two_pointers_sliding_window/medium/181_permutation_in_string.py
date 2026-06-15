@@ -5,7 +5,6 @@ Problem Statement: Return true if s2 contains a permutation of s1.
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from collections import Counter
 
 
@@ -36,8 +35,17 @@ def solve_optimal(s1, s2):
     return False
 
 
-@pytest.mark.parametrize(
-    "s1,s2,ex", [("ab", "eidbaooo", True), ("ab", "eidboaoo", False)]
-)
-def test_opt(s1, s2, ex):
-    assert solve_optimal(s1, s2) == ex
+if __name__ == "__main__":
+    test_cases = [("ab", "eidbaooo", True), ("ab", "eidboaoo", False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s1, s2, ex in test_cases:
+        assert solve_optimal(s1, s2) == ex
+    print("All tests passed successfully!")

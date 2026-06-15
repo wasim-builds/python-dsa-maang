@@ -5,7 +5,6 @@ Problem Statement: Return min length subarray with sum >= target. Return 0 if no
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -34,9 +33,21 @@ def solve_optimal(target, nums):
     return 0 if res == float("inf") else res
 
 
-@pytest.mark.parametrize(
-    "t,nums,ex",
-    [(7, [2, 3, 1, 2, 4, 3], 2), (4, [1, 4, 4], 1), (11, [1, 1, 1, 1, 1, 1, 1, 1], 0)],
-)
-def test_opt(t, nums, ex):
-    assert solve_optimal(t, nums) == ex
+if __name__ == "__main__":
+    test_cases = [
+        (7, [2, 3, 1, 2, 4, 3], 2),
+        (4, [1, 4, 4], 1),
+        (11, [1, 1, 1, 1, 1, 1, 1, 1], 0),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for t, nums, ex in test_cases:
+        assert solve_optimal(t, nums) == ex
+    print("All tests passed successfully!")

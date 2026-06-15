@@ -5,7 +5,6 @@ Problem Statement: Return all combinations of k numbers chosen from 1..n.
 Complexity: Time O(C(n,k) * k), Space O(k)
 """
 
-import pytest
 from typing import List
 
 
@@ -29,8 +28,20 @@ def solve_optimal(n, k):
     return res
 
 
-@pytest.mark.parametrize(
-    "n,k,ex", [(4, 2, [[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]), (1, 1, [[1]])]
-)
-def test_opt(n, k, ex):
-    assert sorted(solve_optimal(n, k)) == sorted(ex)
+if __name__ == "__main__":
+    test_cases = [
+        (4, 2, [[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]),
+        (1, 1, [[1]]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, k, ex in test_cases:
+        assert sorted(solve_optimal(n, k)) == sorted(ex)
+    print("All tests passed successfully!")

@@ -5,7 +5,7 @@ Problem Statement: Design data structure to track smallest number in initially-i
 Complexity: Time O(log N) pop, O(log N) add
 """
 
-import pytest, heapq
+import heapq
 
 
 class SmallestInfiniteSet:
@@ -29,9 +29,10 @@ class SmallestInfiniteSet:
             heapq.heappush(self.heap, n)
 
 
-def test_set():
+if __name__ == "__main__":
     s = SmallestInfiniteSet()
     assert s.popSmallest() == 1
     s.addBack(1)
     assert s.popSmallest() == 1
     assert s.popSmallest() == 2
+    print("All tests passed successfully!")

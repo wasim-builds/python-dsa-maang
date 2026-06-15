@@ -5,7 +5,6 @@ Problem Statement: Give each child at least 1 candy; more than neighbors with hi
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -25,6 +24,17 @@ def solve_optimal(ratings):
     return sum(candy)
 
 
-@pytest.mark.parametrize("r,ex", [([1, 0, 2], 5), ([1, 2, 2], 4)])
-def test_opt(r, ex):
-    assert solve_optimal(r) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 0, 2], 5), ([1, 2, 2], 4)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for r, ex in test_cases:
+        assert solve_optimal(r) == ex
+    print("All tests passed successfully!")

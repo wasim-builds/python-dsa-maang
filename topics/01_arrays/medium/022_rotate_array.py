@@ -6,7 +6,6 @@ Problem Statement: Rotate array to right by k steps in-place.
 Complexity: Time O(N), Space O(1) reverse approach
 """
 
-import pytest
 from typing import List
 
 
@@ -29,13 +28,21 @@ def solve_optimal(nums, k):
     rev(k, len(nums) - 1)
 
 
-@pytest.mark.parametrize(
-    "nums,k,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([1, 2, 3, 4, 5, 6, 7], 3, [5, 6, 7, 1, 2, 3, 4]),
         ([-1, -100, 3, 99], 2, [3, 99, -1, -100]),
-    ],
-)
-def test_opt(nums, k, ex):
-    solve_optimal(nums, k)
-    assert nums == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, k, ex in test_cases:
+        solve_optimal(nums, k)
+        assert nums == ex
+    print("All tests passed successfully!")

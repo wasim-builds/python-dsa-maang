@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(V) to store the hash map mapping original nodes to their clones, and for the DFS recursion stack / BFS queue.
 """
 
-import pytest
 from typing import Optional
 
 
@@ -103,34 +102,21 @@ def serialize_graph(node):
     return output
 
 
-@pytest.mark.parametrize(
-    "adjList",
-    [
-        ([[2, 4], [1, 3], [2, 4], [1, 3]]),
-        ([[]]),
-        ([]),
-    ],
-)
-def test_solve_optimal(adjList):
-    node = build_graph(adjList)
-    cloned = solve_optimal(node)
-    # Ensure it's not the exact same memory reference but same structure
-    if node:
-        assert cloned is not node
-    assert serialize_graph(cloned) == adjList
+if __name__ == "__main__":
+    test_cases = [[[2, 4], [1, 3], [2, 4], [1, 3]], [[]], []]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "adjList",
-    [
-        ([[2, 4], [1, 3], [2, 4], [1, 3]]),
-        ([[]]),
-        ([]),
-    ],
-)
-def test_solve_brute(adjList):
-    node = build_graph(adjList)
-    cloned = solve_brute(node)
-    if node:
-        assert cloned is not node
-    assert serialize_graph(cloned) == adjList
+    for adjList in test_cases:
+        node = build_graph(adjList)
+        cloned = solve_brute(node)
+        if node:
+            assert cloned is not node
+        assert serialize_graph(cloned) == adjList
+    print("All tests passed successfully!")

@@ -5,8 +5,6 @@ Problem Statement: Given string s and t (s with one extra random char), find tha
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(s, t):
     from collections import Counter
@@ -22,6 +20,17 @@ def solve_optimal(s, t):
     return chr(res)
 
 
-@pytest.mark.parametrize("s,t,ex", [("abcd", "abcde", "e"), ("", "y", "y")])
-def test_opt(s, t, ex):
-    assert solve_optimal(s, t) == ex
+if __name__ == "__main__":
+    test_cases = [("abcd", "abcde", "e"), ("", "y", "y")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, t, ex in test_cases:
+        assert solve_optimal(s, t) == ex
+    print("All tests passed successfully!")

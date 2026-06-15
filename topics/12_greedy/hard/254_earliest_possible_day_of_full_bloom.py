@@ -5,7 +5,6 @@ Problem Statement: Plant seeds then grow them. Find earliest day all flowers blo
 Complexity: Time O(N log N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -22,8 +21,17 @@ def solve_optimal(plantTime, growTime):
     return bloom
 
 
-@pytest.mark.parametrize(
-    "p,g,ex", [([1, 4, 3], [2, 3, 1], 9), ([1, 2, 3, 2], [2, 1, 2, 1], 9)]
-)
-def test_opt(p, g, ex):
-    assert solve_optimal(p, g) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 4, 3], [2, 3, 1], 9), ([1, 2, 3, 2], [2, 1, 2, 1], 9)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for p, g, ex in test_cases:
+        assert solve_optimal(p, g) == ex
+    print("All tests passed successfully!")

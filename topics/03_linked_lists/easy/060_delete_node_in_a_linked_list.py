@@ -6,7 +6,7 @@ Problem Statement: Delete a node given only access to that node (not head). Node
 Complexity: Time O(1), Space O(1)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -21,8 +21,9 @@ def solve_brute(node):
     solve_optimal(node)
 
 
-def test_delete_node():
+if __name__ == "__main__":
     head = list_to_linked([4, 5, 1, 9])
     node = head.next
     solve_optimal(node)
     assert linked_to_list(head) == [4, 1, 9]
+    print("All tests passed successfully!")

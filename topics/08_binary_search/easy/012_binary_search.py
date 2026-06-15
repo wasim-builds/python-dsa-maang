@@ -14,7 +14,6 @@ Complexity Proof:
 """
 
 from typing import List
-import pytest
 
 
 # OPTIMAL
@@ -34,12 +33,17 @@ def search(nums: List[int], target: int) -> int:
     return -1
 
 
-@pytest.mark.parametrize(
-    "nums, target, expected",
-    [
-        ([-1, 0, 3, 5, 9, 12], 9, 4),
-        ([-1, 0, 3, 5, 9, 12], 2, -1),
-    ],
-)
-def test_search(nums, target, expected):
-    assert search(nums, target) == expected
+if __name__ == "__main__":
+    test_cases = [([-1, 0, 3, 5, 9, 12], 9, 4), ([-1, 0, 3, 5, 9, 12], 2, -1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, target, expected in test_cases:
+        assert search(nums, target) == expected
+    print("All tests passed successfully!")

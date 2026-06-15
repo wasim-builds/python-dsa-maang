@@ -5,7 +5,6 @@ Problem Statement: Implement LIFO stack using only two queues.
 Complexity: Time O(N) push, O(1) others; Space O(N)
 """
 
-import pytest
 from collections import deque
 
 
@@ -28,10 +27,11 @@ class MyStack:
         return not self.q
 
 
-def test_stack():
+if __name__ == "__main__":
     s = MyStack()
     s.push(1)
     s.push(2)
     assert s.top() == 2
     assert s.pop() == 2
     assert not s.empty()
+    print("All tests passed successfully!")

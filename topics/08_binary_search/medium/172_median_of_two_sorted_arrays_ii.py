@@ -5,7 +5,6 @@ Problem Statement: Given sorted array, find k closest elements to x. Return sort
 Complexity: Time O(log N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -25,9 +24,20 @@ def solve_optimal(arr, k, x):
     return arr[l : l + k]
 
 
-@pytest.mark.parametrize(
-    "arr,k,x,ex",
-    [([1, 2, 3, 4, 5], 4, 3, [1, 2, 3, 4]), ([1, 2, 3, 4, 5], 4, -1, [1, 2, 3, 4])],
-)
-def test_opt(arr, k, x, ex):
-    assert solve_optimal(arr, k, x) == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([1, 2, 3, 4, 5], 4, 3, [1, 2, 3, 4]),
+        ([1, 2, 3, 4, 5], 4, -1, [1, 2, 3, 4]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, k, x, ex in test_cases:
+        assert solve_optimal(arr, k, x) == ex
+    print("All tests passed successfully!")

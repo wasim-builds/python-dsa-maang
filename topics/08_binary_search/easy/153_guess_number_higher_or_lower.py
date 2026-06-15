@@ -5,8 +5,6 @@ Problem Statement: Binary search based guessing game.
 Complexity: Time O(log N), Space O(1)
 """
 
-import pytest
-
 
 def guess(n, pick):
     return 0 if n == pick else (-1 if n > pick else 1)
@@ -29,6 +27,17 @@ def solve_brute(n, pick):
     return solve_optimal(n, pick)
 
 
-@pytest.mark.parametrize("n,pick,ex", [(10, 6, 6), (1, 1, 1), (2, 2, 2)])
-def test_opt(n, pick, ex):
-    assert solve_optimal(n, pick) == ex
+if __name__ == "__main__":
+    test_cases = [(10, 6, 6), (1, 1, 1), (2, 2, 2)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, pick, ex in test_cases:
+        assert solve_optimal(n, pick) == ex
+    print("All tests passed successfully!")

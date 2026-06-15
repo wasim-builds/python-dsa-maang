@@ -5,7 +5,7 @@ Problem Statement: Place cameras on tree nodes such that every node is monitored
 Complexity: Time O(N), Space O(H)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import TreeNode, list_to_tree
@@ -35,25 +35,35 @@ def solve_brute(root):
     return solve_optimal(root)
 
 
-@pytest.mark.parametrize(
-    "arr,ex", [([0, 0, None, 0, 0], 1), ([0, 0, None, 0, None, 0, None, None, 0], 2)]
-)
-def test_opt(arr, ex):
-    def mk(arr):
-        if not arr:
-            return None
-        from utils.data_structures import TreeNode
+if __name__ == "__main__":
+    test_cases = [([0, 0, None, 0, 0], 1), ([0, 0, None, 0, None, 0, None, None, 0], 2)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-        nodes = [TreeNode(0) if v == 0 else None for v in (arr if arr else [])]
-        if not nodes:
-            return None
-        for i in range(len(nodes)):
-            if nodes[i] and 2 * i + 1 < len(nodes):
-                nodes[i].left = nodes[2 * i + 1]
-            if nodes[i] and 2 * i + 2 < len(nodes):
-                nodes[i].right = nodes[2 * i + 2]
-        return nodes[0]
+    for arr, ex in test_cases:
 
-    root = mk(arr)
-    if root:
-        assert solve_optimal(root) == ex
+        def mk(arr):
+            if not arr:
+                return None
+            from utils.data_structures import TreeNode
+
+            nodes = [TreeNode(0) if v == 0 else None for v in (arr if arr else [])]
+            if not nodes:
+                return None
+            for i in range(len(nodes)):
+                if nodes[i] and 2 * i + 1 < len(nodes):
+                    nodes[i].left = nodes[2 * i + 1]
+                if nodes[i] and 2 * i + 2 < len(nodes):
+                    nodes[i].right = nodes[2 * i + 2]
+            return nodes[0]
+
+        root = mk(arr)
+        if root:
+            assert solve_optimal(root) == ex
+    print("All tests passed successfully!")

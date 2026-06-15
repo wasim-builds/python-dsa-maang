@@ -6,7 +6,6 @@ Problem Statement: Given words and max width, format text so each line has exact
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -40,15 +39,23 @@ def solve_optimal(words, maxWidth):
     return res
 
 
-@pytest.mark.parametrize(
-    "words,mw,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             ["This", "is", "an", "example", "of", "text", "justification."],
             16,
             ["This    is    an", "example  of text", "justification.  "],
         )
-    ],
-)
-def test_opt(words, mw, ex):
-    assert solve_optimal(words, mw) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for words, mw, ex in test_cases:
+        assert solve_optimal(words, mw) == ex
+    print("All tests passed successfully!")

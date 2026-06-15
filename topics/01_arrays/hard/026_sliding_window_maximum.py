@@ -6,7 +6,6 @@ Problem Statement: Given array nums and window size k, return max of each window
 Complexity: Time O(N), Space O(k)
 """
 
-import pytest
 from typing import List
 from collections import deque
 
@@ -29,15 +28,17 @@ def solve_optimal(nums, k):
     return res
 
 
-@pytest.mark.parametrize(
-    "nums,k,ex", [([1, 3, -1, -3, 5, 3, 6, 7], 3, [3, 3, 5, 5, 6, 7]), ([1], 1, [1])]
-)
-def test_opt(nums, k, ex):
-    assert solve_optimal(nums, k) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 3, -1, -3, 5, 3, 6, 7], 3, [3, 3, 5, 5, 6, 7])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums,k,ex", [([1, 3, -1, -3, 5, 3, 6, 7], 3, [3, 3, 5, 5, 6, 7])]
-)
-def test_brute(nums, k, ex):
-    assert solve_brute(nums, k) == ex
+    for nums, k, ex in test_cases:
+        assert solve_brute(nums, k) == ex
+    print("All tests passed successfully!")

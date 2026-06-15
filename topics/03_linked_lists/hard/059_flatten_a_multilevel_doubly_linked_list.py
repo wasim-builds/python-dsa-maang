@@ -6,8 +6,6 @@ Problem Statement: Flatten multilevel doubly linked list with child pointers int
 Complexity: Time O(N), Space O(N) for stack
 """
 
-import pytest
-
 
 class Node:
     def __init__(self, val, prev=None, next=None, child=None):
@@ -37,8 +35,8 @@ def solve_optimal(head):
     return head
 
 
-def test_flatten():
-    n1, n2, n3 = Node(1), Node(2), Node(3)
+if __name__ == "__main__":
+    n1, n2, n3 = (Node(1), Node(2), Node(3))
     n1.next = n2
     n2.prev = n1
     n2.next = n3
@@ -51,3 +49,4 @@ def test_flatten():
         vals.append(r.val)
         r = r.next
     assert vals == [1, 2, 7, 3]
+    print("All tests passed successfully!")

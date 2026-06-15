@@ -5,7 +5,6 @@ Problem Statement: Find person trusted by everyone else but trusts nobody. Retur
 Complexity: Time O(E), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -30,9 +29,21 @@ def solve_optimal(n, trust):
     return -1
 
 
-@pytest.mark.parametrize(
-    "n,t,ex",
-    [(2, [[1, 2]], 2), (3, [[1, 3], [2, 3]], 3), (3, [[1, 3], [2, 3], [3, 1]], -1)],
-)
-def test_opt(n, t, ex):
-    assert solve_optimal(n, t) == ex
+if __name__ == "__main__":
+    test_cases = [
+        (2, [[1, 2]], 2),
+        (3, [[1, 3], [2, 3]], 3),
+        (3, [[1, 3], [2, 3], [3, 1]], -1),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, t, ex in test_cases:
+        assert solve_optimal(n, t) == ex
+    print("All tests passed successfully!")

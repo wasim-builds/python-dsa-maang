@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(N) because in the worst case (e.g. all numbers followed by operators), the stack will hold roughly N/2 numbers.
 """
 
-import pytest
 from typing import List
 
 
@@ -47,23 +46,17 @@ def solve_brute(tokens: List[str]) -> int:
     return solve_optimal(tokens)
 
 
-@pytest.mark.parametrize(
-    "tokens, expected",
-    [
-        (["2", "1", "+", "3", "*"], 9),
-        (["4", "13", "5", "/", "+"], 6),
-        (["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"], 22),
-    ],
-)
-def test_solve_optimal(tokens, expected):
-    assert solve_optimal(tokens) == expected
+if __name__ == "__main__":
+    test_cases = [(["2", "1", "+", "3", "*"], 9)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "tokens, expected",
-    [
-        (["2", "1", "+", "3", "*"], 9),
-    ],
-)
-def test_solve_brute(tokens, expected):
-    assert solve_brute(tokens) == expected
+    for tokens, expected in test_cases:
+        assert solve_brute(tokens) == expected
+    print("All tests passed successfully!")

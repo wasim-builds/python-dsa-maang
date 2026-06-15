@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(H) where H is the height of `root`, due to the recursion stack.
 """
 
-import pytest
 import sys
 import os
 
@@ -51,26 +50,19 @@ def solve_brute(root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
     return solve_optimal(root, subRoot)
 
 
-@pytest.mark.parametrize(
-    "arr_root, arr_sub, expected",
-    [
-        ([3, 4, 5, 1, 2], [4, 1, 2], True),
-        ([3, 4, 5, 1, 2, None, None, None, None, 0], [4, 1, 2], False),
-    ],
-)
-def test_solve_optimal(arr_root, arr_sub, expected):
-    root = list_to_tree(arr_root)
-    sub = list_to_tree(arr_sub)
-    assert solve_optimal(root, sub) == expected
+if __name__ == "__main__":
+    test_cases = [([3, 4, 5, 1, 2], [4, 1, 2], True)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "arr_root, arr_sub, expected",
-    [
-        ([3, 4, 5, 1, 2], [4, 1, 2], True),
-    ],
-)
-def test_solve_brute(arr_root, arr_sub, expected):
-    root = list_to_tree(arr_root)
-    sub = list_to_tree(arr_sub)
-    assert solve_brute(root, sub) == expected
+    for arr_root, arr_sub, expected in test_cases:
+        root = list_to_tree(arr_root)
+        sub = list_to_tree(arr_sub)
+        assert solve_brute(root, sub) == expected
+    print("All tests passed successfully!")

@@ -5,8 +5,6 @@ Problem Statement: Return bitwise AND of all numbers in range [left,right].
 Complexity: Time O(1), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(left, right):
     res = left
@@ -24,6 +22,17 @@ def solve_optimal(left, right):
     return left << shift
 
 
-@pytest.mark.parametrize("l,r,ex", [(5, 7, 4), (0, 0, 0), (1, 2147483647, 0)])
-def test_opt(l, r, ex):
-    assert solve_optimal(l, r) == ex
+if __name__ == "__main__":
+    test_cases = [(5, 7, 4), (0, 0, 0), (1, 2147483647, 0)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for l, r, ex in test_cases:
+        assert solve_optimal(l, r) == ex
+    print("All tests passed successfully!")

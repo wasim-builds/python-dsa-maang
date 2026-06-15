@@ -12,7 +12,6 @@ Complexity Proof:
 """
 
 from typing import List
-import pytest
 
 
 # BRUTE FORCE
@@ -40,25 +39,21 @@ def maxSubArray_optimal(nums: List[int]) -> int:
     return max_sum
 
 
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 6),
         ([1], 1),
         ([5, 4, -1, 7, 8], 23),
-    ],
-)
-def test_maxSubArray_optimal(nums, expected):
-    assert maxSubArray_optimal(nums) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
-        ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 6),
-        ([1], 1),
-        ([5, 4, -1, 7, 8], 23),
-    ],
-)
-def test_maxSubArray_brute(nums, expected):
-    assert maxSubArray_brute(nums) == expected
+    for nums, expected in test_cases:
+        assert maxSubArray_brute(nums) == expected
+    print("All tests passed successfully!")

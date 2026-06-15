@@ -5,7 +5,6 @@ Problem Statement: Find min operations to reduce x to 0 by removing from either 
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -31,9 +30,21 @@ def solve_optimal(nums, x):
     return solve_brute(nums, x)
 
 
-@pytest.mark.parametrize(
-    "nums,x,ex",
-    [([1, 1, 4, 2, 3], 5, 2), ([5, 6, 7, 8, 9], 4, -1), ([3, 2, 20, 1, 1, 3], 10, 5)],
-)
-def test_opt(nums, x, ex):
-    assert solve_optimal(nums, x) == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([1, 1, 4, 2, 3], 5, 2),
+        ([5, 6, 7, 8, 9], 4, -1),
+        ([3, 2, 20, 1, 1, 3], 10, 5),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, x, ex in test_cases:
+        assert solve_optimal(nums, x) == ex
+    print("All tests passed successfully!")

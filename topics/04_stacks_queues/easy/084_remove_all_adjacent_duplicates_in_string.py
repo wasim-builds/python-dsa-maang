@@ -5,8 +5,6 @@ Problem Statement: Repeatedly remove adjacent duplicates until none remain.
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(s):
     while True:
@@ -29,6 +27,17 @@ def solve_optimal(s):
     return "".join(stack)
 
 
-@pytest.mark.parametrize("s,ex", [("abbaca", "ca"), ("azxxzy", "ay")])
-def test_opt(s, ex):
-    assert solve_optimal(s) == ex
+if __name__ == "__main__":
+    test_cases = [("abbaca", "ca"), ("azxxzy", "ay")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, ex in test_cases:
+        assert solve_optimal(s) == ex
+    print("All tests passed successfully!")

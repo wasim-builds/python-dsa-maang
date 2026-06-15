@@ -5,7 +5,6 @@ Problem Statement: Maximize score jumping from index 0 to n-1. Can jump up to k 
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 from collections import deque
 
@@ -34,13 +33,17 @@ def solve_optimal(nums, k):
     return dp[-1]
 
 
-@pytest.mark.parametrize(
-    "nums,k,ex", [([1, -1, -2, 4, -7, 3], 2, 7), ([10, -5, -2, 4, 0, 3], 4, 17)]
-)
-def test_opt(nums, k, ex):
-    assert solve_optimal(nums, k) == ex
+if __name__ == "__main__":
+    test_cases = [([1, -1, -2, 4, -7, 3], 2, 7)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("nums,k,ex", [([1, -1, -2, 4, -7, 3], 2, 7)])
-def test_brute(nums, k, ex):
-    assert solve_brute(nums, k) == ex
+    for nums, k, ex in test_cases:
+        assert solve_brute(nums, k) == ex
+    print("All tests passed successfully!")

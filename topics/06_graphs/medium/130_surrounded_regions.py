@@ -5,7 +5,6 @@ Problem Statement: Capture all regions not connected to border.
 Complexity: Time O(M*N), Space O(M*N)
 """
 
-import pytest
 from typing import List
 
 
@@ -41,9 +40,8 @@ def solve_optimal(board):
                 board[r][c] = "O"
 
 
-@pytest.mark.parametrize(
-    "board,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [
                 ["X", "X", "X", "X"],
@@ -58,9 +56,18 @@ def solve_optimal(board):
                 ["X", "O", "X", "X"],
             ],
         )
-    ],
-)
-def test_opt(board, ex):
-    b = [r[:] for r in board]
-    solve_optimal(b)
-    assert b == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for board, ex in test_cases:
+        b = [r[:] for r in board]
+        solve_optimal(b)
+        assert b == ex
+    print("All tests passed successfully!")

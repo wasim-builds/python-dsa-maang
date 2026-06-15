@@ -5,7 +5,6 @@ Problem Statement: Find the smallest element in sorted char array strictly great
 Complexity: Time O(log N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -27,13 +26,21 @@ def solve_optimal(letters, target):
     return letters[l % len(letters)]
 
 
-@pytest.mark.parametrize(
-    "l,t,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (["c", "f", "j"], "a", "c"),
         (["c", "f", "j"], "c", "f"),
         (["c", "f", "j"], "j", "c"),
-    ],
-)
-def test_opt(l, t, ex):
-    assert solve_optimal(l, t) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for l, t, ex in test_cases:
+        assert solve_optimal(l, t) == ex
+    print("All tests passed successfully!")

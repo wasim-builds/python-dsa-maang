@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(k) for the priority queue which stores at most k nodes at any time. (Excluding the output list).
 """
 
-import pytest
 import sys
 import os
 import heapq
@@ -68,27 +67,22 @@ def solve_optimal(lists: List[Optional[ListNode]]) -> Optional[ListNode]:
     return dummy.next
 
 
-@pytest.mark.parametrize(
-    "arrs, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[1, 4, 5], [1, 3, 4], [2, 6]], [1, 1, 2, 3, 4, 4, 5, 6]),
         ([], []),
         ([[]], []),
-    ],
-)
-def test_solve_optimal(arrs, expected):
-    lists = [list_to_linked(arr) for arr in arrs]
-    assert linked_to_list(solve_optimal(lists)) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "arrs, expected",
-    [
-        ([[1, 4, 5], [1, 3, 4], [2, 6]], [1, 1, 2, 3, 4, 4, 5, 6]),
-        ([], []),
-        ([[]], []),
-    ],
-)
-def test_solve_brute(arrs, expected):
-    lists = [list_to_linked(arr) for arr in arrs]
-    assert linked_to_list(solve_brute(lists)) == expected
+    for arrs, expected in test_cases:
+        lists = [list_to_linked(arr) for arr in arrs]
+        assert linked_to_list(solve_brute(lists)) == expected
+    print("All tests passed successfully!")

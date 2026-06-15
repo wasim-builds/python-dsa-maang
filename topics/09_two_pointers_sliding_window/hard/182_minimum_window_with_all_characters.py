@@ -5,7 +5,6 @@ Problem Statement: Return number of subarrays with exactly k different integers.
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -39,8 +38,17 @@ def solve_optimal(nums, k):
     return at_most_k(nums, k) - at_most_k(nums, k - 1)
 
 
-@pytest.mark.parametrize(
-    "nums,k,ex", [([1, 2, 1, 2, 3], 2, 7), ([1, 2, 1, 3, 4], 3, 3)]
-)
-def test_opt(nums, k, ex):
-    assert solve_optimal(nums, k) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 1, 2, 3], 2, 7), ([1, 2, 1, 3, 4], 3, 3)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, k, ex in test_cases:
+        assert solve_optimal(nums, k) == ex
+    print("All tests passed successfully!")

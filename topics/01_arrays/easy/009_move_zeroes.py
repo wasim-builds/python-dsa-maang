@@ -12,7 +12,6 @@ Complexity Proof:
 - Space: O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -29,9 +28,18 @@ def solve_optimal(nums):
             p += 1
 
 
-@pytest.mark.parametrize(
-    "nums,expected", [([0, 1, 0, 3, 12], [1, 3, 12, 0, 0]), ([0], [0])]
-)
-def test_optimal(nums, expected):
-    solve_optimal(nums)
-    assert nums == expected
+if __name__ == "__main__":
+    test_cases = [([0, 1, 0, 3, 12], [1, 3, 12, 0, 0]), ([0], [0])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, expected in test_cases:
+        solve_optimal(nums)
+        assert nums == expected
+    print("All tests passed successfully!")

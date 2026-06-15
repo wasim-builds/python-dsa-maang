@@ -5,7 +5,6 @@ Problem Statement: Find two numbers in sorted array summing to target. Return 1-
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -28,9 +27,21 @@ def solve_optimal(numbers, target):
             r -= 1
 
 
-@pytest.mark.parametrize(
-    "nums,t,ex",
-    [([2, 7, 11, 15], 9, [1, 2]), ([2, 3, 4], 6, [1, 3]), ([3, 3], 6, [1, 2])],
-)
-def test_opt(nums, t, ex):
-    assert solve_optimal(nums, t) == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([2, 7, 11, 15], 9, [1, 2]),
+        ([2, 3, 4], 6, [1, 3]),
+        ([3, 3], 6, [1, 2]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, t, ex in test_cases:
+        assert solve_optimal(nums, t) == ex
+    print("All tests passed successfully!")

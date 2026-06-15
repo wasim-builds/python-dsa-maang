@@ -17,8 +17,6 @@ Complexity Proof:
 - Space Complexity: O(N * M) where N is the number of words inserted and M is the maximum word length, as we create a new node for every character.
 """
 
-import pytest
-
 
 class TrieNode:
     def __init__(self):
@@ -55,11 +53,12 @@ class Trie:
         return True
 
 
-def test_trie():
+if __name__ == "__main__":
     trie = Trie()
     trie.insert("apple")
-    assert trie.search("apple") == True  # return True
-    assert trie.search("app") == False  # return False
-    assert trie.startsWith("app") == True  # return True
+    assert trie.search("apple") == True
+    assert trie.search("app") == False
+    assert trie.startsWith("app") == True
     trie.insert("app")
-    assert trie.search("app") == True  # return True
+    assert trie.search("app") == True
+    print("All tests passed successfully!")

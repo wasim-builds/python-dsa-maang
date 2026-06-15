@@ -5,7 +5,6 @@ Problem Statement: Pick index with probability proportional to its weight.
 Complexity: Time O(log N) pick, Space O(N)
 """
 
-import pytest
 import random, bisect
 from typing import List
 
@@ -22,9 +21,10 @@ class Solution:
         return bisect.bisect_left(self.prefix, r) - 1
 
 
-def test_random_pick():
+if __name__ == "__main__":
     s = Solution([1, 3])
     counts = {0: 0, 1: 0}
     for _ in range(1000):
         counts[s.pickIndex()] += 1
     assert counts[1] > counts[0]
+    print("All tests passed successfully!")

@@ -6,7 +6,7 @@ Problem Statement: Given linked list, return node where cycle begins, or null.
 Complexity: Time O(N), Space O(1) Floyd's algorithm
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode
@@ -26,9 +26,10 @@ def solve_optimal(head):
     return None
 
 
-def test_cycle_ii():
+if __name__ == "__main__":
     nodes = [ListNode(i) for i in [3, 2, 0, -4]]
     for i in range(len(nodes) - 1):
         nodes[i].next = nodes[i + 1]
     nodes[-1].next = nodes[1]
     assert solve_optimal(nodes[0]) is nodes[1]
+    print("All tests passed successfully!")

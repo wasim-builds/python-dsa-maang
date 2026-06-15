@@ -5,7 +5,6 @@ Problem Statement: Return true if can provide change for each customer (5,10,20 
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -34,8 +33,17 @@ def solve_optimal(bills):
     return True
 
 
-@pytest.mark.parametrize(
-    "b,ex", [([5, 5, 5, 10, 20], True), ([5, 5, 10, 10, 20], False)]
-)
-def test_opt(b, ex):
-    assert solve_optimal(b) == ex
+if __name__ == "__main__":
+    test_cases = [([5, 5, 5, 10, 20], True), ([5, 5, 10, 10, 20], False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for b, ex in test_cases:
+        assert solve_optimal(b) == ex
+    print("All tests passed successfully!")

@@ -5,7 +5,7 @@ Problem Statement: Flatten binary tree to linked list in-place using preorder tr
 Complexity: Time O(N), Space O(1) Morris approach
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import TreeNode, list_to_tree, linked_to_list
@@ -28,7 +28,7 @@ def solve_brute(root):
     solve_optimal(root)
 
 
-def test_flatten():
+if __name__ == "__main__":
     root = list_to_tree([1, 2, 5, 3, 4, None, 6])
     solve_optimal(root)
     vals = []
@@ -37,3 +37,4 @@ def test_flatten():
         vals.append(curr.val)
         curr = curr.right
     assert vals == [1, 2, 3, 4, 5, 6]
+    print("All tests passed successfully!")

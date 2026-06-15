@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(H) where H is the height of the tree. This accounts for the recursive call stack.
 """
 
-import pytest
 import sys
 import os
 
@@ -60,27 +59,22 @@ def solve_optimal(root: Optional[TreeNode]) -> bool:
     return dfs(root)[0]
 
 
-@pytest.mark.parametrize(
-    "arr, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([3, 9, 20, None, None, 15, 7], True),
         ([1, 2, 2, 3, 3, None, None, 4, 4], False),
         ([], True),
-    ],
-)
-def test_solve_optimal(arr, expected):
-    root = list_to_tree(arr)
-    assert solve_optimal(root) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "arr, expected",
-    [
-        ([3, 9, 20, None, None, 15, 7], True),
-        ([1, 2, 2, 3, 3, None, None, 4, 4], False),
-        ([], True),
-    ],
-)
-def test_solve_brute(arr, expected):
-    root = list_to_tree(arr)
-    assert solve_brute(root) == expected
+    for arr, expected in test_cases:
+        root = list_to_tree(arr)
+        assert solve_brute(root) == expected
+    print("All tests passed successfully!")

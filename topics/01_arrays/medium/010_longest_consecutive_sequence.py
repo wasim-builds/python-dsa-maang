@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(N) to store the hash set containing all the numbers.
 """
 
-import pytest
 from typing import List
 
 
@@ -55,25 +54,21 @@ def solve_optimal(nums: List[int]) -> int:
     return longest
 
 
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([100, 4, 200, 1, 3, 2], 4),
         ([0, 3, 7, 2, 5, 8, 4, 6, 0, 1], 9),
         ([], 0),
-    ],
-)
-def test_solve_optimal(nums, expected):
-    assert solve_optimal(nums) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
-        ([100, 4, 200, 1, 3, 2], 4),
-        ([0, 3, 7, 2, 5, 8, 4, 6, 0, 1], 9),
-        ([], 0),
-    ],
-)
-def test_solve_brute(nums, expected):
-    assert solve_brute(nums) == expected
+    for nums, expected in test_cases:
+        assert solve_brute(nums) == expected
+    print("All tests passed successfully!")

@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(T/M) for the recursion stack to store the current combination.
 """
 
-import pytest
 from typing import List
 
 
@@ -48,27 +47,24 @@ def solve_brute(candidates: List[int], target: int) -> List[List[int]]:
     return solve_optimal(candidates, target)
 
 
-@pytest.mark.parametrize(
-    "candidates, target, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([2, 3, 6, 7], 7, [[2, 2, 3], [7]]),
         ([2, 3, 5], 8, [[2, 2, 2, 2], [2, 3, 3], [3, 5]]),
         ([2], 1, []),
-    ],
-)
-def test_solve_optimal(candidates, target, expected):
-    result = solve_optimal(candidates, target)
-    assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "candidates, target, expected",
-    [
-        ([2, 3, 6, 7], 7, [[2, 2, 3], [7]]),
-        ([2, 3, 5], 8, [[2, 2, 2, 2], [2, 3, 3], [3, 5]]),
-        ([2], 1, []),
-    ],
-)
-def test_solve_brute(candidates, target, expected):
-    result = solve_brute(candidates, target)
-    assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
+    for candidates, target, expected in test_cases:
+        result = solve_brute(candidates, target)
+        assert sorted([sorted(x) for x in result]) == sorted(
+            [sorted(x) for x in expected]
+        )
+    print("All tests passed successfully!")

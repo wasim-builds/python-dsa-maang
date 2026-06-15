@@ -5,7 +5,6 @@ Problem Statement: Burst all balloons to get max coins. nums[left]*nums[i]*nums[
 Complexity: Time O(N^3), Space O(N^2)
 """
 
-import pytest
 from typing import List
 
 
@@ -27,6 +26,17 @@ def solve_optimal(nums):
     return dp[0][n - 1]
 
 
-@pytest.mark.parametrize("nums,ex", [([3, 1, 5, 8], 167), ([1, 5], 10)])
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([3, 1, 5, 8], 167), ([1, 5], 10)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, ex in test_cases:
+        assert solve_optimal(nums) == ex
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Sort array with values 0,1,2 in-place using one pass (Dutch F
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -28,10 +27,22 @@ def solve_optimal(nums):
             mid += 1
 
 
-@pytest.mark.parametrize(
-    "nums,ex",
-    [([2, 0, 2, 1, 1, 0], [0, 0, 1, 1, 2, 2]), ([2, 0, 1], [0, 1, 2]), ([0], [0])],
-)
-def test_opt(nums, ex):
-    solve_optimal(nums)
-    assert nums == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([2, 0, 2, 1, 1, 0], [0, 0, 1, 1, 2, 2]),
+        ([2, 0, 1], [0, 1, 2]),
+        ([0], [0]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, ex in test_cases:
+        solve_optimal(nums)
+        assert nums == ex
+    print("All tests passed successfully!")

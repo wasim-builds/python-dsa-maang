@@ -5,7 +5,6 @@ Problem Statement: Find two elements appearing once; all others appear twice.
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -29,6 +28,17 @@ def solve_optimal(nums):
     return [a, b]
 
 
-@pytest.mark.parametrize("nums,ex", [([1, 2, 1, 3, 2, 5], {3, 5}), ([1, 2], {1, 2})])
-def test_opt(nums, ex):
-    assert set(solve_optimal(nums)) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 1, 3, 2, 5], {3, 5}), ([1, 2], {1, 2})]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, ex in test_cases:
+        assert set(solve_optimal(nums)) == ex
+    print("All tests passed successfully!")

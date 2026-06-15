@@ -5,7 +5,6 @@ Problem Statement: Given array of strings, find max length of concatenation with
 Complexity: Time O(2^N * N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -29,13 +28,21 @@ def solve_optimal(arr):
     return res[0]
 
 
-@pytest.mark.parametrize(
-    "arr,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (["un", "iq", "ue"], 4),
         (["cha", "r", "act", "ers"], 6),
         (["abcdefghijklmnopqrstuvwxyz"], 26),
-    ],
-)
-def test_opt(arr, ex):
-    assert solve_optimal(arr) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        assert solve_optimal(arr) == ex
+    print("All tests passed successfully!")

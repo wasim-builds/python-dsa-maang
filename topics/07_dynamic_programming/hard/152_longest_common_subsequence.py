@@ -5,8 +5,6 @@ Problem Statement: Return length of longest common subsequence of text1 and text
 Complexity: Time O(M*N), Space O(min(M,N))
 """
 
-import pytest
-
 
 def solve_brute(t1, t2):
     from functools import lru_cache
@@ -37,8 +35,17 @@ def solve_optimal(t1, t2):
     return dp[n]
 
 
-@pytest.mark.parametrize(
-    "t1,t2,ex", [("abcde", "ace", 3), ("abc", "abc", 3), ("abc", "def", 0)]
-)
-def test_opt(t1, t2, ex):
-    assert solve_optimal(t1, t2) == ex
+if __name__ == "__main__":
+    test_cases = [("abcde", "ace", 3), ("abc", "abc", 3), ("abc", "def", 0)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for t1, t2, ex in test_cases:
+        assert solve_optimal(t1, t2) == ex
+    print("All tests passed successfully!")

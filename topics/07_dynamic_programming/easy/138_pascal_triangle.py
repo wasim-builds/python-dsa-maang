@@ -5,7 +5,6 @@ Problem Statement: Generate first numRows of Pascal's Triangle.
 Complexity: Time O(N^2), Space O(N^2)
 """
 
-import pytest
 from typing import List
 
 
@@ -24,8 +23,20 @@ def solve_optimal(n):
     return solve_brute(n)
 
 
-@pytest.mark.parametrize(
-    "n,ex", [(5, [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]), (1, [[1]])]
-)
-def test_opt(n, ex):
-    assert solve_optimal(n) == ex
+if __name__ == "__main__":
+    test_cases = [
+        (5, [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]),
+        (1, [[1]]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert solve_optimal(n) == ex
+    print("All tests passed successfully!")

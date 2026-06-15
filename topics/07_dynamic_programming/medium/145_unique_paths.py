@@ -5,8 +5,6 @@ Problem Statement: Robot on m x n grid, can move right or down. How many paths f
 Complexity: Time O(M*N), Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(m, n):
     from math import comb
@@ -22,6 +20,17 @@ def solve_optimal(m, n):
     return dp[n - 1]
 
 
-@pytest.mark.parametrize("m,n,ex", [(3, 7, 28), (3, 2, 3), (1, 1, 1)])
-def test_opt(m, n, ex):
-    assert solve_optimal(m, n) == ex
+if __name__ == "__main__":
+    test_cases = [(3, 7, 28), (3, 2, 3), (1, 1, 1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for m, n, ex in test_cases:
+        assert solve_optimal(m, n) == ex
+    print("All tests passed successfully!")

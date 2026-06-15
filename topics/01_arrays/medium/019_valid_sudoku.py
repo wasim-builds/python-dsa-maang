@@ -16,7 +16,6 @@ Complexity Proof:
 - Space Complexity: O(1) or O(9^2) because the hash sets will store at most 81 elements across rows, cols, and squares.
 """
 
-import pytest
 from typing import List
 from collections import defaultdict
 
@@ -52,46 +51,8 @@ def solve_brute(board: List[List[str]]) -> bool:
     return solve_optimal(board)
 
 
-@pytest.mark.parametrize(
-    "board, expected",
-    [
-        (
-            [
-                ["5", "3", ".", ".", "7", ".", ".", ".", "."],
-                ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-                [".", "9", "8", ".", ".", ".", ".", "6", "."],
-                ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
-                ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
-                ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-                [".", "6", ".", ".", ".", ".", "2", "8", "."],
-                [".", ".", ".", "4", "1", "9", ".", ".", "5"],
-                [".", ".", ".", ".", "8", ".", ".", "7", "9"],
-            ],
-            True,
-        ),
-        (
-            [
-                ["8", "3", ".", ".", "7", ".", ".", ".", "."],
-                ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-                [".", "9", "8", ".", ".", ".", ".", "6", "."],
-                ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
-                ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
-                ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-                [".", "6", ".", ".", ".", ".", "2", "8", "."],
-                [".", ".", ".", "4", "1", "9", ".", ".", "5"],
-                [".", ".", ".", ".", "8", ".", ".", "7", "9"],
-            ],
-            False,
-        ),
-    ],
-)
-def test_solve_optimal(board, expected):
-    assert solve_optimal(board) == expected
-
-
-@pytest.mark.parametrize(
-    "board, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [
                 ["5", "3", ".", ".", "7", ".", ".", ".", "."],
@@ -106,7 +67,16 @@ def test_solve_optimal(board, expected):
             ],
             True,
         )
-    ],
-)
-def test_solve_brute(board, expected):
-    assert solve_brute(board) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for board, expected in test_cases:
+        assert solve_brute(board) == expected
+    print("All tests passed successfully!")

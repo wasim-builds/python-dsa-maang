@@ -5,7 +5,6 @@ Problem Statement: Merge nums2 into nums1 in sorted order. nums1 has space for m
 Complexity: Time O(M+N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -30,10 +29,21 @@ def solve_optimal(nums1, m, nums2, n):
         k -= 1
 
 
-@pytest.mark.parametrize(
-    "n1,m,n2,n,ex",
-    [([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3, [1, 2, 2, 3, 5, 6]), ([1], 1, [], 0, [1])],
-)
-def test_opt(n1, m, n2, n, ex):
-    solve_optimal(n1, m, n2, n)
-    assert n1 == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3, [1, 2, 2, 3, 5, 6]),
+        ([1], 1, [], 0, [1]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n1, m, n2, n, ex in test_cases:
+        solve_optimal(n1, m, n2, n)
+        assert n1 == ex
+    print("All tests passed successfully!")

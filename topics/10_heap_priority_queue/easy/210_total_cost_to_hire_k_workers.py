@@ -5,7 +5,7 @@ Problem Statement: Hire k workers with minimum cost. Each round hire from first/
 Complexity: Time O((k+candidates)*log(candidates)), Space O(candidates)
 """
 
-import pytest, heapq
+import heapq
 from typing import List
 
 
@@ -50,9 +50,17 @@ def solve_optimal(costs, k, cands):
     return res
 
 
-@pytest.mark.parametrize(
-    "c,k,cands,ex",
-    [([17, 12, 10, 2, 7, 2, 11, 20, 8], 3, 4, 11), ([1, 2, 4, 1], 3, 3, 4)],
-)
-def test_opt(c, k, cands, ex):
-    assert solve_optimal(c[:], k, cands) == ex
+if __name__ == "__main__":
+    test_cases = [([17, 12, 10, 2, 7, 2, 11, 20, 8], 3, 4, 11), ([1, 2, 4, 1], 3, 3, 4)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for c, k, cands, ex in test_cases:
+        assert solve_optimal(c[:], k, cands) == ex
+    print("All tests passed successfully!")

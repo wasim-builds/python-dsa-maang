@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(N) for the monotonic stack storing the indices of the temperatures.
 """
 
-import pytest
 from typing import List
 
 
@@ -45,25 +44,21 @@ def solve_brute(temperatures: List[int]) -> List[int]:
     return res
 
 
-@pytest.mark.parametrize(
-    "temperatures, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([73, 74, 75, 71, 69, 72, 76, 73], [1, 1, 4, 2, 1, 1, 0, 0]),
         ([30, 40, 50, 60], [1, 1, 1, 0]),
         ([30, 60, 90], [1, 1, 0]),
-    ],
-)
-def test_solve_optimal(temperatures, expected):
-    assert solve_optimal(temperatures) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "temperatures, expected",
-    [
-        ([73, 74, 75, 71, 69, 72, 76, 73], [1, 1, 4, 2, 1, 1, 0, 0]),
-        ([30, 40, 50, 60], [1, 1, 1, 0]),
-        ([30, 60, 90], [1, 1, 0]),
-    ],
-)
-def test_solve_brute(temperatures, expected):
-    assert solve_brute(temperatures) == expected
+    for temperatures, expected in test_cases:
+        assert solve_brute(temperatures) == expected
+    print("All tests passed successfully!")

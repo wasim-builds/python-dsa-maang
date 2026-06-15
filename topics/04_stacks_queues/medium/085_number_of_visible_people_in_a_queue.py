@@ -5,7 +5,6 @@ Problem Statement: People stand in line. heights[i] is height of ith person. Ret
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -41,9 +40,20 @@ def solve_optimal(heights):
     return res
 
 
-@pytest.mark.parametrize(
-    "h,ex",
-    [([10, 6, 8, 5, 11, 9], [3, 1, 2, 1, 1, 0]), ([5, 1, 2, 3, 10], [4, 1, 1, 1, 0])],
-)
-def test_opt(h, ex):
-    assert solve_optimal(h) == ex
+if __name__ == "__main__":
+    test_cases = [
+        ([10, 6, 8, 5, 11, 9], [3, 1, 2, 1, 1, 0]),
+        ([5, 1, 2, 3, 10], [4, 1, 1, 1, 0]),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for h, ex in test_cases:
+        assert solve_optimal(h) == ex
+    print("All tests passed successfully!")

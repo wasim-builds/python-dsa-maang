@@ -5,8 +5,6 @@ Problem Statement: Implement FIFO queue using only two stacks.
 Complexity: Time O(1) amortized, Space O(N)
 """
 
-import pytest
-
 
 class MyQueue:
     def __init__(self):
@@ -32,10 +30,11 @@ class MyQueue:
         return not self.s1 and not self.s2
 
 
-def test_queue():
+if __name__ == "__main__":
     q = MyQueue()
     q.push(1)
     q.push(2)
     assert q.peek() == 1
     assert q.pop() == 1
     assert not q.empty()
+    print("All tests passed successfully!")

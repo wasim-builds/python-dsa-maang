@@ -5,7 +5,6 @@ Problem Statement: Starting at index start, jump to i+arr[i] or i-arr[i]. Can yo
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 from collections import deque
 
@@ -40,13 +39,21 @@ def solve_optimal(arr, start):
     return False
 
 
-@pytest.mark.parametrize(
-    "arr,s,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([4, 2, 3, 0, 3, 1, 2], 5, True),
         ([4, 2, 3, 0, 3, 1, 2], 0, True),
         ([3, 0, 2, 1, 2], 2, False),
-    ],
-)
-def test_opt(arr, s, ex):
-    assert solve_optimal(arr, s) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, s, ex in test_cases:
+        assert solve_optimal(arr, s) == ex
+    print("All tests passed successfully!")

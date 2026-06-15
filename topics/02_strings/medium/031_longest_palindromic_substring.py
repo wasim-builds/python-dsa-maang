@@ -12,8 +12,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only keep track of indices (`resLen`, `res`). Note: extracting the final string slice takes O(N) memory but is considered O(1) extra space.
 """
 
-import pytest
-
 
 # BRUTE FORCE
 # Time: O(N^3), Space: O(1)
@@ -59,28 +57,22 @@ def solve_optimal(s: str) -> str:
     return res
 
 
-@pytest.mark.parametrize(
-    "s, expected_options",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("babad", ["bab", "aba"]),
         ("cbbd", ["bb"]),
         ("a", ["a"]),
         ("ac", ["a", "c"]),
-    ],
-)
-def test_solve_optimal(s, expected_options):
-    # Multiple valid answers possible, assert it's one of them
-    assert solve_optimal(s) in expected_options
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "s, expected_options",
-    [
-        ("babad", ["bab", "aba"]),
-        ("cbbd", ["bb"]),
-        ("a", ["a"]),
-        ("ac", ["a", "c"]),
-    ],
-)
-def test_solve_brute(s, expected_options):
-    assert solve_brute(s) in expected_options
+    for s, expected_options in test_cases:
+        assert solve_brute(s) in expected_options
+    print("All tests passed successfully!")

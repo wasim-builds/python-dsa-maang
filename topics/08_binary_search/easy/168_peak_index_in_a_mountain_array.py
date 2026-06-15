@@ -5,7 +5,6 @@ Problem Statement: Find peak index in mountain array.
 Complexity: Time O(log N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -24,8 +23,17 @@ def solve_optimal(arr):
     return l
 
 
-@pytest.mark.parametrize(
-    "arr,ex", [([0, 1, 0], 1), ([0, 2, 1, 0], 1), ([0, 10, 5, 2], 1)]
-)
-def test_opt(arr, ex):
-    assert solve_optimal(arr) == ex
+if __name__ == "__main__":
+    test_cases = [([0, 1, 0], 1), ([0, 2, 1, 0], 1), ([0, 10, 5, 2], 1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        assert solve_optimal(arr) == ex
+    print("All tests passed successfully!")

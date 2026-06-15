@@ -5,7 +5,6 @@ Problem Statement: Return longest word in words that can be built one char at a 
 Complexity: Time O(N * M), Space O(N * M)
 """
 
-import pytest
 from typing import List
 
 
@@ -22,12 +21,20 @@ def solve_optimal(words):
     return ""
 
 
-@pytest.mark.parametrize(
-    "w,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (["w", "wo", "wor", "worl", "world"], "world"),
         (["a", "banana", "app", "appl", "ap", "apply", "apple"], "apple"),
-    ],
-)
-def test_opt(w, ex):
-    assert solve_optimal(w) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for w, ex in test_cases:
+        assert solve_optimal(w) == ex
+    print("All tests passed successfully!")

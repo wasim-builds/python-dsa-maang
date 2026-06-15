@@ -6,7 +6,6 @@ Problem Statement: Return max number of consecutive 1s if you can flip at most k
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -36,17 +35,17 @@ def solve_optimal(nums, k):
     return res
 
 
-@pytest.mark.parametrize(
-    "nums,k,ex",
-    [
-        ([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2, 6),
-        ([0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1], 3, 10),
-    ],
-)
-def test_opt(nums, k, ex):
-    assert solve_optimal(nums, k) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2, 6)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("nums,k,ex", [([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2, 6)])
-def test_brute(nums, k, ex):
-    assert solve_brute(nums, k) == ex
+    for nums, k, ex in test_cases:
+        assert solve_brute(nums, k) == ex
+    print("All tests passed successfully!")

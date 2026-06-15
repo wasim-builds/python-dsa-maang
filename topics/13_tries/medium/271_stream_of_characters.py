@@ -5,8 +5,6 @@ Problem Statement: Query characters from stream. Return true if any word in word
 Complexity: Time O(N * L) build, O(L) query; Space O(N * L)
 """
 
-import pytest
-
 
 class TrieNode:
     def __init__(self):
@@ -39,7 +37,7 @@ class StreamChecker:
         return False
 
 
-def test_stream():
+if __name__ == "__main__":
     sc = StreamChecker(["cd", "f", "kl"])
     for c, ex in [
         ("a", False),
@@ -50,3 +48,4 @@ def test_stream():
         ("f", True),
     ]:
         assert sc.query(c) == ex
+    print("All tests passed successfully!")

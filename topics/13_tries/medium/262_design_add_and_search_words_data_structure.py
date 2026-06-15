@@ -16,8 +16,6 @@ Complexity Proof:
 - Space Complexity: O(N * M) where N is the number of words added and M is the maximum length of a word, as we create a new node for each character.
 """
 
-import pytest
-
 
 class TrieNode:
     def __init__(self):
@@ -61,12 +59,13 @@ class WordDictionary:
         return dfs(0, self.root)
 
 
-def test_word_dictionary():
+if __name__ == "__main__":
     wordDictionary = WordDictionary()
     wordDictionary.addWord("bad")
     wordDictionary.addWord("dad")
     wordDictionary.addWord("mad")
-    assert wordDictionary.search("pad") == False  # return False
-    assert wordDictionary.search("bad") == True  # return True
-    assert wordDictionary.search(".ad") == True  # return True
-    assert wordDictionary.search("b..") == True  # return True
+    assert wordDictionary.search("pad") == False
+    assert wordDictionary.search("bad") == True
+    assert wordDictionary.search(".ad") == True
+    assert wordDictionary.search("b..") == True
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Given sorted list of words in alien language, derive characte
 Complexity: Time O(C) chars total, Space O(1) since at most 26 letters
 """
 
-import pytest
 from typing import List
 
 
@@ -43,14 +42,26 @@ def solve_optimal(words):
     return "".join(reversed(res))
 
 
-@pytest.mark.parametrize("words,ex", [(["wrt", "wrf", "er", "ett", "rftt"], "wertf")])
-def test_opt(words, ex):
-    res = solve_optimal(words)
-    # Verify by checking order constraints
-    pos = {c: i for i, c in enumerate(res)}
-    assert all(
-        pos.get(c1, -1) < pos.get(c2, -1)
-        for a, b in zip(words, words[1:])
-        for c1, c2 in zip(a, b)
-        if c1 != c2
-    )
+if __name__ == "__main__":
+    test_cases = [(["wrt", "wrf", "er", "ett", "rftt"], "wertf")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for words, ex in test_cases:
+        res = solve_optimal(words)
+        pos = {c: i for i, c in enumerate(res)}
+        assert all(
+            (
+                pos.get(c1, -1) < pos.get(c2, -1)
+                for a, b in zip(words, words[1:])
+                for c1, c2 in zip(a, b)
+                if c1 != c2
+            )
+        )
+    print("All tests passed successfully!")

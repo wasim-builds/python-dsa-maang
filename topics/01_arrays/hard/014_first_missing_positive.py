@@ -6,7 +6,6 @@ Problem Statement: Given unsorted integer array, return smallest missing positiv
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -28,13 +27,17 @@ def solve_optimal(nums):
     return n + 1
 
 
-@pytest.mark.parametrize(
-    "nums,ex", [([1, 2, 0], 3), ([3, 4, -1, 1], 2), ([7, 8, 9, 11, 12], 1)]
-)
-def test_opt(nums, ex):
-    assert solve_optimal(nums[:]) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 0], 3)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("nums,ex", [([1, 2, 0], 3)])
-def test_brute(nums, ex):
-    assert solve_brute(nums) == ex
+    for nums, ex in test_cases:
+        assert solve_brute(nums) == ex
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Find element appearing once; all others appear three times. O
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -23,6 +22,17 @@ def solve_optimal(nums):
     return ones
 
 
-@pytest.mark.parametrize("nums,ex", [([2, 2, 3, 2], 3), ([0, 1, 0, 1, 0, 1, 99], 99)])
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([2, 2, 3, 2], 3), ([0, 1, 0, 1, 0, 1, 99], 99)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, ex in test_cases:
+        assert solve_optimal(nums) == ex
+    print("All tests passed successfully!")

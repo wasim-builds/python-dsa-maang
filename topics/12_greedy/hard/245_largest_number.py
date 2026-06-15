@@ -5,7 +5,6 @@ Problem Statement: Arrange numbers to form the largest number.
 Complexity: Time O(N log N), Space O(N)
 """
 
-import pytest
 from typing import List
 from functools import cmp_to_key
 
@@ -22,8 +21,17 @@ def solve_optimal(nums):
     return "".join(nums).lstrip("0") or "0"
 
 
-@pytest.mark.parametrize(
-    "nums,ex", [([10, 2], "210"), ([3, 30, 34, 5, 9], "9534330"), ([0, 0], "0")]
-)
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([10, 2], "210"), ([3, 30, 34, 5, 9], "9534330"), ([0, 0], "0")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, ex in test_cases:
+        assert solve_optimal(nums) == ex
+    print("All tests passed successfully!")

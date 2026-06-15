@@ -6,8 +6,6 @@ Problem Statement: Write string in zigzag pattern on given numRows and return re
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(s, numRows):
     return solve_optimal(s, numRows)
@@ -27,13 +25,21 @@ def solve_optimal(s, numRows):
     return "".join(rows)
 
 
-@pytest.mark.parametrize(
-    "s,r,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"),
         ("PAYPALISHIRING", 4, "PINALSIGYAHRPI"),
         ("A", 1, "A"),
-    ],
-)
-def test_opt(s, r, ex):
-    assert solve_optimal(s, r) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, r, ex in test_cases:
+        assert solve_optimal(s, r) == ex
+    print("All tests passed successfully!")

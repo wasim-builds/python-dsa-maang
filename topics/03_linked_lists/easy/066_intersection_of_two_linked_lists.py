@@ -6,7 +6,7 @@ Problem Statement: Return node at which two linked lists intersect, or null.
 Complexity: Time O(M+N), Space O(1)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode
@@ -33,8 +33,9 @@ def solve_optimal(headA, headB):
     return a
 
 
-def test_intersection():
+if __name__ == "__main__":
     shared = ListNode(8, ListNode(4, ListNode(5)))
     headA = ListNode(4, ListNode(1, shared))
     headB = ListNode(5, ListNode(6, ListNode(1, shared)))
     assert solve_optimal(headA, headB) is shared
+    print("All tests passed successfully!")

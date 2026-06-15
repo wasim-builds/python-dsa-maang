@@ -5,7 +5,6 @@ Problem Statement: Process baseball game records: int=points, +, D, C. Return su
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -27,9 +26,20 @@ def solve_optimal(ops):
     return sum(stack)
 
 
-@pytest.mark.parametrize(
-    "ops,ex",
-    [(["5", "2", "C", "D", "+"], 30), (["5", "-2", "4", "C", "D", "9", "+", "+"], 27)],
-)
-def test_opt(ops, ex):
-    assert solve_optimal(ops) == ex
+if __name__ == "__main__":
+    test_cases = [
+        (["5", "2", "C", "D", "+"], 30),
+        (["5", "-2", "4", "C", "D", "9", "+", "+"], 27),
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for ops, ex in test_cases:
+        assert solve_optimal(ops) == ex
+    print("All tests passed successfully!")

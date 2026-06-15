@@ -5,8 +5,6 @@ Problem Statement: Return number of 1 bits (Hamming weight) of integer n.
 Complexity: Time O(1), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(n):
     return bin(n).count("1")
@@ -20,6 +18,17 @@ def solve_optimal(n):
     return count
 
 
-@pytest.mark.parametrize("n,ex", [(11, 3), (128, 1), (4294967293, 31)])
-def test_opt(n, ex):
-    assert solve_optimal(n) == ex
+if __name__ == "__main__":
+    test_cases = [(11, 3), (128, 1), (4294967293, 31)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert solve_optimal(n) == ex
+    print("All tests passed successfully!")

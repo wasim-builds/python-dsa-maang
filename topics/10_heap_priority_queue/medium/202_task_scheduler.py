@@ -14,7 +14,6 @@ Complexity Proof:
 - Space Complexity: O(1) because the hash map and heap will hold at most 26 elements.
 """
 
-import pytest
 from typing import List
 from collections import Counter, deque
 import heapq
@@ -58,25 +57,21 @@ def solve_brute(tasks: List[str], n: int) -> int:
     return max(len(tasks), (max_count - 1) * (n + 1) + max_count_tasks)
 
 
-@pytest.mark.parametrize(
-    "tasks, n, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (["A", "A", "A", "B", "B", "B"], 2, 8),
         (["A", "A", "A", "B", "B", "B"], 0, 6),
         (["A", "A", "A", "A", "A", "A", "B", "C", "D", "E", "F", "G"], 2, 16),
-    ],
-)
-def test_solve_optimal(tasks, n, expected):
-    assert solve_optimal(tasks, n) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "tasks, n, expected",
-    [
-        (["A", "A", "A", "B", "B", "B"], 2, 8),
-        (["A", "A", "A", "B", "B", "B"], 0, 6),
-        (["A", "A", "A", "A", "A", "A", "B", "C", "D", "E", "F", "G"], 2, 16),
-    ],
-)
-def test_solve_brute(tasks, n, expected):
-    assert solve_brute(tasks, n) == expected
+    for tasks, n, expected in test_cases:
+        assert solve_brute(tasks, n) == expected
+    print("All tests passed successfully!")

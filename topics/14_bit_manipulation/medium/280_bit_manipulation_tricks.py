@@ -5,8 +5,6 @@ Problem Statement: Divide two integers without multiplication, division or mod. 
 Complexity: Time O(log^2 N), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(dividend, divisor):
     INT_MAX, INT_MIN = 2**31 - 1, -(2**31)
@@ -32,6 +30,17 @@ def solve_optimal(dividend, divisor):
     return -res if neg else res
 
 
-@pytest.mark.parametrize("a,b,ex", [(10, 3, 3), (7, -2, -3)])
-def test_opt(a, b, ex):
-    assert solve_optimal(a, b) == ex
+if __name__ == "__main__":
+    test_cases = [(10, 3, 3), (7, -2, -3)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for a, b, ex in test_cases:
+        assert solve_optimal(a, b) == ex
+    print("All tests passed successfully!")

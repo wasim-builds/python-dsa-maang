@@ -5,7 +5,6 @@ Problem Statement: Return shortest transformation sequence length from beginWord
 Complexity: Time O(M^2 * N), Space O(M^2 * N) BFS
 """
 
-import pytest
 from typing import List
 from collections import deque, defaultdict
 
@@ -33,12 +32,20 @@ def solve_optimal(begin, end, wordList):
     return solve_brute(begin, end, wordList)
 
 
-@pytest.mark.parametrize(
-    "b,e,wl,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"], 5),
         ("hit", "cog", ["hot", "dot", "dog", "lot", "log"], 0),
-    ],
-)
-def test_opt(b, e, wl, ex):
-    assert solve_optimal(b, e, wl) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for b, e, wl, ex in test_cases:
+        assert solve_optimal(b, e, wl) == ex
+    print("All tests passed successfully!")

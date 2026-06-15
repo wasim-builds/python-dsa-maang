@@ -5,7 +5,6 @@ Problem Statement: Pay cost[i] to climb stair. Can climb 1 or 2 steps. Find min 
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -24,8 +23,17 @@ def solve_optimal(cost):
     return b
 
 
-@pytest.mark.parametrize(
-    "c,ex", [([10, 15, 20], 15), ([1, 100, 1, 1, 1, 100, 1, 1, 100, 1], 6)]
-)
-def test_opt(c, ex):
-    assert solve_optimal(c) == ex
+if __name__ == "__main__":
+    test_cases = [([10, 15, 20], 15), ([1, 100, 1, 1, 1, 100, 1, 1, 100, 1], 6)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for c, ex in test_cases:
+        assert solve_optimal(c) == ex
+    print("All tests passed successfully!")

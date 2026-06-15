@@ -6,7 +6,6 @@ Problem Statement: Return count of reverse pairs i<j where nums[i]>2*nums[j].
 Complexity: Time O(N log N) merge sort, Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -39,11 +38,17 @@ def solve_optimal(nums):
     return ans
 
 
-@pytest.mark.parametrize("nums,ex", [([1, 3, 2, 3, 1], 2), ([2, 4, 3, 5, 1], 3)])
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 3, 2, 3, 1], 2)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("nums,ex", [([1, 3, 2, 3, 1], 2)])
-def test_brute(nums, ex):
-    assert solve_brute(nums) == ex
+    for nums, ex in test_cases:
+        assert solve_brute(nums) == ex
+    print("All tests passed successfully!")

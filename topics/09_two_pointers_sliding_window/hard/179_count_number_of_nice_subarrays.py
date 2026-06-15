@@ -5,7 +5,6 @@ Problem Statement: Find all starting indices of substring(s) that is concatenati
 Complexity: Time O(N * W * L), Space O(W)
 """
 
-import pytest
 from typing import List
 from collections import Counter
 
@@ -29,13 +28,21 @@ def solve_optimal(s, words):
     return solve_brute(s, words)
 
 
-@pytest.mark.parametrize(
-    "s,w,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("barfoothefoobarman", ["foo", "bar"], [0, 9]),
         ("wordgoodgoodgoodbestword", ["word", "good", "best", "word"], []),
         ("barfoofoobarthefoobarman", ["bar", "foo", "the"], [6, 9, 12]),
-    ],
-)
-def test_opt(s, w, ex):
-    assert sorted(solve_optimal(s, w)) == sorted(ex)
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, w, ex in test_cases:
+        assert sorted(solve_optimal(s, w)) == sorted(ex)
+    print("All tests passed successfully!")

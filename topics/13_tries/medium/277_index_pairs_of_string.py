@@ -5,7 +5,6 @@ Problem Statement: Find all index pairs [i,j] where text[i..j] is a word in word
 Complexity: Time O(N * L), Space O(N * L)
 """
 
-import pytest
 from typing import List
 
 
@@ -22,16 +21,24 @@ def solve_optimal(text, words):
     return solve_brute(text, words)
 
 
-@pytest.mark.parametrize(
-    "t,w,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             "thestoryofleetcodeandme",
             ["story", "fleet", "leetcode"],
             [[3, 7], [9, 13], [10, 17]],
         ),
         ("ababa", ["aba", "ab"], [[0, 1], [0, 2], [2, 3], [2, 4]]),
-    ],
-)
-def test_opt(t, w, ex):
-    assert solve_optimal(t, w) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for t, w, ex in test_cases:
+        assert solve_optimal(t, w) == ex
+    print("All tests passed successfully!")

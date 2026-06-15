@@ -5,7 +5,6 @@ Problem Statement: Break string using words from dictionary. Return min extra ch
 Complexity: Time O(N^2 + W * L), Space O(N + W * L)
 """
 
-import pytest
 from typing import List
 
 
@@ -25,12 +24,20 @@ def solve_optimal(s, dictionary):
     return dp[n]
 
 
-@pytest.mark.parametrize(
-    "s,d,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("leetscode", ["leet", "code", "leetcode"], 1),
         ("sayhelloworld", ["hello", "world"], 3),
-    ],
-)
-def test_opt(s, d, ex):
-    assert solve_optimal(s, d) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, d, ex in test_cases:
+        assert solve_optimal(s, d) == ex
+    print("All tests passed successfully!")

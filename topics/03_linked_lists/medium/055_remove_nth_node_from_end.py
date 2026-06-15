@@ -6,7 +6,7 @@ Problem Statement: Remove the nth node from the end of the list and return its h
 Complexity: Time O(N), Space O(1) two-pointer
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -38,8 +38,17 @@ def solve_optimal(head, n):
     return dummy.next
 
 
-@pytest.mark.parametrize(
-    "arr,n,ex", [([1, 2, 3, 4, 5], 2, [1, 2, 3, 5]), ([1], 1, []), ([1, 2], 1, [1])]
-)
-def test_opt(arr, n, ex):
-    assert linked_to_list(solve_optimal(list_to_linked(arr), n)) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 3, 4, 5], 2, [1, 2, 3, 5]), ([1], 1, []), ([1, 2], 1, [1])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, n, ex in test_cases:
+        assert linked_to_list(solve_optimal(list_to_linked(arr), n)) == ex
+    print("All tests passed successfully!")

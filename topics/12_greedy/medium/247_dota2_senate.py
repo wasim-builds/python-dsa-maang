@@ -5,7 +5,6 @@ Problem Statement: Senators eliminate opponents in order. Which party wins?
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from collections import deque
 
 
@@ -28,6 +27,17 @@ def solve_optimal(senate):
     return "Radiant" if r else "Dire"
 
 
-@pytest.mark.parametrize("s,ex", [("RD", "Radiant"), ("RDD", "Dire")])
-def test_opt(s, ex):
-    assert solve_optimal(s) == ex
+if __name__ == "__main__":
+    test_cases = [("RD", "Radiant"), ("RDD", "Dire")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, ex in test_cases:
+        assert solve_optimal(s) == ex
+    print("All tests passed successfully!")

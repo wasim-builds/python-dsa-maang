@@ -5,7 +5,7 @@ Problem Statement: Design class that finds kth largest element in stream.
 Complexity: Time O(log k) add, Space O(k)
 """
 
-import pytest, heapq
+import heapq
 
 
 class KthLargest:
@@ -22,9 +22,10 @@ class KthLargest:
         return self.heap[0]
 
 
-def test_kth():
+if __name__ == "__main__":
     obj = KthLargest(3, [4, 5, 8, 2])
     assert obj.add(3) == 4
     assert obj.add(5) == 5
     assert obj.add(10) == 5
     assert obj.add(9) == 8
+    print("All tests passed successfully!")

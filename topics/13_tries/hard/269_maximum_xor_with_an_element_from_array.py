@@ -5,7 +5,6 @@ Problem Statement: For each query [x,m], find max XOR of x with any element <=m.
 Complexity: Time O((N+Q) log M), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -59,15 +58,17 @@ def solve_optimal(nums, queries):
     return res
 
 
-@pytest.mark.parametrize(
-    "nums,q,ex", [([0, 1, 2, 3, 4], [[3, 1], [1, 3], [5, 6]], [3, 3, 7])]
-)
-def test_opt(nums, q, ex):
-    assert solve_optimal(nums, q) == ex
+if __name__ == "__main__":
+    test_cases = [([0, 1, 2, 3, 4], [[3, 1], [1, 3], [5, 6]], [3, 3, 7])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "nums,q,ex", [([0, 1, 2, 3, 4], [[3, 1], [1, 3], [5, 6]], [3, 3, 7])]
-)
-def test_brute(nums, q, ex):
-    assert solve_brute(nums, q) == ex
+    for nums, q, ex in test_cases:
+        assert solve_brute(nums, q) == ex
+    print("All tests passed successfully!")

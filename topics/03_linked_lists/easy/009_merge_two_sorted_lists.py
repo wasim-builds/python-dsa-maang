@@ -16,7 +16,6 @@ import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
-import pytest
 
 
 # OPTIMAL
@@ -42,16 +41,24 @@ def mergeTwoLists(list1: ListNode, list2: ListNode) -> ListNode:
     return dummy.next
 
 
-@pytest.mark.parametrize(
-    "list1, list2, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([1, 2, 4], [1, 3, 4], [1, 1, 2, 3, 4, 4]),
         ([], [], []),
         ([], [0], [0]),
-    ],
-)
-def test_mergeTwoLists(list1, list2, expected):
-    l1 = list_to_linked(list1)
-    l2 = list_to_linked(list2)
-    merged = mergeTwoLists(l1, l2)
-    assert linked_to_list(merged) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for list1, list2, expected in test_cases:
+        l1 = list_to_linked(list1)
+        l2 = list_to_linked(list2)
+        merged = mergeTwoLists(l1, l2)
+        assert linked_to_list(merged) == expected
+    print("All tests passed successfully!")

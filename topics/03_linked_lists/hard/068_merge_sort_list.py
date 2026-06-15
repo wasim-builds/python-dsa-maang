@@ -6,7 +6,7 @@ Problem Statement: Merge K sorted linked lists using divide and conquer approach
 Complexity: Time O(N log K), Space O(log K)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -41,8 +41,17 @@ def solve_optimal(lists):
     return lists[0]
 
 
-@pytest.mark.parametrize(
-    "arrs,ex", [([[1, 4, 5], [1, 3, 4], [2, 6]], [1, 1, 2, 3, 4, 4, 5, 6])]
-)
-def test_opt(arrs, ex):
-    assert linked_to_list(solve_optimal([list_to_linked(a) for a in arrs])) == ex
+if __name__ == "__main__":
+    test_cases = [([[1, 4, 5], [1, 3, 4], [2, 6]], [1, 1, 2, 3, 4, 4, 5, 6])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arrs, ex in test_cases:
+        assert linked_to_list(solve_optimal([list_to_linked(a) for a in arrs])) == ex
+    print("All tests passed successfully!")

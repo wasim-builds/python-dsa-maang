@@ -5,7 +5,7 @@ Problem Statement: Return k weakest rows (by soldier count, then row index).
 Complexity: Time O(M * N), Space O(M)
 """
 
-import pytest, heapq
+import heapq
 from typing import List
 
 
@@ -21,9 +21,8 @@ def solve_optimal(mat, k):
     return [heapq.heappop(heap)[1] for _ in range(k)]
 
 
-@pytest.mark.parametrize(
-    "m,k,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [
                 [1, 1, 0, 0, 0],
@@ -35,7 +34,16 @@ def solve_optimal(mat, k):
             3,
             [2, 0, 3],
         )
-    ],
-)
-def test_opt(m, k, ex):
-    assert solve_optimal(m, k) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for m, k, ex in test_cases:
+        assert solve_optimal(m, k) == ex
+    print("All tests passed successfully!")

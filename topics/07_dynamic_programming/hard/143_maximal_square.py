@@ -5,7 +5,6 @@ Problem Statement: Find largest square containing only 1s in binary matrix. Retu
 Complexity: Time O(M*N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -52,9 +51,8 @@ def solve_optimal(matrix):
     return res * res
 
 
-@pytest.mark.parametrize(
-    "m,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             [
                 ["1", "0", "1", "0", "0"],
@@ -64,7 +62,16 @@ def solve_optimal(matrix):
             ],
             4,
         )
-    ],
-)
-def test_opt(m, ex):
-    assert solve_optimal(m) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for m, ex in test_cases:
+        assert solve_optimal(m) == ex
+    print("All tests passed successfully!")

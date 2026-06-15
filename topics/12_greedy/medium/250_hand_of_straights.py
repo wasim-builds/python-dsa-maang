@@ -5,7 +5,6 @@ Problem Statement: Determine if hand can be divided into groups of groupSize con
 Complexity: Time O(N log N), Space O(N)
 """
 
-import pytest
 from typing import List
 from collections import Counter
 
@@ -28,8 +27,17 @@ def solve_optimal(hand, groupSize):
     return True
 
 
-@pytest.mark.parametrize(
-    "h,gs,ex", [([1, 2, 3, 6, 2, 3, 4, 7, 8], 3, True), ([1, 2, 3, 4, 5], 4, False)]
-)
-def test_opt(h, gs, ex):
-    assert solve_optimal(h, gs) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 3, 6, 2, 3, 4, 7, 8], 3, True), ([1, 2, 3, 4, 5], 4, False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for h, gs, ex in test_cases:
+        assert solve_optimal(h, gs) == ex
+    print("All tests passed successfully!")

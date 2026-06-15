@@ -5,7 +5,6 @@ Problem Statement: Solve sudoku puzzle by filling empty cells.
 Complexity: Time O(9^M) where M is empty cells, Space O(M)
 """
 
-import pytest
 from typing import List
 
 
@@ -40,7 +39,7 @@ def solve_optimal(board):
     bt()
 
 
-def test_sudoku():
+if __name__ == "__main__":
     board = [
         ["5", "3", ".", ".", "7", ".", ".", ".", "."],
         ["6", ".", ".", "1", "9", "5", ".", ".", "."],
@@ -54,3 +53,4 @@ def test_sudoku():
     ]
     solve_optimal(board)
     assert board[0][2] == "4"
+    print("All tests passed successfully!")

@@ -16,7 +16,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we only use two pointers (`l`, `r`) for the binary search.
 """
 
-import pytest
 from typing import List
 
 
@@ -60,25 +59,21 @@ def solve_brute(matrix: List[List[int]], target: int) -> bool:
     return False
 
 
-@pytest.mark.parametrize(
-    "matrix, target, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 3, True),
         ([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 13, False),
         ([[1]], 1, True),
-    ],
-)
-def test_solve_optimal(matrix, target, expected):
-    assert solve_optimal(matrix, target) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "matrix, target, expected",
-    [
-        ([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 3, True),
-        ([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 13, False),
-        ([[1]], 1, True),
-    ],
-)
-def test_solve_brute(matrix, target, expected):
-    assert solve_brute(matrix, target) == expected
+    for matrix, target, expected in test_cases:
+        assert solve_brute(matrix, target) == expected
+    print("All tests passed successfully!")

@@ -5,7 +5,6 @@ Problem Statement: Split array into k non-empty subarrays to minimize the larges
 Complexity: Time O(N log(sum)), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -34,8 +33,17 @@ def solve_optimal(nums, k):
     return l
 
 
-@pytest.mark.parametrize(
-    "nums,k,ex", [([7, 2, 5, 10, 8], 2, 18), ([1, 2, 3, 4, 5], 2, 9)]
-)
-def test_opt(nums, k, ex):
-    assert solve_optimal(nums, k) == ex
+if __name__ == "__main__":
+    test_cases = [([7, 2, 5, 10, 8], 2, 18), ([1, 2, 3, 4, 5], 2, 9)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, k, ex in test_cases:
+        assert solve_optimal(nums, k) == ex
+    print("All tests passed successfully!")

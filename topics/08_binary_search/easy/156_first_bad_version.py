@@ -5,8 +5,6 @@ Problem Statement: Find first bad version minimizing API calls.
 Complexity: Time O(log N), Space O(1)
 """
 
-import pytest
-
 
 def is_bad(v, bad):
     return v >= bad
@@ -29,6 +27,17 @@ def solve_brute(n, bad):
             return i
 
 
-@pytest.mark.parametrize("n,b,ex", [(5, 4, 4), (1, 1, 1)])
-def test_opt(n, b, ex):
-    assert solve_optimal(n, b) == ex
+if __name__ == "__main__":
+    test_cases = [(5, 4, 4), (1, 1, 1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, b, ex in test_cases:
+        assert solve_optimal(n, b) == ex
+    print("All tests passed successfully!")

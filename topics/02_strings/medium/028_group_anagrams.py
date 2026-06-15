@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(M * N) to store the hash map and the resulting grouped strings.
 """
 
-import pytest
 from typing import List
 from collections import defaultdict
 
@@ -44,34 +43,27 @@ def solve_optimal(strs: List[str]) -> List[List[str]]:
     return list(res.values())
 
 
-@pytest.mark.parametrize(
-    "input_data, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             ["eat", "tea", "tan", "ate", "nat", "bat"],
             [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]],
         ),
         ([""], [[""]]),
         (["a"], [["a"]]),
-    ],
-)
-def test_solve_optimal(input_data, expected):
-    # Order doesn't matter, so sort everything to test
-    result = solve_optimal(input_data)
-    assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "input_data, expected",
-    [
-        (
-            ["eat", "tea", "tan", "ate", "nat", "bat"],
-            [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]],
-        ),
-        ([""], [[""]]),
-        (["a"], [["a"]]),
-    ],
-)
-def test_solve_brute(input_data, expected):
-    result = solve_brute(input_data)
-    assert sorted([sorted(x) for x in result]) == sorted([sorted(x) for x in expected])
+    for input_data, expected in test_cases:
+        result = solve_brute(input_data)
+        assert sorted([sorted(x) for x in result]) == sorted(
+            [sorted(x) for x in expected]
+        )
+    print("All tests passed successfully!")

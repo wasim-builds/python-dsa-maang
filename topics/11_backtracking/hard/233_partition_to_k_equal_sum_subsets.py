@@ -5,7 +5,6 @@ Problem Statement: Partition array into k subsets with equal sum.
 Complexity: Time O(k * 2^N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -41,8 +40,17 @@ def solve_optimal(nums, k):
     return bt(0)
 
 
-@pytest.mark.parametrize(
-    "nums,k,ex", [([4, 3, 2, 3, 5, 2, 1], 4, True), ([1, 2, 3, 4], 3, False)]
-)
-def test_opt(nums, k, ex):
-    assert solve_optimal(nums, k) == ex
+if __name__ == "__main__":
+    test_cases = [([4, 3, 2, 3, 5, 2, 1], 4, True), ([1, 2, 3, 4], 3, False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, k, ex in test_cases:
+        assert solve_optimal(nums, k) == ex
+    print("All tests passed successfully!")

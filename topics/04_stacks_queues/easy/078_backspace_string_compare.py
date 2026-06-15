@@ -5,8 +5,6 @@ Problem Statement: Given strings s and t with '#' as backspace, return if they a
 Complexity: Time O(N), Space O(1) two-pointer
 """
 
-import pytest
-
 
 def build(s):
     stack = []
@@ -26,14 +24,22 @@ def solve_optimal(s, t):
     return build(s) == build(t)
 
 
-@pytest.mark.parametrize(
-    "s,t,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("ab#c", "ad#c", True),
         ("ab##", "c#d#", True),
         ("a##c", "#a#c", True),
         ("a#c", "b", False),
-    ],
-)
-def test_opt(s, t, ex):
-    assert solve_optimal(s, t) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, t, ex in test_cases:
+        assert solve_optimal(s, t) == ex
+    print("All tests passed successfully!")

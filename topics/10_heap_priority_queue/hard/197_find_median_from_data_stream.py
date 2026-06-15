@@ -16,7 +16,6 @@ Complexity Proof:
 - Space Complexity: O(N) where N is the number of elements added, as we store all elements across the two heaps.
 """
 
-import pytest
 import heapq
 
 
@@ -57,10 +56,11 @@ class MedianFinder:
             return (-self.small[0] + self.large[0]) / 2.0
 
 
-def test_median_finder():
+if __name__ == "__main__":
     mf = MedianFinder()
     mf.addNum(1)
     mf.addNum(2)
     assert mf.findMedian() == 1.5
     mf.addNum(3)
     assert mf.findMedian() == 2.0
+    print("All tests passed successfully!")

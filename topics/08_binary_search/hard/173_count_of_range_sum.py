@@ -5,7 +5,6 @@ Problem Statement: Count range sums that lie in [lower, upper] inclusive.
 Complexity: Time O(N log N) merge sort, Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -46,6 +45,17 @@ def solve_optimal(nums, lo, hi):
     return ans
 
 
-@pytest.mark.parametrize("nums,lo,hi,ex", [([-2, 5, -1], -2, 2, 3), ([], 0, 0, 0)])
-def test_opt(nums, lo, hi, ex):
-    assert solve_optimal(nums, lo, hi) == ex
+if __name__ == "__main__":
+    test_cases = [([-2, 5, -1], -2, 2, 3), ([], 0, 0, 0)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, lo, hi, ex in test_cases:
+        assert solve_optimal(nums, lo, hi) == ex
+    print("All tests passed successfully!")

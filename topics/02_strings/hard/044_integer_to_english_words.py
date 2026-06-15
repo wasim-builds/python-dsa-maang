@@ -6,8 +6,6 @@ Problem Statement: Convert non-negative integer to English words.
 Complexity: Time O(log N), Space O(log N)
 """
 
-import pytest
-
 
 def solve_brute(num):
     return solve_optimal(num)
@@ -72,13 +70,21 @@ def solve_optimal(num):
     return res.strip()
 
 
-@pytest.mark.parametrize(
-    "n,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (123, "One Hundred Twenty Three"),
         (12345, "Twelve Thousand Three Hundred Forty Five"),
         (1000010, "One Million Ten"),
-    ],
-)
-def test_opt(n, ex):
-    assert solve_optimal(n) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert solve_optimal(n) == ex
+    print("All tests passed successfully!")

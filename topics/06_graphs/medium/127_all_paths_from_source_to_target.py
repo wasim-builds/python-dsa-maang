@@ -5,7 +5,6 @@ Problem Statement: Find all paths from node 0 to node n-1 in a DAG.
 Complexity: Time O(2^N * N), Space O(2^N * N)
 """
 
-import pytest
 from typing import List
 
 
@@ -30,15 +29,23 @@ def solve_optimal(graph):
     return solve_brute(graph)
 
 
-@pytest.mark.parametrize(
-    "g,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[1, 2], [3], [3], []], [[0, 1, 3], [0, 2, 3]]),
         (
             [[4, 3, 1], [3, 2, 4], [3], [4], []],
             [[0, 4], [0, 3, 4], [0, 1, 3, 4], [0, 1, 2, 3, 4], [0, 1, 4]],
         ),
-    ],
-)
-def test_opt(g, ex):
-    assert sorted(solve_optimal(g)) == sorted(ex)
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for g, ex in test_cases:
+        assert sorted(solve_optimal(g)) == sorted(ex)
+    print("All tests passed successfully!")

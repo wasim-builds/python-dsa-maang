@@ -5,7 +5,6 @@ Problem Statement: Given collection with duplicates, return all unique permutati
 Complexity: Time O(N! * N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -37,12 +36,20 @@ def solve_optimal(nums):
     return res
 
 
-@pytest.mark.parametrize(
-    "nums,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([1, 1, 2], [[1, 1, 2], [1, 2, 1], [2, 1, 1]]),
         ([1, 2, 3], [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]),
-    ],
-)
-def test_opt(nums, ex):
-    assert sorted(solve_optimal(nums)) == sorted(ex)
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, ex in test_cases:
+        assert sorted(solve_optimal(nums)) == sorted(ex)
+    print("All tests passed successfully!")

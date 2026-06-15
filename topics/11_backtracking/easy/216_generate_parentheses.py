@@ -5,7 +5,6 @@ Problem Statement: Generate all combinations of n pairs of well-formed parenthes
 Complexity: Time O(4^N / sqrt(N)) Catalan, Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -29,8 +28,17 @@ def solve_optimal(n):
     return res
 
 
-@pytest.mark.parametrize(
-    "n,ex", [(3, ["((()))", "(()())", "(())()", "()(())", "()()()"]), (1, ["()"])]
-)
-def test_opt(n, ex):
-    assert sorted(solve_optimal(n)) == sorted(ex)
+if __name__ == "__main__":
+    test_cases = [(3, ["((()))", "(()())", "(())()", "()(())", "()()()"]), (1, ["()"])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, ex in test_cases:
+        assert sorted(solve_optimal(n)) == sorted(ex)
+    print("All tests passed successfully!")

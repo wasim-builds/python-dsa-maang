@@ -5,8 +5,6 @@ Problem Statement: Design dictionary that searches with one character changed.
 Complexity: Time O(N*L) build, O(26*L^2) search
 """
 
-import pytest
-
 
 class MagicDictionary:
     def __init__(self):
@@ -27,10 +25,11 @@ class MagicDictionary:
         return False
 
 
-def test_magic():
+if __name__ == "__main__":
     m = MagicDictionary()
     m.buildDict(["hello", "leetcode"])
     assert not m.search("hello")
     assert m.search("hhllo")
     assert not m.search("hell")
     assert m.search("leetcoded") == False
+    print("All tests passed successfully!")

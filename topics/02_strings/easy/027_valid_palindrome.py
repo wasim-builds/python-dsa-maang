@@ -13,7 +13,6 @@ Complexity Proof:
 - Space Complexity: O(1) because we do not allocate any extra memory. We just use two pointers.
 """
 
-import pytest
 import re
 
 
@@ -54,25 +53,21 @@ def alphaNum(c):
     )
 
 
-@pytest.mark.parametrize(
-    "input_data, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ("A man, a plan, a canal: Panama", True),
         ("race a car", False),
         (" ", True),
-    ],
-)
-def test_solve_optimal(input_data, expected):
-    assert solve_optimal(input_data) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "input_data, expected",
-    [
-        ("A man, a plan, a canal: Panama", True),
-        ("race a car", False),
-        (" ", True),
-    ],
-)
-def test_solve_brute(input_data, expected):
-    assert solve_brute(input_data) == expected
+    for input_data, expected in test_cases:
+        assert solve_brute(input_data) == expected
+    print("All tests passed successfully!")

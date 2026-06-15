@@ -5,7 +5,6 @@ Problem Statement: Return 3 products suggestion list for each prefix of searchWo
 Complexity: Time O(N log N + M^2), Space O(N)
 """
 
-import pytest
 from typing import List
 import bisect
 
@@ -25,9 +24,8 @@ def solve_optimal(products, searchWord):
     return res
 
 
-@pytest.mark.parametrize(
-    "p,sw,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (
             ["mobile", "mouse", "moneypot", "monitor", "mousepad"],
             "mouse",
@@ -39,7 +37,16 @@ def solve_optimal(products, searchWord):
                 ["mouse", "mousepad"],
             ],
         )
-    ],
-)
-def test_opt(p, sw, ex):
-    assert solve_optimal(p, sw) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for p, sw, ex in test_cases:
+        assert solve_optimal(p, sw) == ex
+    print("All tests passed successfully!")

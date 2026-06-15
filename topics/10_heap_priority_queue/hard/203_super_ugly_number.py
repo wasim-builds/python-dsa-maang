@@ -5,7 +5,7 @@ Problem Statement: Return nth super ugly number (only prime factors from primes 
 Complexity: Time O(N * P), Space O(N)
 """
 
-import pytest, heapq
+import heapq
 from typing import List
 
 
@@ -26,6 +26,17 @@ def solve_optimal(n, primes):
     return v
 
 
-@pytest.mark.parametrize("n,p,ex", [(12, [2, 7, 13, 19], 32), (1, [2, 3, 5], 1)])
-def test_opt(n, p, ex):
-    assert solve_optimal(n, p) == ex
+if __name__ == "__main__":
+    test_cases = [(12, [2, 7, 13, 19], 32), (1, [2, 3, 5], 1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n, p, ex in test_cases:
+        assert solve_optimal(n, p) == ex
+    print("All tests passed successfully!")

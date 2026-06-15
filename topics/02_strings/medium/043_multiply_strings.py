@@ -6,8 +6,6 @@ Problem Statement: Given two non-negative integers num1 and num2 as strings, ret
 Complexity: Time O(M*N), Space O(M+N)
 """
 
-import pytest
-
 
 def solve_brute(num1, num2):
     return str(int(num1) * int(num2))
@@ -29,6 +27,17 @@ def solve_optimal(num1, num2):
     return res or "0"
 
 
-@pytest.mark.parametrize("n1,n2,ex", [("2", "3", "6"), ("123", "456", "56088")])
-def test_opt(n1, n2, ex):
-    assert solve_optimal(n1, n2) == ex
+if __name__ == "__main__":
+    test_cases = [("2", "3", "6"), ("123", "456", "56088")]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for n1, n2, ex in test_cases:
+        assert solve_optimal(n1, n2) == ex
+    print("All tests passed successfully!")

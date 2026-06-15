@@ -5,7 +5,6 @@ Problem Statement: Partition string so each letter appears in at most one part. 
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -25,8 +24,17 @@ def solve_optimal(s):
     return res
 
 
-@pytest.mark.parametrize(
-    "s,ex", [("ababcbacadefegdehijhklij", [9, 7, 8]), ("eccbbbbdec", [10])]
-)
-def test_opt(s, ex):
-    assert solve_optimal(s) == ex
+if __name__ == "__main__":
+    test_cases = [("ababcbacadefegdehijhklij", [9, 7, 8]), ("eccbbbbdec", [10])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, ex in test_cases:
+        assert solve_optimal(s) == ex
+    print("All tests passed successfully!")

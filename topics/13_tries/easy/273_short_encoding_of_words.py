@@ -5,7 +5,6 @@ Problem Statement: Encode words array as string. Return minimum encoding length.
 Complexity: Time O(N * L^2), Space O(N * L)
 """
 
-import pytest
 from typing import List
 
 
@@ -21,6 +20,17 @@ def solve_optimal(words):
     return sum(len(w) + 1 for w in good)
 
 
-@pytest.mark.parametrize("w,ex", [(["time", "me", "bell"], 10)])
-def test_opt(w, ex):
-    assert solve_optimal(w) == ex
+if __name__ == "__main__":
+    test_cases = [(["time", "me", "bell"], 10)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for w, ex in test_cases:
+        assert solve_optimal(w) == ex
+    print("All tests passed successfully!")

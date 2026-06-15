@@ -5,7 +5,6 @@ Problem Statement: Return minimum arrows needed to burst all balloons.
 Complexity: Time O(N log N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -24,13 +23,21 @@ def solve_optimal(points):
     return arrows
 
 
-@pytest.mark.parametrize(
-    "pts,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[10, 16], [2, 8], [1, 6], [7, 12]], 2),
         ([[1, 2], [3, 4], [5, 6], [7, 8]], 4),
         ([[1, 2]], 1),
-    ],
-)
-def test_opt(pts, ex):
-    assert solve_optimal(pts) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for pts, ex in test_cases:
+        assert solve_optimal(pts) == ex
+    print("All tests passed successfully!")

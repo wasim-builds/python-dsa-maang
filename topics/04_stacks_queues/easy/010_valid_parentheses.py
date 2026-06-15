@@ -10,8 +10,6 @@ An input string is valid if:
 2. Open brackets must be closed in the correct order.
 """
 
-import pytest
-
 
 # OPTIMAL (Stack)
 # Time: O(n), Space: O(n)
@@ -31,14 +29,17 @@ def isValid(s: str) -> bool:
     return True if not stack else False
 
 
-@pytest.mark.parametrize(
-    "s, expected",
-    [
-        ("()", True),
-        ("()[]{}", True),
-        ("(]", False),
-        ("([)]", False),
-    ],
-)
-def test_isValid(s, expected):
-    assert isValid(s) == expected
+if __name__ == "__main__":
+    test_cases = [("()", True), ("()[]{}", True), ("(]", False), ("([)]", False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, expected in test_cases:
+        assert isValid(s) == expected
+    print("All tests passed successfully!")

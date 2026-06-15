@@ -5,7 +5,6 @@ Problem Statement: Return max length subarray that is turbulent (alternating com
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -45,8 +44,17 @@ def solve_optimal(arr):
     return res
 
 
-@pytest.mark.parametrize(
-    "arr,ex", [([9, 4, 2, 10, 7, 8, 8, 1, 9], 5), ([4, 8, 12, 16], 2), ([100], 1)]
-)
-def test_opt(arr, ex):
-    assert solve_optimal(arr) == ex
+if __name__ == "__main__":
+    test_cases = [([9, 4, 2, 10, 7, 8, 8, 1, 9], 5), ([4, 8, 12, 16], 2), ([100], 1)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        assert solve_optimal(arr) == ex
+    print("All tests passed successfully!")

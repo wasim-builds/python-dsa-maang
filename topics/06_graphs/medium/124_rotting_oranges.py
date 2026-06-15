@@ -17,7 +17,6 @@ Complexity Proof:
 - Space Complexity: O(M * N) because the queue can hold up to M*N elements in the worst case (if all oranges are initially rotten).
 """
 
-import pytest
 from typing import List
 from collections import deque
 
@@ -69,27 +68,22 @@ def solve_brute(grid: List[List[int]]) -> int:
     return solve_optimal(grid_copy)
 
 
-@pytest.mark.parametrize(
-    "grid, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[2, 1, 1], [1, 1, 0], [0, 1, 1]], 4),
         ([[2, 1, 1], [0, 1, 1], [1, 0, 1]], -1),
         ([[0, 2]], 0),
-    ],
-)
-def test_solve_optimal(grid, expected):
-    grid_copy = [row[:] for row in grid]
-    assert solve_optimal(grid_copy) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "grid, expected",
-    [
-        ([[2, 1, 1], [1, 1, 0], [0, 1, 1]], 4),
-        ([[2, 1, 1], [0, 1, 1], [1, 0, 1]], -1),
-        ([[0, 2]], 0),
-    ],
-)
-def test_solve_brute(grid, expected):
-    grid_copy = [row[:] for row in grid]
-    assert solve_brute(grid_copy) == expected
+    for grid, expected in test_cases:
+        grid_copy = [row[:] for row in grid]
+        assert solve_brute(grid_copy) == expected
+    print("All tests passed successfully!")

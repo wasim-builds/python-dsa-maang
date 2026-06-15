@@ -12,7 +12,6 @@ Complexity Proof:
 - Space Complexity: O(N) to store the hash map and for the recursive call stack.
 """
 
-import pytest
 import sys
 import os
 
@@ -61,25 +60,21 @@ def solve_optimal(preorder: List[int], inorder: List[int]) -> Optional[TreeNode]
     return build(0, len(inorder) - 1)
 
 
-@pytest.mark.parametrize(
-    "preorder, inorder, expected",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([3, 9, 20, 15, 7], [9, 3, 15, 20, 7], [3, 9, 20, None, None, 15, 7]),
         ([-1], [-1], [-1]),
-    ],
-)
-def test_solve_optimal(preorder, inorder, expected):
-    root = solve_optimal(preorder, inorder)
-    assert tree_to_list(root) == expected
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize(
-    "preorder, inorder, expected",
-    [
-        ([3, 9, 20, 15, 7], [9, 3, 15, 20, 7], [3, 9, 20, None, None, 15, 7]),
-        ([-1], [-1], [-1]),
-    ],
-)
-def test_solve_brute(preorder, inorder, expected):
-    root = solve_brute(preorder, inorder)
-    assert tree_to_list(root) == expected
+    for preorder, inorder, expected in test_cases:
+        root = solve_brute(preorder, inorder)
+        assert tree_to_list(root) == expected
+    print("All tests passed successfully!")

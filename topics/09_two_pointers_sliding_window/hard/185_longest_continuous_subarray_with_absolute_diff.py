@@ -5,7 +5,6 @@ Problem Statement: Return max length subarray where max-min <= limit.
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 from collections import deque
 
@@ -45,13 +44,21 @@ def solve_optimal(nums, limit):
     return res
 
 
-@pytest.mark.parametrize(
-    "nums,limit,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([8, 2, 4, 7], 4, 2),
         ([10, 1, 2, 4, 7, 2], 5, 4),
         ([4, 2, 2, 2, 4, 4, 2, 2], 0, 3),
-    ],
-)
-def test_opt(nums, limit, ex):
-    assert solve_optimal(nums, limit) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for nums, limit, ex in test_cases:
+        assert solve_optimal(nums, limit) == ex
+    print("All tests passed successfully!")

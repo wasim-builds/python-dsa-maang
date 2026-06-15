@@ -6,8 +6,6 @@ Problem Statement: Message encoded as numbers 1-26 (A-Z). Count number of ways t
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest
-
 
 def solve_brute(s):
     from functools import lru_cache
@@ -38,6 +36,17 @@ def solve_optimal(s):
     return dp[0]
 
 
-@pytest.mark.parametrize("s,ex", [("12", 2), ("226", 3), ("06", 0)])
-def test_opt(s, ex):
-    assert solve_optimal(s) == ex
+if __name__ == "__main__":
+    test_cases = [("12", 2), ("226", 3), ("06", 0)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, ex in test_cases:
+        assert solve_optimal(s) == ex
+    print("All tests passed successfully!")

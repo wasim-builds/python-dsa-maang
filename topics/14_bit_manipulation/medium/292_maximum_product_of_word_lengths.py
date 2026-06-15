@@ -5,7 +5,6 @@ Problem Statement: Return max product of lengths of two words that share no comm
 Complexity: Time O(N^2), Space O(N) bitmask
 """
 
-import pytest
 from typing import List
 
 
@@ -26,12 +25,20 @@ def solve_optimal(words):
     return res
 
 
-@pytest.mark.parametrize(
-    "w,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         (["abcw", "baz", "foo", "bar", "xtfn", "abcdef"], 16),
         (["a", "ab", "abc", "d", "cd", "bcd", "abcd"], 4),
-    ],
-)
-def test_opt(w, ex):
-    assert solve_optimal(w) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for w, ex in test_cases:
+        assert solve_optimal(w) == ex
+    print("All tests passed successfully!")

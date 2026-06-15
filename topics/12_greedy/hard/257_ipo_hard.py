@@ -5,8 +5,6 @@ Problem Statement: From pos 0, can jump [minJump,maxJump] to 0-chars. Reach last
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
-
 
 def solve_brute(s, minJ, maxJ):
     return solve_optimal(s, minJ, maxJ)
@@ -26,8 +24,17 @@ def solve_optimal(s, minJump, maxJump):
     return dp[-1]
 
 
-@pytest.mark.parametrize(
-    "s,mn,mx,ex", [("011010", 2, 3, True), ("01101110", 2, 3, False)]
-)
-def test_opt(s, mn, mx, ex):
-    assert solve_optimal(s, mn, mx) == ex
+if __name__ == "__main__":
+    test_cases = [("011010", 2, 3, True), ("01101110", 2, 3, False)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for s, mn, mx, ex in test_cases:
+        assert solve_optimal(s, mn, mx) == ex
+    print("All tests passed successfully!")

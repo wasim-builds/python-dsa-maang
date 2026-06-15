@@ -6,7 +6,7 @@ Problem Statement: Given list L0→L1→…→Ln, reorder to L0→Ln→L1→Ln-1
 Complexity: Time O(N), Space O(1)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
@@ -40,10 +40,19 @@ def solve_brute(head):
     solve_optimal(head)
 
 
-@pytest.mark.parametrize(
-    "arr,ex", [([1, 2, 3, 4], [1, 4, 2, 3]), ([1, 2, 3, 4, 5], [1, 5, 2, 4, 3])]
-)
-def test_opt(arr, ex):
-    h = list_to_linked(arr)
-    solve_optimal(h)
-    assert linked_to_list(h) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 2, 3, 4], [1, 4, 2, 3]), ([1, 2, 3, 4, 5], [1, 5, 2, 4, 3])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for arr, ex in test_cases:
+        h = list_to_linked(arr)
+        solve_optimal(h)
+        assert linked_to_list(h) == ex
+    print("All tests passed successfully!")

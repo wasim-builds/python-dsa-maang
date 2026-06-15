@@ -5,7 +5,7 @@ Problem Statement: For each query, find minimum-length interval containing it.
 Complexity: Time O((N+Q) log N), Space O(N+Q)
 """
 
-import pytest, heapq
+import heapq
 from typing import List
 
 
@@ -32,12 +32,20 @@ def solve_optimal(intervals, queries):
     return res
 
 
-@pytest.mark.parametrize(
-    "inv,q,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[1, 4], [2, 4], [3, 6], [4, 4]], [2, 3, 4, 5], [3, 3, 1, 4]),
         ([[2, 3], [2, 5], [1, 8], [20, 25]], [2, 19, 5, 22], [2, -1, 4, 6]),
-    ],
-)
-def test_opt(inv, q, ex):
-    assert solve_optimal(inv, q) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for inv, q, ex in test_cases:
+        assert solve_optimal(inv, q) == ex
+    print("All tests passed successfully!")

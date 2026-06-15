@@ -5,7 +5,6 @@ Problem Statement: Given edges with weights, find min time for signal to reach a
 Complexity: Time O((V+E) log V) Dijkstra, Space O(V+E)
 """
 
-import pytest
 from typing import List
 import heapq
 from collections import defaultdict
@@ -34,13 +33,21 @@ def solve_optimal(times, n, k):
     return solve_brute(times, n, k)
 
 
-@pytest.mark.parametrize(
-    "t,n,k,ex",
-    [
+if __name__ == "__main__":
+    test_cases = [
         ([[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2, 2),
         ([[1, 2, 1]], 2, 1, 1),
         ([[1, 2, 1]], 2, 2, -1),
-    ],
-)
-def test_opt(t, n, k, ex):
-    assert solve_optimal(t, n, k) == ex
+    ]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for t, n, k, ex in test_cases:
+        assert solve_optimal(t, n, k) == ex
+    print("All tests passed successfully!")

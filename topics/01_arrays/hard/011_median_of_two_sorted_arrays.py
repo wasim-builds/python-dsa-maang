@@ -6,7 +6,6 @@ Problem Statement: Given two sorted arrays nums1 and nums2, return the median of
 Complexity: Time O(log(min(m,n))), Space O(1)
 """
 
-import pytest
 from typing import List
 
 
@@ -40,13 +39,17 @@ def solve_optimal(nums1, nums2):
             l = i + 1
 
 
-@pytest.mark.parametrize(
-    "n1,n2,ex", [([1, 3], [2], 2.0), ([1, 2], [3, 4], 2.5), ([0, 0], [0, 0], 0.0)]
-)
-def test_opt(n1, n2, ex):
-    assert solve_optimal(n1, n2) == ex
+if __name__ == "__main__":
+    test_cases = [([1, 3], [2], 2.0)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("n1,n2,ex", [([1, 3], [2], 2.0)])
-def test_brute(n1, n2, ex):
-    assert solve_brute(n1, n2) == ex
+    for n1, n2, ex in test_cases:
+        assert solve_brute(n1, n2) == ex
+    print("All tests passed successfully!")

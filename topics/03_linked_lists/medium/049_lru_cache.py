@@ -17,8 +17,6 @@ Complexity Proof:
 - Space Complexity: O(C) where C is the capacity of the cache. The hash map and the doubly linked list will store at most C elements.
 """
 
-import pytest
-
 
 class Node:
     def __init__(self, key=0, val=0):
@@ -66,14 +64,16 @@ class LRUCache:
 
 
 # Testing
-def test_lru_cache():
+
+if __name__ == "__main__":
     lRUCache = LRUCache(2)
-    lRUCache.put(1, 1)  # cache is {1=1}
-    lRUCache.put(2, 2)  # cache is {1=1, 2=2}
-    assert lRUCache.get(1) == 1  # return 1
-    lRUCache.put(3, 3)  # LRU key was 2, evicts key 2, cache is {1=1, 3=3}
-    assert lRUCache.get(2) == -1  # returns -1 (not found)
-    lRUCache.put(4, 4)  # LRU key was 1, evicts key 1, cache is {4=4, 3=3}
-    assert lRUCache.get(1) == -1  # return -1 (not found)
-    assert lRUCache.get(3) == 3  # return 3
-    assert lRUCache.get(4) == 4  # return 4
+    lRUCache.put(1, 1)
+    lRUCache.put(2, 2)
+    assert lRUCache.get(1) == 1
+    lRUCache.put(3, 3)
+    assert lRUCache.get(2) == -1
+    lRUCache.put(4, 4)
+    assert lRUCache.get(1) == -1
+    assert lRUCache.get(3) == 3
+    assert lRUCache.get(4) == 4
+    print("All tests passed successfully!")

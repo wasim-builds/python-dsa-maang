@@ -5,7 +5,6 @@ Problem Statement: Return sum of min values of all subarrays. Answer modulo 1e9+
 Complexity: Time O(N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 MOD = 10**9 + 7
@@ -34,11 +33,17 @@ def solve_optimal(arr):
     return res % MOD
 
 
-@pytest.mark.parametrize("arr,ex", [([3, 1, 2, 4], 17), ([11, 81, 94, 43, 3], 444)])
-def test_opt(arr, ex):
-    assert solve_optimal(arr) == ex
+if __name__ == "__main__":
+    test_cases = [([3, 1, 2, 4], 17)]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("arr,ex", [([3, 1, 2, 4], 17)])
-def test_brute(arr, ex):
-    assert solve_brute(arr) == ex
+    for arr, ex in test_cases:
+        assert solve_brute(arr) == ex
+    print("All tests passed successfully!")

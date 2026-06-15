@@ -5,7 +5,7 @@ Problem Statement: Return all duplicate subtrees. Two trees are duplicates if sa
 Complexity: Time O(N^2) serialization, Space O(N^2)
 """
 
-import pytest, sys, os
+import sys, os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import TreeNode, list_to_tree
@@ -34,7 +34,8 @@ def solve_brute(root):
     return solve_optimal(root)
 
 
-def test_dup():
+if __name__ == "__main__":
     root = list_to_tree([1, 2, 3, 4, None, 2, 4, None, None, 4])
     dups = solve_optimal(root)
-    assert any(d.val == 2 for d in dups)
+    assert any((d.val == 2 for d in dups))
+    print("All tests passed successfully!")

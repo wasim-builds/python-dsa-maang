@@ -5,7 +5,6 @@ Problem Statement: Add +,-,* operators between digits to make target. Return all
 Complexity: Time O(N * 4^N), Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -37,8 +36,17 @@ def solve_optimal(num, target):
     return res
 
 
-@pytest.mark.parametrize(
-    "num,t,ex", [("123", 6, ["1+2+3", "1*2*3"]), ("232", 8, ["2*3+2", "2+3*2"])]
-)
-def test_opt(num, t, ex):
-    assert sorted(solve_optimal(num, t)) == sorted(ex)
+if __name__ == "__main__":
+    test_cases = [("123", 6, ["1+2+3", "1*2*3"]), ("232", 8, ["2*3+2", "2+3*2"])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
+
+    for num, t, ex in test_cases:
+        assert sorted(solve_optimal(num, t)) == sorted(ex)
+    print("All tests passed successfully!")

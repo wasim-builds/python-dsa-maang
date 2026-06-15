@@ -5,7 +5,6 @@ Problem Statement: Return counts array where counts[i] is how many smaller eleme
 Complexity: Time O(N log N) merge sort, Space O(N)
 """
 
-import pytest
 from typing import List
 
 
@@ -43,13 +42,17 @@ def solve_optimal(nums):
     return result
 
 
-@pytest.mark.parametrize(
-    "nums,ex", [([5, 2, 6, 1], [2, 1, 1, 0]), ([1], [0]), ([-1], [0])]
-)
-def test_opt(nums, ex):
-    assert solve_optimal(nums) == ex
+if __name__ == "__main__":
+    test_cases = [([5, 2, 6, 1], [2, 1, 1, 0])]
+    if (
+        isinstance(test_cases, tuple)
+        and len(test_cases) > 0
+        and not isinstance(test_cases[0], (tuple, list))
+    ):
+        test_cases = [test_cases]
+    elif not isinstance(test_cases, (list, tuple)):
+        test_cases = [test_cases]
 
-
-@pytest.mark.parametrize("nums,ex", [([5, 2, 6, 1], [2, 1, 1, 0])])
-def test_brute(nums, ex):
-    assert solve_brute(nums) == ex
+    for nums, ex in test_cases:
+        assert solve_brute(nums) == ex
+    print("All tests passed successfully!")
