@@ -1,0 +1,43 @@
+"""
+Problem: Cheapest Flights Within K Stops
+Difficulty: Hard  Companies: Amazon,Google,Microsoft,Uber
+Problem Statement: Find cheapest price from src to dst with at most k stops.
+Complexity: Time O(K * E), Space O(V) Bellman-Ford
+"""
+
+import pytest
+from typing import List
+
+
+def solve_brute(n, flights, src, dst, k):
+    prices = [float("inf")] * n
+    prices[src] = 0
+    for _ in range(k + 1):
+        tmp = prices[:]
+        for u, v, w in flights:
+            if prices[u] + w < tmp[v]:
+                tmp[v] = prices[u] + w
+        prices = tmp
+    return -1 if prices[dst] == float("inf") else prices[dst]
+
+
+def solve_optimal(n, flights, src, dst, k):
+    return solve_brute(n, flights, src, dst, k)
+
+
+@pytest.mark.parametrize(
+    "n,fl,s,d,k,ex",
+    [
+        (
+            4,
+            [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600], [2, 3, 200]],
+            0,
+            3,
+            1,
+            700,
+        ),
+        (3, [[0, 1, 100], [1, 2, 100], [0, 2, 500]], 0, 2, 1, 200),
+    ],
+)
+def test_opt(n, fl, s, d, k, ex):
+    assert solve_optimal(n, fl, s, d, k) == ex

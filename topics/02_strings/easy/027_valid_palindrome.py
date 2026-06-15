@@ -1,0 +1,78 @@
+"""
+Problem: Valid Palindrome
+Difficulty: Easy
+Topic: 02_strings
+Companies: Meta, Amazon, Microsoft, Apple, Spotify
+
+Problem Statement:
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.
+Given a string `s`, return `true` if it is a palindrome, or `false` otherwise.
+
+Complexity Proof:
+- Time Complexity: O(N) where N is the length of the string. The two pointers traverse the string at most once.
+- Space Complexity: O(1) because we do not allocate any extra memory. We just use two pointers.
+"""
+
+import pytest
+import re
+
+
+# BRUTE FORCE
+# Time: O(N), Space: O(N)
+def solve_brute(s: str) -> bool:
+    new_str = ""
+    for c in s:
+        if c.isalnum():
+            new_str += c.lower()
+    return new_str == new_str[::-1]
+
+
+# OPTIMAL
+# Time: O(N), Space: O(1)
+def solve_optimal(s: str) -> bool:
+    l, r = 0, len(s) - 1
+
+    while l < r:
+        while l < r and not alphaNum(s[l]):
+            l += 1
+        while r > l and not alphaNum(s[r]):
+            r -= 1
+
+        if s[l].lower() != s[r].lower():
+            return False
+
+        l, r = l + 1, r - 1
+
+    return True
+
+
+def alphaNum(c):
+    return (
+        ord("A") <= ord(c) <= ord("Z")
+        or ord("a") <= ord(c) <= ord("z")
+        or ord("0") <= ord(c) <= ord("9")
+    )
+
+
+@pytest.mark.parametrize(
+    "input_data, expected",
+    [
+        ("A man, a plan, a canal: Panama", True),
+        ("race a car", False),
+        (" ", True),
+    ],
+)
+def test_solve_optimal(input_data, expected):
+    assert solve_optimal(input_data) == expected
+
+
+@pytest.mark.parametrize(
+    "input_data, expected",
+    [
+        ("A man, a plan, a canal: Panama", True),
+        ("race a car", False),
+        (" ", True),
+    ],
+)
+def test_solve_brute(input_data, expected):
+    assert solve_brute(input_data) == expected

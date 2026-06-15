@@ -1,0 +1,27 @@
+"""
+Problem: Unique Paths
+Difficulty: Medium  Companies: Amazon,Google,Microsoft,Bloomberg
+Problem Statement: Robot on m x n grid, can move right or down. How many paths from top-left to bottom-right?
+Complexity: Time O(M*N), Space O(N)
+"""
+
+import pytest
+
+
+def solve_brute(m, n):
+    from math import comb
+
+    return comb(m + n - 2, n - 1)
+
+
+def solve_optimal(m, n):
+    dp = [1] * n
+    for r in range(1, m):
+        for c in range(1, n):
+            dp[c] += dp[c - 1]
+    return dp[n - 1]
+
+
+@pytest.mark.parametrize("m,n,ex", [(3, 7, 28), (3, 2, 3), (1, 1, 1)])
+def test_opt(m, n, ex):
+    assert solve_optimal(m, n) == ex

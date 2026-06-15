@@ -1,0 +1,32 @@
+"""
+Problem: Score After Flipping Matrix
+Difficulty: Medium  Companies: Google,Amazon
+Problem Statement: Toggle rows/cols to maximize score of binary matrix.
+Complexity: Time O(M*N), Space O(1)
+"""
+
+import pytest
+from typing import List
+
+
+def solve_brute(grid):
+    return solve_optimal(grid)
+
+
+def solve_optimal(grid):
+    m, n = len(grid), len(grid[0])
+    for row in grid:
+        if not row[0]:
+            for j in range(n):
+                row[j] ^= 1
+    for j in range(1, n):
+        ones = sum(grid[i][j] for i in range(m))
+        if ones < m - ones:
+            for i in range(m):
+                grid[i][j] ^= 1
+    return sum(int("".join(map(str, row)), 2) for row in grid)
+
+
+@pytest.mark.parametrize("g,ex", [([[0, 0, 1, 1], [1, 0, 1, 0], [1, 1, 0, 0]], 39)])
+def test_opt(g, ex):
+    assert solve_optimal([r[:] for r in g]) == ex

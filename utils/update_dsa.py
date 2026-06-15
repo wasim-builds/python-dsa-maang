@@ -4,7 +4,9 @@ BASE_DIR = "/home/wasim/.gemini/antigravity/scratch/python-dsa-maang"
 
 NEW_PROBLEMS = [
     {
-        "topic": "01_arrays", "difficulty": "medium", "filename": "006_maximum_subarray.py",
+        "topic": "01_arrays",
+        "difficulty": "medium",
+        "filename": "006_maximum_subarray.py",
         "content": '''"""
 Problem: Maximum Subarray (Kadane's Algorithm)
 Difficulty: Medium
@@ -43,10 +45,12 @@ if __name__ == "__main__":
     assert maxSubArray_optimal([1]) == 1
     assert maxSubArray_optimal([5,4,-1,7,8]) == 23
     print("✅ All tests passed!")
-'''
+''',
     },
     {
-        "topic": "01_arrays", "difficulty": "medium", "filename": "007_product_of_array_except_self.py",
+        "topic": "01_arrays",
+        "difficulty": "medium",
+        "filename": "007_product_of_array_except_self.py",
         "content": '''"""
 Problem: Product of Array Except Self
 Difficulty: Medium
@@ -79,10 +83,12 @@ if __name__ == "__main__":
     assert productExceptSelf([1,2,3,4]) == [24,12,8,6]
     assert productExceptSelf([-1,1,0,-3,3]) == [0,0,9,0,0]
     print("✅ All tests passed!")
-'''
+''',
     },
     {
-        "topic": "03_linked_lists", "difficulty": "easy", "filename": "008_reverse_linked_list.py",
+        "topic": "03_linked_lists",
+        "difficulty": "easy",
+        "filename": "008_reverse_linked_list.py",
         "content": '''"""
 Problem: Reverse Linked List
 Difficulty: Easy
@@ -112,10 +118,12 @@ if __name__ == "__main__":
     rev_head = reverseList(head)
     assert linked_to_list(rev_head) == [5,4,3,2,1]
     print("✅ All tests passed!")
-'''
+''',
     },
     {
-        "topic": "03_linked_lists", "difficulty": "easy", "filename": "009_merge_two_sorted_lists.py",
+        "topic": "03_linked_lists",
+        "difficulty": "easy",
+        "filename": "009_merge_two_sorted_lists.py",
         "content": '''"""
 Problem: Merge Two Sorted Lists
 Difficulty: Easy
@@ -157,10 +165,12 @@ if __name__ == "__main__":
     merged = mergeTwoLists(l1, l2)
     assert linked_to_list(merged) == [1,1,2,3,4,4]
     print("✅ All tests passed!")
-'''
+''',
     },
     {
-        "topic": "04_stacks_queues", "difficulty": "easy", "filename": "010_valid_parentheses.py",
+        "topic": "04_stacks_queues",
+        "difficulty": "easy",
+        "filename": "010_valid_parentheses.py",
         "content": '''"""
 Problem: Valid Parentheses
 Difficulty: Easy
@@ -196,10 +206,12 @@ if __name__ == "__main__":
     assert isValid("(]") == False
     assert isValid("([)]") == False
     print("✅ All tests passed!")
-'''
+''',
     },
     {
-        "topic": "07_dynamic_programming", "difficulty": "easy", "filename": "011_climbing_stairs.py",
+        "topic": "07_dynamic_programming",
+        "difficulty": "easy",
+        "filename": "011_climbing_stairs.py",
         "content": '''"""
 Problem: Climbing Stairs
 Difficulty: Easy
@@ -225,10 +237,12 @@ if __name__ == "__main__":
     assert climbStairs(3) == 3
     assert climbStairs(5) == 8
     print("✅ All tests passed!")
-'''
+''',
     },
     {
-        "topic": "08_binary_search", "difficulty": "easy", "filename": "012_binary_search.py",
+        "topic": "08_binary_search",
+        "difficulty": "easy",
+        "filename": "012_binary_search.py",
         "content": '''"""
 Problem: Binary Search
 Difficulty: Easy
@@ -261,16 +275,20 @@ if __name__ == "__main__":
     assert search([-1,0,3,5,9,12], 9) == 4
     assert search([-1,0,3,5,9,12], 2) == -1
     print("✅ All tests passed!")
-'''
-    }
+''',
+    },
 ]
+
 
 def main():
     for prob in NEW_PROBLEMS:
-        filepath = os.path.join(BASE_DIR, "topics", prob["topic"], prob["difficulty"], prob["filename"])
+        filepath = os.path.join(
+            BASE_DIR, "topics", prob["topic"], prob["difficulty"], prob["filename"]
+        )
         with open(filepath, "w") as f:
             f.write(prob["content"])
     print(f"Added {len(NEW_PROBLEMS)} real MAANG problems.")
+
 
 if __name__ == "__main__":
     main()

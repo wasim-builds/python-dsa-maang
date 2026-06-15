@@ -5,19 +5,27 @@ Companies: Amazon, Microsoft, LinkedIn, Google
 
 Problem Statement:
 Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+
+Complexity Proof:
+- Time Complexity: O(N) because we iterate through the array of numbers exactly once, performing O(1) operations at each step.
+- Space Complexity: O(1) because we only maintain two variables (`max_sum` and `curr_sum`).
 """
+
 from typing import List
+import pytest
+
 
 # BRUTE FORCE
 # Time: O(n^2), Space: O(1)
 def maxSubArray_brute(nums: List[int]) -> int:
-    max_sum = float('-inf')
+    max_sum = float("-inf")
     for i in range(len(nums)):
         curr_sum = 0
         for j in range(i, len(nums)):
             curr_sum += nums[j]
             max_sum = max(max_sum, curr_sum)
     return max_sum
+
 
 # OPTIMAL (Kadane's Algorithm)
 # Time: O(n), Space: O(1)
@@ -31,8 +39,26 @@ def maxSubArray_optimal(nums: List[int]) -> int:
         max_sum = max(max_sum, curr_sum)
     return max_sum
 
-if __name__ == "__main__":
-    assert maxSubArray_optimal([-2,1,-3,4,-1,2,1,-5,4]) == 6
-    assert maxSubArray_optimal([1]) == 1
-    assert maxSubArray_optimal([5,4,-1,7,8]) == 23
-    print("✅ All tests passed!")
+
+@pytest.mark.parametrize(
+    "nums, expected",
+    [
+        ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 6),
+        ([1], 1),
+        ([5, 4, -1, 7, 8], 23),
+    ],
+)
+def test_maxSubArray_optimal(nums, expected):
+    assert maxSubArray_optimal(nums) == expected
+
+
+@pytest.mark.parametrize(
+    "nums, expected",
+    [
+        ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 6),
+        ([1], 1),
+        ([5, 4, -1, 7, 8], 23),
+    ],
+)
+def test_maxSubArray_brute(nums, expected):
+    assert maxSubArray_brute(nums) == expected

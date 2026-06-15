@@ -1,0 +1,29 @@
+"""
+Problem: Bitwise AND of Numbers Range
+Difficulty: Easy  Companies: Amazon,Google,Bloomberg
+Problem Statement: Return bitwise AND of all numbers in range [left,right].
+Complexity: Time O(1), Space O(1)
+"""
+
+import pytest
+
+
+def solve_brute(left, right):
+    res = left
+    for i in range(left + 1, right + 1):
+        res &= i
+    return res
+
+
+def solve_optimal(left, right):
+    shift = 0
+    while left != right:
+        left >>= 1
+        right >>= 1
+        shift += 1
+    return left << shift
+
+
+@pytest.mark.parametrize("l,r,ex", [(5, 7, 4), (0, 0, 0), (1, 2147483647, 0)])
+def test_opt(l, r, ex):
+    assert solve_optimal(l, r) == ex

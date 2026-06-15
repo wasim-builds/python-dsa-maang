@@ -17,9 +17,14 @@ Constraints:
     2 <= nums.length <= 10^4
     -10^9 <= nums[i] <= 10^9
     Only one valid answer exists.
+
+Complexity Proof:
+- Time Complexity: O(N) because we iterate through the list at most once. Hash map lookups take O(1) time on average.
+- Space Complexity: O(N) because in the worst case, we might need to store N-1 elements in our hash map before finding a match.
 """
 
 from typing import List
+import pytest
 
 
 # ═══════════════════════════════════════════════════════════
@@ -59,12 +64,25 @@ def two_sum_optimal(nums: List[int], target: int) -> List[int]:
 # ═══════════════════════════════════════════════════════════
 # TEST CASES
 # ═══════════════════════════════════════════════════════════
-if __name__ == "__main__":
-    test_cases = [
-        ([2, 7, 11, 15], 9,  [0, 1]),
-        ([3, 2, 4],      6,  [1, 2]),
-        ([3, 3],         6,  [0, 1]),
-    ]
-    for nums, target, expected in test_cases:
-        assert two_sum_optimal(nums, target) == expected, f"Failed for {nums}"
-    print("✅ All Two Sum tests passed!")
+@pytest.mark.parametrize(
+    "nums, target, expected",
+    [
+        ([2, 7, 11, 15], 9, [0, 1]),
+        ([3, 2, 4], 6, [1, 2]),
+        ([3, 3], 6, [0, 1]),
+    ],
+)
+def test_two_sum_optimal(nums, target, expected):
+    assert two_sum_optimal(nums, target) == expected
+
+
+@pytest.mark.parametrize(
+    "nums, target, expected",
+    [
+        ([2, 7, 11, 15], 9, [0, 1]),
+        ([3, 2, 4], 6, [1, 2]),
+        ([3, 3], 6, [0, 1]),
+    ],
+)
+def test_two_sum_brute(nums, target, expected):
+    assert two_sum_brute(nums, target) == expected

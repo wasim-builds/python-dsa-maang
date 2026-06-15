@@ -1,0 +1,37 @@
+"""
+Problem: Maximum Product of Word Lengths
+Difficulty: Medium  Companies: Amazon,Google
+Problem Statement: Return max product of lengths of two words that share no common letters.
+Complexity: Time O(N^2), Space O(N) bitmask
+"""
+
+import pytest
+from typing import List
+
+
+def solve_brute(words):
+    return solve_optimal(words)
+
+
+def solve_optimal(words):
+    masks = [0] * len(words)
+    for i, w in enumerate(words):
+        for c in w:
+            masks[i] |= 1 << (ord(c) - ord("a"))
+    res = 0
+    for i in range(len(words)):
+        for j in range(i + 1, len(words)):
+            if not (masks[i] & masks[j]):
+                res = max(res, len(words[i]) * len(words[j]))
+    return res
+
+
+@pytest.mark.parametrize(
+    "w,ex",
+    [
+        (["abcw", "baz", "foo", "bar", "xtfn", "abcdef"], 16),
+        (["a", "ab", "abc", "d", "cd", "bcd", "abcd"], 4),
+    ],
+)
+def test_opt(w, ex):
+    assert solve_optimal(w) == ex

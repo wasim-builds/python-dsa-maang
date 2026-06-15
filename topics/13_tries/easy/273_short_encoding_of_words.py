@@ -1,0 +1,26 @@
+"""
+Problem: Short Encoding of Words
+Difficulty: Easy  Companies: Google,Amazon
+Problem Statement: Encode words array as string. Return minimum encoding length.
+Complexity: Time O(N * L^2), Space O(N * L)
+"""
+
+import pytest
+from typing import List
+
+
+def solve_brute(words):
+    return solve_optimal(words)
+
+
+def solve_optimal(words):
+    good = set(words)
+    for w in words:
+        for k in range(1, len(w)):
+            good.discard(w[k:])
+    return sum(len(w) + 1 for w in good)
+
+
+@pytest.mark.parametrize("w,ex", [(["time", "me", "bell"], 10)])
+def test_opt(w, ex):
+    assert solve_optimal(w) == ex

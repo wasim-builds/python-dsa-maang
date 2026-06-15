@@ -1,0 +1,44 @@
+"""
+Problem: Expression Add Operators
+Difficulty: Hard  Companies: Google,Amazon,Meta,Microsoft
+Problem Statement: Add +,-,* operators between digits to make target. Return all valid expressions.
+Complexity: Time O(N * 4^N), Space O(N)
+"""
+
+import pytest
+from typing import List
+
+
+def solve_brute(num, target):
+    return solve_optimal(num, target)
+
+
+def solve_optimal(num, target):
+    res = []
+
+    def bt(idx, path, val, prev):
+        if idx == len(num):
+            if val == target:
+                res.append(path)
+                return
+        for i in range(idx, len(num)):
+            s = num[idx : i + 1]
+            if len(s) > 1 and s[0] == "0":
+                break
+            cur = int(s)
+            if idx == 0:
+                bt(i + 1, s, cur, cur)
+            else:
+                bt(i + 1, path + "+" + s, val + cur, cur)
+                bt(i + 1, path + "-" + s, val - cur, -cur)
+                bt(i + 1, path + "*" + s, val - prev + prev * cur, prev * cur)
+
+    bt(0, "", 0, 0)
+    return res
+
+
+@pytest.mark.parametrize(
+    "num,t,ex", [("123", 6, ["1+2+3", "1*2*3"]), ("232", 8, ["2*3+2", "2+3*2"])]
+)
+def test_opt(num, t, ex):
+    assert sorted(solve_optimal(num, t)) == sorted(ex)

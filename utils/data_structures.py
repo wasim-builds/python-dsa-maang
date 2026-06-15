@@ -2,6 +2,7 @@
 Common Data Structures used across all DSA problems.
 Import these in any solution file.
 """
+
 from typing import Optional, List
 from collections import deque
 

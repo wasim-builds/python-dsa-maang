@@ -1,0 +1,38 @@
+"""
+Problem: Minimum Cost to Make Array Non-decreasing
+Difficulty: Hard  Companies: Amazon,Google
+Problem Statement: Find minimum total cost to cut array into non-decreasing pieces.
+Complexity: Time O(N log N), Space O(1) greedy
+"""
+
+import pytest
+from typing import List
+
+
+def solve_brute(n, horizontalCut, verticalCut):
+    return solve_optimal(n, horizontalCut, verticalCut)
+
+
+def solve_optimal(m, horizontalCut, verticalCut):
+    horizontalCut.sort(reverse=True)
+    verticalCut.sort(reverse=True)
+    h = v = 1
+    res = 0
+    i = j = 0
+    while i < len(horizontalCut) or j < len(verticalCut):
+        hc = horizontalCut[i] if i < len(horizontalCut) else -1
+        vc = verticalCut[j] if j < len(verticalCut) else -1
+        if hc >= vc:
+            res += hc * v
+            h += 1
+            i += 1
+        else:
+            res += vc * h
+            v += 1
+            j += 1
+    return res
+
+
+@pytest.mark.parametrize("m,h,v,ex", [(3, [1, 3], [2], 9)])
+def test_opt(m, h, v, ex):
+    assert solve_optimal(m, h, v) == ex

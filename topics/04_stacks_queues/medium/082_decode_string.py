@@ -1,0 +1,43 @@
+"""
+Problem: Decode String
+Difficulty: Medium  Companies: Google,Amazon,Bloomberg,Microsoft
+Problem Statement: Decode string encoded as k[encoded_string].
+Complexity: Time O(N), Space O(N)
+"""
+
+import pytest
+
+
+def solve_brute(s):
+    return solve_optimal(s)
+
+
+def solve_optimal(s):
+    stack = []
+    curr = ""
+    k = 0
+    for c in s:
+        if c.isdigit():
+            k = k * 10 + int(c)
+        elif c == "[":
+            stack.append((curr, k))
+            curr = ""
+            k = 0
+        elif c == "]":
+            prev, num = stack.pop()
+            curr = prev + num * curr
+        else:
+            curr += c
+    return curr
+
+
+@pytest.mark.parametrize(
+    "s,ex",
+    [
+        ("3[a]2[bc]", "aaabcbc"),
+        ("3[a2[c]]", "accaccacc"),
+        ("2[abc]3[cd]ef", "abcabccdcdcdef"),
+    ],
+)
+def test_opt(s, ex):
+    assert solve_optimal(s) == ex

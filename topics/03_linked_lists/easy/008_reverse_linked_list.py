@@ -5,10 +5,18 @@ Companies: Amazon, Microsoft, Apple, Google
 
 Problem Statement:
 Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+Complexity Proof:
+- Time Complexity: O(N) where N is the number of nodes in the linked list. We visit each node exactly once.
+- Space Complexity: O(1) because we only use three pointers (`prev`, `curr`, `nxt`) to reverse the links in place.
 """
+
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../../'))
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "../../../"))
 from utils.data_structures import ListNode, list_to_linked, linked_to_list
+import pytest
+
 
 # OPTIMAL (Iterative)
 # Time: O(n), Space: O(1)
@@ -22,8 +30,16 @@ def reverseList(head: ListNode) -> ListNode:
         curr = nxt
     return prev
 
-if __name__ == "__main__":
-    head = list_to_linked([1,2,3,4,5])
+
+@pytest.mark.parametrize(
+    "input_list, expected",
+    [
+        ([1, 2, 3, 4, 5], [5, 4, 3, 2, 1]),
+        ([1, 2], [2, 1]),
+        ([], []),
+    ],
+)
+def test_reverseList(input_list, expected):
+    head = list_to_linked(input_list)
     rev_head = reverseList(head)
-    assert linked_to_list(rev_head) == [5,4,3,2,1]
-    print("✅ All tests passed!")
+    assert linked_to_list(rev_head) == expected

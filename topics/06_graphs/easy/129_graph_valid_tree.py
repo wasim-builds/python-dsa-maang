@@ -1,0 +1,47 @@
+"""
+Problem: Graph Valid Tree
+Difficulty: Easy  Companies: LinkedIn,Google,Amazon,Microsoft
+Problem Statement: Given n nodes and edges, determine if they form a valid tree (connected, no cycles).
+Complexity: Time O(V+E), Space O(V)
+"""
+
+import pytest
+from typing import List
+
+
+def solve_brute(n, edges):
+    if len(edges) != n - 1:
+        return False
+    adj = {i: [] for i in range(n)}
+    for a, b in edges:
+        adj[a].append(b)
+        adj[b].append(a)
+    visited = set()
+
+    def dfs(node, parent):
+        visited.add(node)
+        for nei in adj[node]:
+            if nei == parent:
+                continue
+            if nei in visited:
+                return False
+            if not dfs(nei, node):
+                return False
+        return True
+
+    return dfs(0, -1) and len(visited) == n
+
+
+def solve_optimal(n, edges):
+    return solve_brute(n, edges)
+
+
+@pytest.mark.parametrize(
+    "n,e,ex",
+    [
+        (5, [[0, 1], [0, 2], [0, 3], [1, 4]], True),
+        (5, [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], False),
+    ],
+)
+def test_opt(n, e, ex):
+    assert solve_optimal(n, e) == ex
