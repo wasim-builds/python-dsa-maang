@@ -37,14 +37,6 @@ def solve_optimal(nums, k):
 
 if __name__ == "__main__":
     test_cases = [([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2, 6)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for nums, k, ex in test_cases:
         assert solve_brute(nums, k) == ex

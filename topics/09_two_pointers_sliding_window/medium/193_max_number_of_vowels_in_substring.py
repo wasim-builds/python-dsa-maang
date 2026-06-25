@@ -25,14 +25,6 @@ def solve_optimal(s, k):
 
 if __name__ == "__main__":
     test_cases = [("abciiidef", 3, 3), ("aeiou", 2, 2), ("leetcode", 3, 2)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for s, k, ex in test_cases:
         assert solve_optimal(s, k) == ex

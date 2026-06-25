@@ -46,14 +46,6 @@ def solve_optimal(arr):
 
 if __name__ == "__main__":
     test_cases = [([9, 4, 2, 10, 7, 8, 8, 1, 9], 5), ([4, 8, 12, 16], 2), ([100], 1)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for arr, ex in test_cases:
         assert solve_optimal(arr) == ex

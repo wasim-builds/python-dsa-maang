@@ -44,14 +44,6 @@ def solve_optimal(words):
 
 if __name__ == "__main__":
     test_cases = [(["wrt", "wrf", "er", "ett", "rftt"], "wertf")]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for words, ex in test_cases:
         res = solve_optimal(words)

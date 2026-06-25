@@ -33,14 +33,6 @@ if __name__ == "__main__":
         ([10, 20, 5], [70, 50, 30], 2, 105.0),
         ([3, 1, 10, 10, 1], [4, 8, 2, 2, 7], 3, 30.666666666666668),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for q, w, k, ex in test_cases:
         assert abs(solve_optimal(q, w, k) - ex) < 0.01

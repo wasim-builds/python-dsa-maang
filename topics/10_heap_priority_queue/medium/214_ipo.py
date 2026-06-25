@@ -44,14 +44,6 @@ def solve_optimal(k, w, profits, capital):
 
 if __name__ == "__main__":
     test_cases = [(2, 0, [1, 2, 3], [0, 1, 1], 4), (3, 0, [1, 2, 3], [0, 1, 2], 6)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for k, w, p, c, ex in test_cases:
         assert solve_optimal(k, w, p, c) == ex

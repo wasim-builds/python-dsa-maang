@@ -22,14 +22,6 @@ def solve_optimal(intervals):
 
 if __name__ == "__main__":
     test_cases = [([[0, 30], [5, 10], [15, 20]], False), ([[7, 10], [2, 4]], True)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for inv, ex in test_cases:
         assert solve_optimal(inv) == ex

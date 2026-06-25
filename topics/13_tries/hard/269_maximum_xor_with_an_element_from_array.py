@@ -60,14 +60,6 @@ def solve_optimal(nums, queries):
 
 if __name__ == "__main__":
     test_cases = [([0, 1, 2, 3, 4], [[3, 1], [1, 3], [5, 6]], [3, 3, 7])]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for nums, q, ex in test_cases:
         assert solve_brute(nums, q) == ex

@@ -27,14 +27,6 @@ def solve_optimal(piles, k):
 
 if __name__ == "__main__":
     test_cases = [([5, 4, 9], 2, 12), ([4, 3, 6, 7], 3, 12)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for p, k, ex in test_cases:
         assert solve_optimal(p[:], k) == ex

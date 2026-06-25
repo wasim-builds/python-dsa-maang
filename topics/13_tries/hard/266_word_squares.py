@@ -47,14 +47,6 @@ def solve_optimal(str1, str2):
 
 if __name__ == "__main__":
     test_cases = [("abac", "cab", "cabac")]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for s1, s2, ex in test_cases:
         assert solve_optimal(s1, s2) == ex

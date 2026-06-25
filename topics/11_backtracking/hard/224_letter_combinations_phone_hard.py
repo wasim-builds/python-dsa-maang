@@ -33,14 +33,6 @@ if __name__ == "__main__":
         (4, 2, [[1, 2], [1, 3], [1, 4], [2, 3], [2, 4], [3, 4]]),
         (1, 1, [[1]]),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for n, k, ex in test_cases:
         assert sorted(solve_optimal(n, k)) == sorted(ex)

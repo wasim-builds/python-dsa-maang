@@ -60,14 +60,6 @@ if __name__ == "__main__":
         ([0, 3, 7, 2, 5, 8, 4, 6, 0, 1], 9),
         ([], 0),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for nums, expected in test_cases:
         assert solve_brute(nums) == expected

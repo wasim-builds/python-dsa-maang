@@ -52,14 +52,6 @@ def solve_optimal(costs, k, cands):
 
 if __name__ == "__main__":
     test_cases = [([17, 12, 10, 2, 7, 2, 11, 20, 8], 3, 4, 11), ([1, 2, 4, 1], 3, 3, 4)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for c, k, cands, ex in test_cases:
         assert solve_optimal(c[:], k, cands) == ex

@@ -25,14 +25,6 @@ def solve_optimal(n):
 
 if __name__ == "__main__":
     test_cases = [(16, True), (14, False), (1, True)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for n, ex in test_cases:
         assert solve_optimal(n) == ex

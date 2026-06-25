@@ -26,7 +26,11 @@ def solve_optimal(s: str, wordDict: List[str]) -> bool:
         for w in wordDict:
             # If there's enough characters left in s to match w
             if (i + len(w)) <= len(s) and s[i : i + len(w)] == w:
+                # dp[i] becomes True if the rest of the string starting from i + len(w) can also be segmented
                 dp[i] = dp[i + len(w)]
+            
+            # If we found a valid match that allows segmenting the rest, 
+            # no need to check other words for this index `i`.
             if dp[i]:
                 break
 
@@ -40,6 +44,7 @@ def solve_brute(s: str, wordDict: List[str]) -> bool:
     memo = {}
 
     def dfs(i):
+        # i represents the starting index of the substring we are currently checking
         if i == len(s):
             return True
         if i in memo:
@@ -62,15 +67,8 @@ if __name__ == "__main__":
         ("applepenapple", ["apple", "pen"], True),
         ("catsandog", ["cats", "dog", "sand", "and", "cat"], False),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for s, wordDict, expected in test_cases:
+        assert solve_optimal(s, wordDict) == expected
         assert solve_brute(s, wordDict) == expected
     print("All tests passed successfully!")

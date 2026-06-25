@@ -43,14 +43,6 @@ def maxProfit_optimal(prices: List[int]) -> int:
 
 if __name__ == "__main__":
     test_cases = [([7, 1, 5, 3, 6, 4], 5), ([7, 6, 4, 3, 1], 0)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for prices, expected in test_cases:
         assert maxProfit_brute(prices) == expected

@@ -33,14 +33,6 @@ def solve_optimal(s, p):
 
 if __name__ == "__main__":
     test_cases = [("aa", "a", False), ("aa", "a*", True), ("ab", ".*", True)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for s, p, ex in test_cases:
         assert solve_optimal(s, p) == ex

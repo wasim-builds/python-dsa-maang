@@ -41,14 +41,6 @@ def solve_optimal(root, k):
 
 if __name__ == "__main__":
     test_cases = [([3, 1, 4, None, 2], 1, 1), ([5, 3, 6, 2, 4, None, None, 1], 3, 3)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for arr, k, ex in test_cases:
         assert solve_optimal(list_to_tree(arr), k) == ex

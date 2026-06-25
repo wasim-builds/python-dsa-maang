@@ -71,14 +71,6 @@ if __name__ == "__main__":
         ([3, 2, 4], 6, [1, 2]),
         ([3, 3], 6, [0, 1]),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for nums, target, expected in test_cases:
         assert two_sum_brute(nums, target) == expected

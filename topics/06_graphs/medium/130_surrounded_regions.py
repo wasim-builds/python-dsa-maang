@@ -57,14 +57,6 @@ if __name__ == "__main__":
             ],
         )
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for board, ex in test_cases:
         b = [r[:] for r in board]

@@ -41,14 +41,6 @@ if __name__ == "__main__":
             [[5, 4, 11, 2], [5, 8, 4, 5]],
         )
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for arr, t, ex in test_cases:
         assert sorted(solve_optimal(list_to_tree(arr), t)) == sorted(ex)

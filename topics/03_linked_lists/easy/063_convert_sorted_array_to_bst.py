@@ -29,14 +29,6 @@ def solve_optimal(nums):
 
 if __name__ == "__main__":
     test_cases = [([-10, -3, 0, 5, 9], [0, -3, 9, -10, None, 5]), ([1, 3], [3, 1])]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for nums, ex in test_cases:
         assert tree_to_list(solve_optimal(nums)) == ex

@@ -26,14 +26,6 @@ def solve_optimal(s, minJump, maxJump):
 
 if __name__ == "__main__":
     test_cases = [("011010", 2, 3, True), ("01101110", 2, 3, False)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for s, mn, mx, ex in test_cases:
         assert solve_optimal(s, mn, mx) == ex

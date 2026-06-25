@@ -57,14 +57,6 @@ def solve_optimal(root: TreeNode) -> int:
 
 if __name__ == "__main__":
     test_cases = [([3, 9, 20, None, None, 15, 7], 3), ([1, None, 2], 2), ([], 0)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for arr, expected in test_cases:
         root = list_to_tree(arr)

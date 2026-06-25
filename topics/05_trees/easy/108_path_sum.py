@@ -29,14 +29,6 @@ if __name__ == "__main__":
         ([1, 2, 3], 5, False),
         ([], 0, False),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for arr, t, ex in test_cases:
         from utils.data_structures import list_to_tree

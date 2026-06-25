@@ -27,14 +27,6 @@ if __name__ == "__main__":
         ([1, 3, -1, -3, 5, 3, 6, 7], 3, [1.0, -1.0, -1.0, 3.0, 5.0, 6.0]),
         ([1, 2, 3, 4, 2, 3, 1, 4, 2], 4, [2.5, 2.5, 3.0, 2.5, 2.5, 2.5]),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for nums, k, ex in test_cases:
         assert solve_optimal(nums, k) == ex

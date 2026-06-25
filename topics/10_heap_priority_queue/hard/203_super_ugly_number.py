@@ -28,14 +28,6 @@ def solve_optimal(n, primes):
 
 if __name__ == "__main__":
     test_cases = [(12, [2, 7, 13, 19], 32), (1, [2, 3, 5], 1)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for n, p, ex in test_cases:
         assert solve_optimal(n, p) == ex

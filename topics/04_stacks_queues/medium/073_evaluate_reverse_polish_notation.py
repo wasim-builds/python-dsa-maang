@@ -27,16 +27,20 @@ def solve_optimal(tokens: List[str]) -> int:
             stack.append(stack.pop() + stack.pop())
         elif c == "-":
             a, b = stack.pop(), stack.pop()
-            stack.append(b - a)
+            stack.append(b - a) # Order matters: b was pushed before a
         elif c == "*":
             stack.append(stack.pop() * stack.pop())
         elif c == "/":
             a, b = stack.pop(), stack.pop()
-            # python division truncates toward negative infinity, so we use int()
+            # In Python, normal integer division (//) truncates toward negative infinity.
+            # The problem requires truncating toward zero. 
+            # Using int(b / a) achieves truncation toward zero.
             stack.append(int(b / a))
         else:
+            # If it's a number, push it onto the stack
             stack.append(int(c))
 
+    # The final result will be the only item left in the stack
     return stack[0]
 
 
@@ -47,16 +51,13 @@ def solve_brute(tokens: List[str]) -> int:
 
 
 if __name__ == "__main__":
-    test_cases = [(["2", "1", "+", "3", "*"], 9)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
+    test_cases = [
+        (["2", "1", "+", "3", "*"], 9),
+        (["4", "13", "5", "/", "+"], 6),
+        (["10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"], 22)
+    ]
 
     for tokens, expected in test_cases:
+        assert solve_optimal(tokens) == expected
         assert solve_brute(tokens) == expected
     print("All tests passed successfully!")

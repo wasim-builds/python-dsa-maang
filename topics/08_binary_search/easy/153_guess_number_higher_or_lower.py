@@ -29,14 +29,6 @@ def solve_brute(n, pick):
 
 if __name__ == "__main__":
     test_cases = [(10, 6, 6), (1, 1, 1), (2, 2, 2)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for n, pick, ex in test_cases:
         assert solve_optimal(n, pick) == ex

@@ -35,14 +35,6 @@ def solve_optimal(bills):
 
 if __name__ == "__main__":
     test_cases = [([5, 5, 5, 10, 20], True), ([5, 5, 10, 10, 20], False)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for b, ex in test_cases:
         assert solve_optimal(b) == ex

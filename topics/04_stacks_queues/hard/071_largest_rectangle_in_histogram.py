@@ -51,14 +51,6 @@ def solve_brute(heights: List[int]) -> int:
 
 if __name__ == "__main__":
     test_cases = [([2, 1, 5, 6, 2, 3], 10), ([2, 4], 4), ([1, 1], 2)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for heights, expected in test_cases:
         assert solve_brute(heights) == expected

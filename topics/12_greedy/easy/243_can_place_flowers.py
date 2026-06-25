@@ -25,14 +25,6 @@ def solve_optimal(flowerbed, n):
 
 if __name__ == "__main__":
     test_cases = [([1, 0, 0, 0, 1], 1, True), ([1, 0, 0, 0, 1], 2, False)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for f, n, ex in test_cases:
         assert solve_optimal(f[:], n) == ex

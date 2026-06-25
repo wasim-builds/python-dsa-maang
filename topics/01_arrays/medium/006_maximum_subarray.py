@@ -45,14 +45,6 @@ if __name__ == "__main__":
         ([1], 1),
         ([5, 4, -1, 7, 8], 23),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for nums, expected in test_cases:
         assert maxSubArray_brute(nums) == expected

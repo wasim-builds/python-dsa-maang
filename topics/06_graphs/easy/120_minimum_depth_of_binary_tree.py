@@ -43,14 +43,6 @@ if __name__ == "__main__":
         ([3, 9, 20, None, None, 15, 7], 2),
         ([2, None, 3, None, 4, None, 5, None, 6], 5),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for arr, ex in test_cases:
         assert solve_optimal(list_to_tree(arr)) == ex

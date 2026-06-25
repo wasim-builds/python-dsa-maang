@@ -24,7 +24,18 @@ def containsDuplicate_brute(nums: List[int]) -> bool:
     return False
 
 
-# OPTIMAL
+# INTERMEDIATE (Hash Set)
+# Time: O(n), Space: O(n)
+def containsDuplicate_hashset(nums: List[int]) -> bool:
+    seen = set()
+    for num in nums:
+        if num in seen:
+            return True
+        seen.add(num)
+    return False
+
+
+# OPTIMAL (Pythonic)
 # Time: O(n), Space: O(n)
 def containsDuplicate_optimal(nums: List[int]) -> bool:
     return len(set(nums)) != len(nums)
@@ -32,15 +43,9 @@ def containsDuplicate_optimal(nums: List[int]) -> bool:
 
 if __name__ == "__main__":
     test_cases = [([1, 2, 3, 1], True), ([1, 2, 3, 4], False)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for nums, expected in test_cases:
         assert containsDuplicate_brute(nums) == expected
+        assert containsDuplicate_hashset(nums) == expected
+        assert containsDuplicate_optimal(nums) == expected
     print("All tests passed successfully!")

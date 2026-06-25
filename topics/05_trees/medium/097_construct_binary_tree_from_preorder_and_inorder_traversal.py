@@ -65,14 +65,6 @@ if __name__ == "__main__":
         ([3, 9, 20, 15, 7], [9, 3, 15, 20, 7], [3, 9, 20, None, None, 15, 7]),
         ([-1], [-1], [-1]),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for preorder, inorder, expected in test_cases:
         root = solve_brute(preorder, inorder)

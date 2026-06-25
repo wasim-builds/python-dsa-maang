@@ -23,14 +23,6 @@ def solve_optimal(plantTime, growTime):
 
 if __name__ == "__main__":
     test_cases = [([1, 4, 3], [2, 3, 1], 9), ([1, 2, 3, 2], [2, 1, 2, 1], 9)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for p, g, ex in test_cases:
         assert solve_optimal(p, g) == ex

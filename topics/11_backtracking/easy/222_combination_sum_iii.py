@@ -30,14 +30,6 @@ def solve_optimal(k, n):
 
 if __name__ == "__main__":
     test_cases = [(3, 7, [[1, 2, 4]]), (3, 9, [[1, 2, 6], [1, 3, 5], [2, 3, 4]])]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for k, n, ex in test_cases:
         assert sorted(solve_optimal(k, n)) == sorted(ex)

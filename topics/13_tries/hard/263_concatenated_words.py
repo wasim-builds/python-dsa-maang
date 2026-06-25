@@ -47,14 +47,6 @@ if __name__ == "__main__":
             ["catsdogcats", "dogcatsdog", "ratcatdogcat"],
         )
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for w, ex in test_cases:
         assert sorted(solve_optimal(w)) == sorted(ex)

@@ -22,14 +22,6 @@ def solve_optimal(m, n):
 
 if __name__ == "__main__":
     test_cases = [(3, 7, 28), (3, 2, 3), (1, 1, 1)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for m, n, ex in test_cases:
         assert solve_optimal(m, n) == ex

@@ -51,14 +51,6 @@ if __name__ == "__main__":
         ([0], [0], [0]),
         ([9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9], [8, 9, 9, 9, 0, 0, 0, 1]),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for a, b, ex in test_cases:
         assert linked_to_list(solve_optimal(list_to_linked(a), list_to_linked(b))) == ex

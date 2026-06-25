@@ -21,14 +21,6 @@ def solve_optimal(encoded, first):
 
 if __name__ == "__main__":
     test_cases = [([1, 2, 3], 1, [1, 0, 2, 1]), ([6, 2, 7, 3], 4, [4, 2, 0, 7, 4])]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for enc, f, ex in test_cases:
         assert solve_optimal(enc, f) == ex

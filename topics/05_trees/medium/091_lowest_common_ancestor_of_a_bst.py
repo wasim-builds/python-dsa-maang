@@ -41,11 +41,15 @@ def solve_optimal(root: "TreeNode", p: "TreeNode", q: "TreeNode") -> "TreeNode":
     curr = root
 
     while curr:
+        # If both p and q are greater than parent, the LCA must be in the right subtree
         if p.val > curr.val and q.val > curr.val:
             curr = curr.right
+        # If both p and q are less than parent, the LCA must be in the left subtree
         elif p.val < curr.val and q.val < curr.val:
             curr = curr.left
         else:
+            # We have found the split point (or one of the nodes is the current node)
+            # This is the Lowest Common Ancestor.
             return curr
 
 
@@ -66,19 +70,13 @@ if __name__ == "__main__":
         ([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5], 2, 4, 2),
         ([2, 1], 2, 1, 2),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for arr, p_val, q_val, expected_val in test_cases:
         root = list_to_tree(arr)
         p = find_node(root, p_val)
         q = find_node(root, q_val)
-        res = solve_brute(root, p, q)
-        assert res.val == expected_val
+        
+        # Test both optimal and brute force solutions
+        assert solve_optimal(root, p, q).val == expected_val
+        assert solve_brute(root, p, q).val == expected_val
     print("All tests passed successfully!")

@@ -47,14 +47,6 @@ if __name__ == "__main__":
             ["This    is    an", "example  of text", "justification.  "],
         )
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for words, mw, ex in test_cases:
         assert solve_optimal(words, mw) == ex

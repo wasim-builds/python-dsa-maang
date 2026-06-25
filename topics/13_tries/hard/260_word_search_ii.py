@@ -143,14 +143,6 @@ if __name__ == "__main__":
             ["eat", "oath"],
         )
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for board, words, expected in test_cases:
         board_copy = [row[:] for row in board]

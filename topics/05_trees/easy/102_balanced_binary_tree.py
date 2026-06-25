@@ -65,14 +65,6 @@ if __name__ == "__main__":
         ([1, 2, 2, 3, 3, None, None, 4, 4], False),
         ([], True),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for arr, expected in test_cases:
         root = list_to_tree(arr)

@@ -26,14 +26,6 @@ if __name__ == "__main__":
         (["h", "e", "l", "l", "o"], ["o", "l", "l", "e", "h"]),
         (["H", "a", "n", "n", "a", "h"], ["h", "a", "n", "n", "a", "H"]),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for s, ex in test_cases:
         solve_optimal(s)

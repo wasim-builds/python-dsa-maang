@@ -36,14 +36,6 @@ def solve_optimal(data):
 
 if __name__ == "__main__":
     test_cases = [([197, 130, 1], True), ([235, 140, 4], False)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for d, ex in test_cases:
         assert solve_optimal(d) == ex

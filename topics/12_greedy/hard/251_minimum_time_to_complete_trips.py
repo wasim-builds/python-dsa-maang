@@ -25,14 +25,6 @@ def solve_optimal(time, totalTrips):
 
 if __name__ == "__main__":
     test_cases = [([1, 2, 3], 5, 3), ([2], 1, 2)]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for t, total, ex in test_cases:
         assert solve_optimal(t, total) == ex

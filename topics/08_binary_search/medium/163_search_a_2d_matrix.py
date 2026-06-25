@@ -65,14 +65,6 @@ if __name__ == "__main__":
         ([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 13, False),
         ([[1]], 1, True),
     ]
-    if (
-        isinstance(test_cases, tuple)
-        and len(test_cases) > 0
-        and not isinstance(test_cases[0], (tuple, list))
-    ):
-        test_cases = [test_cases]
-    elif not isinstance(test_cases, (list, tuple)):
-        test_cases = [test_cases]
 
     for matrix, target, expected in test_cases:
         assert solve_brute(matrix, target) == expected
